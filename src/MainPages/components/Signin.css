@@ -1,3 +1,7 @@
+* {
+  margin: 0;
+  padding: 0;
+}
 .container_singin {
   position: fixed;
   top: 0;
@@ -22,7 +26,7 @@
   margin: 0 auto;
   width: 100%;
   position: relative;
-  padding: 0 20px 32px;
+  padding: 0 20px 30px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -41,7 +45,7 @@
 }
 
 .signin_input {
-  margin-top: 30px;
+  margin-top: 20px;
   border-radius: 2px;
   width: 100%;
   height: 40px;
@@ -66,4 +70,23 @@
   border-radius: 3px;
   border-style: none;
   justify-content: center;
+}
+
+.social_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-content: space-around;
+}
+
+.social_btn {
+  background-color: #feec34;
+  border-color: #feec34;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  border-radius: 50%;
 }

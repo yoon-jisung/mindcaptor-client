@@ -57,6 +57,11 @@ export default function Signin({ isOpen, close }) {
                 로그인
               </button>
             </div>
+            <div className="social_box">
+              <div className="social_btn">구글</div>
+              <div className="social_btn">카카오</div>
+              <div className="social_btn">네이버</div>
+            </div>
           </div>
         </div>
       ) : null}
