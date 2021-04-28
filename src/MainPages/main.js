@@ -1,7 +1,8 @@
-import React from 'react';
 import twix from './twix.png';
 import './main.css';
 import SigninBtn from './components/SigninBtn';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 export default function main() {
   return (
@@ -17,8 +18,26 @@ export default function main() {
       <a className="signup">회원가입</a>
 
       <div className="game">
-        <button className="summery_btn">게임설명</button>
-        <button className="howToPlay_btn">게임방법</button>
+        <button
+          onClick={
+            <Popup trigger={<button> Trigger</button>} position="right center">
+              <div>Popup content here !!</div>
+            </Popup>
+          }
+          className="summery_btn"
+        >
+          게임설명
+        </button>
+        <button
+          onClick={
+            <Popup trigger={<button> Trigger</button>} position="right center">
+              <div>Popup content here !!</div>
+            </Popup>
+          }
+          className="howToPlay_btn"
+        >
+          게임방법
+        </button>
       </div>
     </div>
   );
