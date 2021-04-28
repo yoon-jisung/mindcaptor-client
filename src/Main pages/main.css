@@ -1,14 +1,39 @@
 * {
-  margin: 0;
-  padding: 0;
-  border: solid 1px black;
-}
-
-body {
-  display: flex;
+  box-sizing: border-box;
+  margin: 10px;
 }
 
 .main {
-  align-items: center;
+  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.logo_box {
+  border: 2px solid mediumturquoise;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  border: 2px solid mediumturquoise;
+}
+
+.entry {
+  border: 2px solid blue;
+  display: flex;
+  justify-content: center;
+}
+
+.signup {
+  border: 2px solid green;
+  display: flex;
+  justify-content: center;
+}
+
+.game {
+  border: 2px solid orange;
+  display: flex;
   justify-content: center;
 }
