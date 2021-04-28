@@ -1,6 +1,7 @@
 import React from 'react';
 import twix from './twix.png';
 import './main.css';
+import SigninBtn from './components/SigninBtn';
 
 export default function main() {
   return (
@@ -10,7 +11,7 @@ export default function main() {
       </box>
       <div className="entry">
         <button className="guest_entry_btn">게스트 참가</button>
-        <button className="member_entry_btn">아이디 참가</button>
+        <SigninBtn className="member_entry_btn">아이디 참가</SigninBtn>
       </div>
 
       <a className="signup">회원가입</a>
