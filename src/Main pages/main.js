@@ -1,17 +1,24 @@
 import React from 'react';
 import twix from './twix.png';
 import './main.css';
+
 export default function main() {
   return (
-    <container className="main">
+    <div className="main">
       <box className="logo_box">
         <img src={twix} className="logo"></img>
       </box>
-      <button className="guest_entry">게스트 참가</button>
-      <button className="member_entry">아이디 참가</button>
+      <div className="entry">
+        <button className="guest_entry_btn">게스트 참가</button>
+        <button className="member_entry_btn">아이디 참가</button>
+      </div>
+
       <a className="signup">회원가입</a>
-      <button className="summery">게임설명</button>
-      <button className="howToPlay">게임방법</button>
-    </container>
+
+      <div className="game">
+        <button className="summery_btn">게임설명</button>
+        <button className="howToPlay_btn">게임방법</button>
+      </div>
+    </div>
   );
 }
