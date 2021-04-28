@@ -3,6 +3,16 @@
   margin: 10px;
 }
 
+button {
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
+}
+
 .main {
   border: 2px solid red;
   display: flex;
@@ -10,7 +20,7 @@
   align-content: center;
 }
 
-.logo_box {
+.logo_div {
   border: 2px solid mediumturquoise;
   display: flex;
   justify-content: center;
@@ -20,16 +30,24 @@
   border: 2px solid mediumturquoise;
 }
 
-.entry {
+.member_entry_btn {
+  cursor: pointer;
+}
+
+.entry_div {
   border: 2px solid blue;
   display: flex;
   justify-content: center;
 }
 
-.signup {
+.signup_div {
   border: 2px solid green;
   display: flex;
   justify-content: center;
+}
+
+.signup_btn {
+  cursor: pointer;
 }
 
 .game {

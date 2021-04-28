@@ -2,7 +2,8 @@
   margin: 0;
   padding: 0;
 }
-.container_singin {
+
+.container_signup {
   position: fixed;
   top: 0;
   right: 0;
@@ -11,7 +12,7 @@
   background: rgba(0, 0, 0, 0.6);
 }
 
-.signin {
+.signup {
   width: 480px;
   height: 621px;
   background-color: white;
@@ -22,7 +23,7 @@
   background: #fff;
 }
 
-.signin_box {
+.signup_box {
   margin: 0 auto;
   width: 100%;
   position: relative;
@@ -34,18 +35,18 @@
   align-items: center;
 }
 
-.signin_exit {
+.signup_exit {
   float: right;
   font-size: 25px;
   cursor: pointer;
 }
 
-.signin_logo {
+.signup_logo {
   width: 150px;
   margin: 0 auto;
 }
 
-.signin_input {
+.signup_input {
   margin-top: 20px;
   border-radius: 2px;
   width: 100%;
@@ -57,7 +58,7 @@
   justify-content: center;
 }
 
-.signin_btn {
+.signup_btn {
   height: 40px;
   width: 100%;
   font-size: 14px;
@@ -71,23 +72,4 @@
   border-radius: 3px;
   border-style: none;
   justify-content: center;
-}
-
-.social_box {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  justify-content: space-around;
-}
-
-.social_btn {
-  background-color: #feec34;
-  border-color: #feec34;
-  height: 60px;
-  width: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-  border-radius: 50%;
 }
