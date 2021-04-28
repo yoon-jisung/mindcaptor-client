@@ -14,7 +14,9 @@ export default function SigninBtn() {
 
   return (
     <>
-      <button onClick={openModal}>로그인 참가</button>
+      <button onClick={openModal} className="member_entry_btn">
+        로그인 참가
+      </button>
       <Signin isOpen={isModalOpen} close={closeModal} />
     </>
   );
