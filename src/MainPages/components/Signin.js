@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './Signin.css';
 import twix from '../twix.png';
+import { useHistory, withRouter, Link } from 'react-router-dom';
 
 export default function Signin({ isOpen, close }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
 
   const emailInputValue = (e) => {
     setEmail(e.target.value);
@@ -15,9 +17,7 @@ export default function Signin({ isOpen, close }) {
   };
 
   const handleSignin = () => {
-    {
-      alert('로그인 성공');
-    }
+    history.push('/Waiting');
   };
 
   return (

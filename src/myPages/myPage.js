@@ -1,12 +1,14 @@
 import React, { usestate } from 'react';
 import twix from './twix.png';
+import { Link, withRouter, useHistory } from 'react-router-dom';
 
-export default function MyPage() {
+function MyPage() {
+  const history = useHistory();
   return (
     <div>
       <header>
         <img src={twix} className="logo"></img>
-        <span>나가기</span>
+        <span onClick={() => history.push('/Waiting')}>나가기</span>
       </header>
 
       <section>
@@ -33,3 +35,5 @@ export default function MyPage() {
     </div>
   );
 }
+
+export default withRouter(MyPage);
