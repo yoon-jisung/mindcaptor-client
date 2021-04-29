@@ -14,6 +14,26 @@ body {
   background-color: teal;
 }
 
+button {
+  -webkit-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  -moz-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  -ms-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  -o-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  display: block;
+  border-radius: 4px;
+  color: rgb(2, 22, 22);
+  box-shadow: rgb(39, 17, 13) 0 0px 0px 2px inset;
+  font-size: 30px;
+  background-color: thistle;
+}
+
+button:hover {
+  color: rgba(255, 255, 255, 0.85);
+  box-shadow: rgb(39, 17, 13) 0 80px 0px 2px inset;
+  cursor: pointer;
+}
+
 /* 왼쪽 밑에서 차오르는 버튼 효과 button,
 button::after {
   -webkit-transition: all 0.3s;
@@ -60,6 +80,7 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 100px;
 }
 
 .logo_div {
@@ -273,8 +294,8 @@ button:hover {
 
 .waiting_signout_btn {
   display: block;
-  float: right;
-  margin-right: 20px;
+  position: fixed;
+  right: 2rem;
 }
 
 .waiting_box {
@@ -291,7 +312,7 @@ button:hover {
   margin: 20px;
 }
 
-.entry_game_btn {
+/* .entry_game_btn {
   zoom: 4;
   overflow: hidden;
 }
@@ -349,8 +370,19 @@ button:hover {
 .mypage_btn:hover:after {
   height: 100%;
   width: 135%;
-}
+} */
 
 .userInfo {
   zoom: 3;
+}
+
+/*GamePages********************************************************************/
+
+canvas {
+  display: flex;
+  position: relative;
+  right: 34.25%;
+  top: 100px;
+  border: 2px solid turquoise;
+  border-radius: 15px;
 }

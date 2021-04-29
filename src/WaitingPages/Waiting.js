@@ -9,7 +9,7 @@ import '../main.css';
 
 export default function Waiting() {
   return (
-    <div>
+    <div className="waiting">
       <div className="waiting_signout_btn">
         <Signout />
       </div>
