@@ -4,6 +4,8 @@ import './main.css';
 import SigninBtn from './components/SigninBtn';
 import SignupBtn from './components/SignupBtn';
 import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import Waiting from '../WaitingPages/Waiting';
 
 export default function main() {
   return (

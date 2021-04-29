@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './MainPages/main';
+import Waiting from './WaitingPages/Waiting';
 
 ReactDOM.render(
   <React.StrictMode>
