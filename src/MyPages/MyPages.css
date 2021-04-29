@@ -1,0 +1,25 @@
+.container {
+  width: 400px;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas:
+    'header header '
+    'content1 content2 ';
+}
+.header {
+  display: inline-grid;
+  grid-area: header;
+  grid-template-columns: repeat(6, 200px);
+  justify-content: space-between;
+  border: 5px solid red;
+}
+
+.UserProFile {
+  border: 5px solid rgb(14, 10, 219);
+  grid-area: content1;
+}
+.follow {
+  border: 5px solid rgb(25, 207, 162);
+  grid-area: content2;
+}
