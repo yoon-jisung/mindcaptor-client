@@ -1,12 +1,9 @@
 import twix from './twix.png';
+import background from './candy-bar-1735659_1920.jpg';
 import './main.css';
 import SigninBtn from './components/SigninBtn';
-<<<<<<< HEAD
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
-=======
 import SignupBtn from './components/SignupBtn';
->>>>>>> aa11ab27c2194ac7f02093e5a29adab953375a92
+import Popup from 'reactjs-popup';
 
 export default function main() {
   return (
@@ -21,28 +18,37 @@ export default function main() {
       <div className="signup_div">
         <SignupBtn>회원가입</SignupBtn>
       </div>
-
       <div className="game">
-        <button
-          onClick={
-            <Popup trigger={<button> Trigger</button>} position="right center">
-              <div>Popup content here !!</div>
-            </Popup>
-          }
+        <Popup
           className="summery_btn"
+          trigger={<button> 게임설명</button>}
+          position="bottom center"
+          on={['hover', 'focus']}
         >
-          게임설명
-        </button>
-        <button
-          onClick={
-            <Popup trigger={<button> Trigger</button>} position="right center">
-              <div>Popup content here !!</div>
-            </Popup>
-          }
+          <p>
+            게임설명 입니다 게임설명 입니다게임설명 입니다게임설명
+            입니다게임설명 입니다게임설명 입니다게임설명 입니다게임설명
+            입니다게임설명 입니다게임설명 입니다게임설명 입니다게임설명
+            입니다게임설명 입니다게임설명 입니다게임설명 입니다게임설명
+            입니다게임설명 입니다게임설명 입니다게임설명 입니다게임설명
+            입니다게임설명 입니다게임설명 입니다게임설명 입니다
+          </p>
+        </Popup>
+        <Popup
           className="howToPlay_btn"
+          trigger={<button> 게임방법</button>}
+          position="bottom center"
+          on={['hover', 'focus']}
         >
-          게임방법
-        </button>
+          <div>
+            게임방법 입니다. 게임방법 입니다.게임방법 입니다.게임방법
+            입니다.게임방법 입니다.게임방법 입니다.게임방법 입니다.게임방법
+            입니다.게임방법 입니다.게임방법 입니다.게임방법 입니다.게임방법
+            입니다.게임방법 입니다.게임방법 입니다.게임방법 입니다.게임방법
+            입니다.게임방법 입니다.게임방법 입니다.게임방법 입니다.게임방법
+            입니다.게임방법 입니다.
+          </div>
+        </Popup>
       </div>
     </div>
   );
