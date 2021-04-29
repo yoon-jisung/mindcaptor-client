@@ -1,5 +1,5 @@
 import React, { usestate } from 'react';
-import twix from './twix.png';
+import logo from '../images/mindcaptor_logo1.png';
 import { Link, withRouter, useHistory } from 'react-router-dom';
 
 function MyPage() {
@@ -7,7 +7,7 @@ function MyPage() {
   return (
     <div>
       <header>
-        <img src={twix} className="logo"></img>
+        <img src={logo} className="logo"></img>
         <span onClick={() => history.push('/Waiting')}>나가기</span>
       </header>
 

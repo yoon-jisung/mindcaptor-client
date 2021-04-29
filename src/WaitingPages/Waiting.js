@@ -5,7 +5,7 @@ import EntryGame from './components/EntryGame';
 import CreateGame from './components/CreateGame';
 import MyPage from './components/MyPage';
 import Signout from './components/Signout';
-import './Waiting.css';
+import '../main.css';
 
 export default function Waiting() {
   return (
