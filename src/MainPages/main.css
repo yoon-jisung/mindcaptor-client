@@ -1,6 +1,14 @@
 * {
   box-sizing: border-box;
   margin: 10px;
+  color: aliceblue;
+  font-family: 'Courier New', Courier, monospace;
+}
+body {
+  background: url('./candy-bar-1735659_1920.jpg');
+  background-position: center;
+  background: size 100%;
+  background-repeat: no-repeat;
 }
 
 button {
@@ -14,10 +22,14 @@ button {
 }
 
 .main {
-  border: 2px solid red;
-  display: flex;
+  border: 5px solid red;
   flex-direction: column;
-  align-content: center;
+  width: 500px;
+  height: 300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo_div {
