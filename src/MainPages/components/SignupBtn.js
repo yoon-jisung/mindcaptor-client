@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Signin from './Signin';
+import Signup from './Signup';
 
-export default function SigninBtn() {
+export default function SignupBtn() {
   const [isModalOpen, setOpen] = useState(false);
 
   const openModal = () => {
@@ -14,10 +14,10 @@ export default function SigninBtn() {
 
   return (
     <>
-      <button onClick={openModal} className="member_entry_btn">
-        로그인 참가
+      <button onClick={openModal} className="member_signup_btn">
+        회원가입
       </button>
-      <Signin isOpen={isModalOpen} close={closeModal} />
+      <Signup isOpen={isModalOpen} close={closeModal} />
     </>
   );
 }

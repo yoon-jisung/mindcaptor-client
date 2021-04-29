@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './Signin.css';
+import './Signup.css';
 import twix from '../twix.png';
 
-export default function Signin({ isOpen, close }) {
+export default function Signup({ isOpen, close }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -14,53 +14,51 @@ export default function Signin({ isOpen, close }) {
     setPassword(e.target.value);
   };
 
-  const handleSignin = () => {
-    {
-      alert('로그인 성공');
-    }
+  const nickNameInputValue = (e) => {
+    setPassword(e.target.value);
   };
 
   return (
     <>
       {isOpen ? (
-        <div className="container_singin">
-          <div className="signin">
+        <div className="container_signup">
+          <div className="signup">
             <div className="close">
               <span
                 type="button"
                 aria-label="Close"
-                className="signin_exit"
+                className="signup_exit"
                 onClick={close}
               >
                 &times;
               </span>
             </div>
-            <div className="signin_box">
+            <div className="signup_box">
               <box className="logo_box">
                 <img src={twix} className="logo"></img>
               </box>
               <input
                 name="email"
-                className="signin_input"
+                className="signup_input"
                 type="text"
                 placeholder="이메일"
                 onChange={emailInputValue}
               />
               <input
                 name="password"
-                className="signin_input"
+                className="signup_input"
                 type="password"
                 placeholder="패스워드"
                 onChange={passwordInputValue}
               />
-              <button className="signin_btn" onClick={handleSignin}>
-                로그인
-              </button>
-            </div>
-            <div className="social_box">
-              <div className="social_btn">구글</div>
-              <div className="social_btn">카카오</div>
-              <div className="social_btn">네이버</div>
+              <input
+                name="nickname"
+                className="signup_input"
+                type="text"
+                placeholder="닉네임"
+                onChange={nickNameInputValue}
+              />
+              <button className="signup_btn">회원가입</button>
             </div>
           </div>
         </div>
