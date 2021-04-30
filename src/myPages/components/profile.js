@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import Slider from './Slider';
 
 export default function ProFile() {
   return (
     <section className="UserProFile">
-      <buttton>편집</buttton>
-      <div>프로필 사진 변경</div>
+      <div>
+        <buttton>편집</buttton>
+        프로필 사진 변경
+        <Slider />
+      </div>
     </section>
   );
 }

@@ -10,8 +10,10 @@ function MyPage() {
   return (
     <div>
       <Header />
-      <ProFile />
-      <SerchUser />
+      <content className="container">
+        <ProFile />
+        <SerchUser />
+      </content>
     </div>
   );
 }
