@@ -410,10 +410,7 @@ canvas {
 /*Colors********************************************************************/
 
 .black {
-  text-align: center;
-  font-size: 0.01px;
-  line-height: 50px;
-  color: black;
+  font-size: 0;
   background-color: black;
   width: 50px;
   height: 50px;
@@ -423,10 +420,7 @@ canvas {
 }
 
 .red {
-  text-align: center;
-  font-size: 0.01px;
-  line-height: 50px;
-  color: red;
+  font-size: 0;
   background-color: red;
   width: 50px;
   height: 50px;
@@ -436,10 +430,7 @@ canvas {
 }
 
 .blue {
-  text-align: center;
-  font-size: 0.01px;
-  line-height: 50px;
-  color: blue;
+  font-size: 0;
   background-color: blue;
   width: 50px;
   height: 50px;
@@ -449,10 +440,7 @@ canvas {
 }
 
 .green {
-  text-align: center;
-  font-size: 0.01px;
-  line-height: 50px;
-  color: green;
+  font-size: 0;
   background-color: green;
   width: 50px;
   height: 50px;
@@ -462,10 +450,7 @@ canvas {
 }
 
 .yellow {
-  text-align: center;
-  font-size: 0.01px;
-  line-height: 50px;
-  color: yellow;
+  font-size: 0;
   background-color: yellow;
   width: 50px;
   height: 50px;
