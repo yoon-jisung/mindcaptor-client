@@ -16,8 +16,9 @@ function MyPage() {
   const PotoData = [Character1, Character2, Character3, Character4];
   console.log(nowPoto);
 
-  const ChangeInputPoto = function (poto) {
-    setPoto(poto);
+  const ChangeInputPoto = function (el) {
+    // e.preventDefault();
+    setPoto(el);
   };
 
   useEffect(() => {
@@ -35,7 +36,7 @@ function MyPage() {
                 <div>
                   <img src={el} alt="프로필사진" />
                   <div>
-                    <button>선택</button>
+                    <button onClick={() => ChangeInputPoto(el)}>선택</button>
                   </div>
                 </div>
               ))}
