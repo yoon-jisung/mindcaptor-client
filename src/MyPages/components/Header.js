@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, withRouter, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import ExitBtn from './ExitBtn';
 
 export default function Header() {

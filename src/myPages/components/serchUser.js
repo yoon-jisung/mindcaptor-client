@@ -10,7 +10,6 @@ export default function serchUser() {
         <ul>
           <li className="user">김코딩</li>
         </ul>
-        <br />
         <div>팔로잉</div>
         <ul>
           <li className="user">박해커</li>
