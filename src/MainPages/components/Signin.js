@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './Signin.css';
-import twix from '../twix.png';
+import '../../main.css';
+import logo from '../../images/mindcaptor_logo1.png';
 import { useHistory, withRouter, Link } from 'react-router-dom';
 
 export default function Signin({ isOpen, close }) {
@@ -37,7 +37,7 @@ export default function Signin({ isOpen, close }) {
             </div>
             <div className="signin_box">
               <box className="logo_box">
-                <img src={twix} className="logo"></img>
+                <img src={logo} className="logo"></img>
               </box>
               <input
                 name="email"

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './Signup.css';
-import twix from '../twix.png';
+import '../../main.css';
+import logo from '../../images/mindcaptor_logo1.png';
 
 export default function Signup({ isOpen, close }) {
   const [email, setEmail] = useState('');
@@ -35,7 +35,7 @@ export default function Signup({ isOpen, close }) {
             </div>
             <div className="signup_box">
               <box className="logo_box">
-                <img src={twix} className="logo"></img>
+                <img src={logo} className="logo"></img>
               </box>
               <input
                 name="email"
