@@ -47,6 +47,10 @@
 .follow {
   display: flex;
   border: 5px solid rgb(25, 207, 162);
+  justify-content: center;
+  align-items: center;
+  background: firebrick;
+  flex-direction: column;
 }
 .user {
   list-style: none;
