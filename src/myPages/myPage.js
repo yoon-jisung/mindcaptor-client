@@ -1,4 +1,5 @@
 import React, { usestate } from 'react';
+import logo from '../images/mindcaptor_logo1.png';
 import { Link, withRouter, useHistory } from 'react-router-dom';
 import ProFile from './components/ProFile';
 import SerchUser from './components/SerchUser';

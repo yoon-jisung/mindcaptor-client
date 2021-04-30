@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export default function Signout() {
   const history = useHistory();
