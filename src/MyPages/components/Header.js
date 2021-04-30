@@ -5,9 +5,8 @@ export default function Header() {
   const history = useHistory();
   return (
     <header className="header">
-      <span>
-        <h1>마이페이지</h1>
-      </span>
+      <h1>마이페이지</h1>
+
       <span onClick={() => history.push('/Waiting')}>나가기</span>
     </header>
   );
