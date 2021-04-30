@@ -458,3 +458,19 @@ canvas {
   border: 2px solid white;
   cursor: pointer;
 }
+
+/*Timer********************************************************************/
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid tomato;
+  font-size: 25px;
+  color: rgb(78, 252, 171);
+}
+
+.timer_num {
+  font-weight: bold;
+}
