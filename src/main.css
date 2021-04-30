@@ -458,3 +458,27 @@ canvas {
   border: 2px solid white;
   cursor: pointer;
 }
+
+/*User********************************************************************/
+
+.userProfile {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: auto;
+  border: 2px solid tomato;
+  background-color: white;
+}
+
+.userPic {
+  height: 200px;
+  border: 2px solid red;
+}
+
+.userNickName {
+  border: 2px solid blue;
+}
+
+.correctAns {
+  border: 2px solid yellow;
+}
