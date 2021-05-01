@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  margin: 10px;
   font-family: 'Courier New', Courier, monospace;
   margin: 0;
   padding: 0;
@@ -378,6 +377,26 @@ button:hover {
 }
 
 /*GamePages********************************************************************/
+.Ready {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.GameWindow {
+  display: flex;
+}
+
+.userProfile {
+  border: 2px solid tomato;
+  list-style: none;
+}
+.UserTable {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  justify-content: flex-end;
+}
 
 canvas {
   display: flex;
