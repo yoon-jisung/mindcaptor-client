@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withRouter, useHistory } from 'react-router-dom';
 
-function MyPage() {
+function MyPageBtn() {
   const history = useHistory();
   return (
     <div>
@@ -12,5 +12,5 @@ function MyPage() {
   );
 }
 
-export default withRouter(MyPage);
+export default withRouter(MyPageBtn);
 // onClick={() => history.push('/')

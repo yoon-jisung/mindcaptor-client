@@ -1,20 +1,33 @@
 import React, { useRef, useEffect, useState } from 'react';
+import Paint from './Paint';
+import Colors from './Colors';
+import Eraser from '../../images/eraser.png';
+import Crayon_Black from '../../images/crayon_black.png';
+import Crayon_Red from '../../images/crayon_red.png';
+import Crayon_Green from '../../images/crayon_green.png';
 
 export default function Canvas3() {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
+  const [canvas, setCanvas] = useState(undefined);
+  const [ctx, setCtx] = useState(undefined);
   const [isDrawing, setIsDrawing] = useState(false);
+  const [color, setColor] = useState('black');
+  const [cursor, setCursor] = useState({
+    cursor: `url(${Crayon_Black}), pointer`,
+  });
 
   useEffect(() => {
+    setCanvas(canvasRef.current);
     const canvas = canvasRef.current;
-
     canvas.width = '600';
     canvas.height = '600';
     canvas.style.position = 'fixed';
 
+    setCtx(canvasRef.current.getContext('2d'));
     const context = canvas.getContext('2d');
     context.lineCap = 'round';
-    context.strokeStyle = 'black';
+    context.strokeStyle = color;
     context.lineWidth = 5;
     context.rect(0, 0, canvas.width, canvas.height);
     context.fillStyle = 'white';
@@ -32,6 +45,7 @@ export default function Canvas3() {
   const finishDrawing = () => {
     contextRef.current.closePath();
     setIsDrawing(false);
+    ctx.lineWidth = 5;
   };
 
   const draw = ({ nativeEvent }) => {
@@ -40,15 +54,70 @@ export default function Canvas3() {
     contextRef.current.lineTo(offsetX, offsetY);
     contextRef.current.stroke();
   };
+
+  const reset = () => {
+    if (ctx) {
+      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+    }
+  };
+
+  const eraserBtn = (e) => {
+    setCursor({ cursor: `url(${Eraser}), pointer` });
+    ctx.lineWidth = 20;
+    ctx.strokeStyle = 'white';
+  };
+
+  const handleColorClick = (e) => {
+    setColor(e.target.textContent);
+    ctx.strokeStyle = color;
+    switch (e.target.textContent) {
+      case '지우개':
+        setCursor({ cursor: `url(${Eraser}), pointer` });
+        break;
+      case 'black':
+        setCursor({ cursor: `url(${Crayon_Black}), pointer` });
+        break;
+      case 'red':
+        setCursor({ cursor: `url(${Crayon_Red}), pointer` });
+        break;
+      case 'blue':
+        console.log('blue');
+        break;
+      case 'green':
+        setCursor({ cursor: `url(${Crayon_Green}), pointer` });
+        break;
+      case 'yellow':
+        console.log('yellow');
+        break;
+      default:
+        setCursor({ cursor: `url(${Crayon_Black}), pointer` });
+        break;
+    }
+  };
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    context.strokeStyle = color;
+    console.log(context.strokeStyle);
+  }, [color]);
+
   return (
     <div>
+      <div className="fake_canvas"></div>
       <canvas
-        style={{ justifyContent: 'center' }}
+        style={cursor}
         onMouseDown={startDrawing}
         onMouseUp={finishDrawing}
         onMouseMove={draw}
         ref={canvasRef}
       />
+      <Paint
+        handleColorClick={handleColorClick}
+        reset={reset}
+        eraserBtn={eraserBtn}
+      />
+      <Colors handleColorClick={handleColorClick} />
     </div>
   );
 }

@@ -33,7 +33,6 @@ button {
 button:hover {
   color: rgba(255, 255, 255, 0.85);
   box-shadow: rgb(39, 17, 13) 0 80px 0px 2px inset;
-  cursor: pointer;
 }
 
 /* 왼쪽 밑에서 차오르는 버튼 효과 button,
@@ -382,9 +381,92 @@ button:hover {
 
 canvas {
   display: flex;
-  position: relative;
+  position: absolute;
   right: 34.25%;
   top: 100px;
   border: 2px solid turquoise;
   border-radius: 15px;
+}
+
+.fake_canvas {
+  width: 605px;
+  height: 605px;
+  background-color: white;
+  position: absolute;
+  right: 34.25%;
+  top: 100px;
+  border: 2px solid turquoise;
+  border-radius: 15px;
+}
+
+.eraser {
+  cursor: url('./images/eraser.png'), pointer;
+}
+
+/*Colors********************************************************************/
+
+.black {
+  font-size: 0;
+  background-color: black;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: url('./images/crayon_black.png'), pointer;
+}
+
+.red {
+  font-size: 0;
+  background-color: red;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: url('./images/crayon_red.png'), pointer;
+}
+
+.blue {
+  font-size: 0;
+  background-color: blue;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.green {
+  font-size: 0;
+  background-color: green;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: url('./images/crayon_green.png'), pointer;
+}
+
+.yellow {
+  font-size: 0;
+  background-color: yellow;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+/*Timer********************************************************************/
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid tomato;
+  font-size: 25px;
+  color: rgb(78, 252, 171);
+}
+
+.timer_num {
+  font-weight: bold;
 }
