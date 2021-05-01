@@ -8,6 +8,8 @@
 
 body {
   background: url('./images/mindcaptor_3kids.png');
+  /* brightness: 50%;
+  contrast: 50% */
   background-position: center;
   background-size: 530px;
   background-repeat: repeat;
