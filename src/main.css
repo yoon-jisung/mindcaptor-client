@@ -453,26 +453,18 @@ canvas {
   cursor: pointer;
 }
 
-/*User********************************************************************/
+/*Timer********************************************************************/
 
-.userProfile {
+.timer {
   display: flex;
   flex-direction: column;
-  width: 200px;
-  height: auto;
+  justify-content: center;
+  align-items: center;
   border: 2px solid tomato;
-  background-color: white;
+  font-size: 25px;
+  color: rgb(78, 252, 171);
 }
 
-.userPic {
-  height: 200px;
-  border: 2px solid red;
-}
-
-.userNickName {
-  border: 2px solid blue;
-}
-
-.correctAns {
-  border: 2px solid yellow;
+.timer_num {
+  font-weight: bold;
 }

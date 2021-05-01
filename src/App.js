@@ -6,7 +6,7 @@ import Waiting from './WaitingPages/Waiting';
 import MyPage from './MyPages/MyPage';
 import InGame from './GamePages/InGame';
 
-export default function app() {
+export default function App() {
   return (
     <div>
       <Switch>
