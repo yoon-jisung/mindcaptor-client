@@ -1,6 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Paint from './Paint';
 import Colors from './Colors';
+import Eraser from '../../images/eraser.png';
+import Crayon_Black from '../../images/crayon_black.png';
+import Crayon_Red from '../../images/crayon_red.png';
+import Crayon_Green from '../../images/crayon_green.png';
 
 export default function Canvas3() {
   const canvasRef = useRef(null);
@@ -8,17 +12,10 @@ export default function Canvas3() {
   const [canvas, setCanvas] = useState(undefined);
   const [ctx, setCtx] = useState(undefined);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [className, setClassName] = useState('canvas');
   const [color, setColor] = useState('black');
-
-  // 이전 색 가져오기
-  const usePrevious = (color) => {
-    const ref = useRef();
-    useEffect(() => {
-      ref.current = color;
-    });
-    return ref.current;
-  };
+  const [cursor, setCursor] = useState({
+    cursor: `url(${Crayon_Black}), pointer`,
+  });
 
   useEffect(() => {
     setCanvas(canvasRef.current);
@@ -48,6 +45,7 @@ export default function Canvas3() {
   const finishDrawing = () => {
     contextRef.current.closePath();
     setIsDrawing(false);
+    ctx.lineWidth = 5;
   };
 
   const draw = ({ nativeEvent }) => {
@@ -63,24 +61,38 @@ export default function Canvas3() {
     }
   };
 
-  const eraserBtn = () => {
-    setClassName('eraser');
+  const eraserBtn = (e) => {
+    setCursor({ cursor: `url(${Eraser}), pointer` });
     ctx.lineWidth = 20;
     ctx.strokeStyle = 'white';
-  };
-
-  const prevColor = usePrevious(color);
-
-  const drawBtn = () => {
-    setClassName('draw');
-    setColor(prevColor); // hooks 쓸때 prev 어떻게 접근하지
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 5;
   };
 
   const handleColorClick = (e) => {
     setColor(e.target.textContent);
     ctx.strokeStyle = color;
+    switch (e.target.textContent) {
+      case '지우개':
+        setCursor({ cursor: `url(${Eraser}), pointer` });
+        break;
+      case 'black':
+        setCursor({ cursor: `url(${Crayon_Black}), pointer` });
+        break;
+      case 'red':
+        setCursor({ cursor: `url(${Crayon_Red}), pointer` });
+        break;
+      case 'blue':
+        console.log('blue');
+        break;
+      case 'green':
+        setCursor({ cursor: `url(${Crayon_Green}), pointer` });
+        break;
+      case 'yellow':
+        console.log('yellow');
+        break;
+      default:
+        setCursor({ cursor: `url(${Crayon_Black}), pointer` });
+        break;
+    }
   };
 
   useEffect(() => {
@@ -94,13 +106,17 @@ export default function Canvas3() {
     <div>
       <div className="fake_canvas"></div>
       <canvas
-        className={`${className}`}
+        style={cursor}
         onMouseDown={startDrawing}
         onMouseUp={finishDrawing}
         onMouseMove={draw}
         ref={canvasRef}
       />
-      <Paint reset={reset} eraserBtn={eraserBtn} drawBtn={drawBtn} />
+      <Paint
+        handleColorClick={handleColorClick}
+        reset={reset}
+        eraserBtn={eraserBtn}
+      />
       <Colors handleColorClick={handleColorClick} />
     </div>
   );
