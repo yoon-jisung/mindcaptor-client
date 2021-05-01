@@ -380,9 +380,105 @@ button:hover {
 
 canvas {
   display: flex;
-  position: relative;
+  position: absolute;
   right: 34.25%;
   top: 100px;
   border: 2px solid turquoise;
   border-radius: 15px;
+  cursor: url('./images/click.png'), pointer;
+}
+
+.draw {
+  cursor: url('./images/click.png'), pointer;
+}
+
+.eraser {
+  cursor: url('./images/eraser.png'), pointer;
+}
+
+.fake_canvas {
+  width: 605px;
+  height: 605px;
+  background-color: white;
+  position: absolute;
+  right: 34.25%;
+  top: 100px;
+  border: 2px solid turquoise;
+  border-radius: 15px;
+}
+
+/*Colors********************************************************************/
+
+.black {
+  font-size: 0;
+  background-color: black;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.red {
+  font-size: 0;
+  background-color: red;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.blue {
+  font-size: 0;
+  background-color: blue;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.green {
+  font-size: 0;
+  background-color: green;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.yellow {
+  font-size: 0;
+  background-color: yellow;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+/*User********************************************************************/
+
+.userProfile {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: auto;
+  border: 2px solid tomato;
+  background-color: white;
+}
+
+.userPic {
+  height: 200px;
+  border: 2px solid red;
+}
+
+.userNickName {
+  border: 2px solid blue;
+}
+
+.correctAns {
+  border: 2px solid yellow;
 }
