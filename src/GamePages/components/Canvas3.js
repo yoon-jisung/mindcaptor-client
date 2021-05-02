@@ -107,6 +107,7 @@ export default function Canvas3() {
         onMouseMove={draw}
         ref={canvasRef}
       />
+
       <div className="Color">
         <Colors handleColorClick={handleColorClick} />
       </div>
