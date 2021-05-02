@@ -1,0 +1,585 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url('./images/mindcaptor_3kids.png');
+  background-position: center;
+  background-size: 530px;
+  background-repeat: repeat;
+  background-color: rgb(0, 197, 197);
+}
+
+button {
+  -webkit-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  -moz-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  -ms-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  -o-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  display: block;
+  border-radius: 4px;
+  color: rgb(2, 22, 22);
+  box-shadow: rgb(39, 17, 13) 0 0px 0px 2px inset;
+  font-size: 30px;
+  background-color: thistle;
+}
+
+button:hover {
+  color: rgba(255, 255, 255, 0.85);
+  box-shadow: rgb(39, 17, 13) 0 80px 0px 2px inset;
+}
+
+/* 왼쪽 밑에서 차오르는 버튼 효과 button,
+button::after {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+button {
+  ---버튼 모든 css제거---
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer; 
+  ---버튼 모든 css제거---
+  background: none;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: relative;
+}
+
+button::before,
+button::after {
+  background: #fff;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+button:hover {
+  color: #efab00;
+} */
+
+.main {
+  flex-direction: column;
+  width: 500px;
+  height: 300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px;
+}
+
+.logo_div {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  background-color: white;
+}
+
+.member_entry_btn {
+  cursor: pointer;
+}
+
+.entry_div {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.signup_div {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.signup_btn {
+  cursor: pointer;
+}
+
+.game {
+  display: flex;
+  justify-content: center;
+}
+
+/*Signin********************************************************************/
+
+.container_singin {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.signin {
+  width: 480px;
+  height: 621px;
+  background-color: white;
+  position: relative;
+  box-sizing: border-box;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+}
+
+.signin_box {
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  padding: 0 20px 30px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signin_exit {
+  float: right;
+  font-size: 25px;
+  cursor: pointer;
+  color: black;
+}
+
+.signin_logo {
+  width: 150px;
+  margin: 0 auto;
+}
+
+.signin_input {
+  margin-top: 20px;
+  border-radius: 2px;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #e5e5e5;
+  padding: 9px 12px;
+  outline: none;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.signin_btn {
+  height: 40px;
+  width: 100%;
+  font-size: 14px;
+  padding: 13px 30px;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  line-height: 1px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+  border-radius: 3px;
+  border-style: none;
+  justify-content: center;
+}
+
+.social_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-content: space-around;
+}
+
+.social_btn {
+  background-color: #feec34;
+  border-color: #feec34;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  border-radius: 50%;
+}
+
+/*Signup********************************************************************/
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container_signup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.signup {
+  width: 480px;
+  height: 621px;
+  background-color: white;
+  position: relative;
+  box-sizing: border-box;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+}
+
+.signup_box {
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  padding: 0 20px 30px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup_exit {
+  float: right;
+  font-size: 25px;
+  cursor: pointer;
+  color: black;
+}
+
+.signup_logo {
+  width: 150px;
+  margin: 0 auto;
+}
+
+.signup_input {
+  margin-top: 20px;
+  border-radius: 2px;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #e5e5e5;
+  padding: 9px 12px;
+  outline: none;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.signup_btn {
+  height: 40px;
+  width: 100%;
+  font-size: 14px;
+  padding: 13px 30px;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  line-height: 1px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+  border-radius: 3px;
+  border-style: none;
+  justify-content: center;
+}
+
+/*Waiting********************************************************************/
+
+.waiting_signout_btn {
+  display: block;
+  position: fixed;
+  right: 2rem;
+}
+
+.waiting_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.waiting_btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+/* .entry_game_btn {
+  zoom: 4;
+  overflow: hidden;
+}
+
+.entry_game_btn::after {
+  height: 100%;
+  left: -35%;
+  top: 0;
+  transform: skew(50deg);
+  transition-duration: 0.6s;
+  transform-origin: top left;
+  width: 0;
+}
+
+.entry_game_btn:hover:after {
+  height: 100%;
+  width: 135%;
+}
+
+.create_game_btn {
+  zoom: 4;
+  overflow: hidden;
+}
+
+.create_game_btn::after {
+  height: 100%;
+  left: -35%;
+  top: 0;
+  transform: skew(50deg);
+  transition-duration: 0.6s;
+  transform-origin: top left;
+  width: 0;
+}
+
+.create_game_btn:hover:after {
+  height: 100%;
+  width: 135%;
+}
+
+.mypage_btn {
+  zoom: 4;
+  overflow: hidden;
+}
+
+.mypage_btn::after {
+  height: 100%;
+  left: -35%;
+  top: 0;
+  transform: skew(50deg);
+  transition-duration: 0.6s;
+  transform-origin: top left;
+  width: 0;
+}
+
+.mypage_btn:hover:after {
+  height: 100%;
+  width: 135%;
+} */
+
+.userInfo {
+  zoom: 3;
+}
+
+/*GamePages********************************************************************/
+.Ready {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.GameWindow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.userProfile {
+  border: 2px solid tomato;
+  list-style: none;
+  width: 200px;
+}
+
+.UserTable {
+}
+
+.eraser {
+  cursor: url('./images/eraser.png'), pointer;
+}
+
+.WhiteBorad {
+  grid-row: 1;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  background-color: white;
+  border: 2px solid turquoise;
+  border-radius: 15px;
+}
+canvas {
+  border-bottom: dotted #c9c2c2;
+}
+.Color {
+}
+
+.Paint {
+  display: flex;
+}
+.Paint > button {
+  margin: 5px;
+}
+
+.Answer {
+  display: flex;
+  grid-row: 2;
+  grid-column: 2;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Answer input {
+  user-select: auto;
+  width: 400px;
+  height: 35px;
+}
+
+.Back {
+  grid-column: 3;
+  order: 3;
+  flex-direction: column;
+
+  display: inline-flex;
+  align-content: center;
+  align-items: stretch;
+  justify-content: flex-end;
+}
+.Colors {
+  user-select: auto;
+  display: flex;
+}
+
+/*Colors********************************************************************/
+
+.black {
+  font-size: 0;
+  background-color: black;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: url('./images/crayon_black.png'), pointer;
+}
+
+.red {
+  font-size: 0;
+  background-color: red;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: url('./images/crayon_red.png'), pointer;
+}
+
+.blue {
+  font-size: 0;
+  background-color: blue;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.green {
+  font-size: 0;
+  background-color: green;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: url('./images/crayon_green.png'), pointer;
+}
+
+.yellow {
+  font-size: 0;
+  background-color: yellow;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+/*Timer********************************************************************/
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid tomato;
+  font-size: 25px;
+  color: rgb(78, 252, 171);
+}
+
+.timer_num {
+  font-weight: bold;
+}
+<<<<<<< HEAD
+
+/*Result********************************************************************/
+.result_box {
+  position: relative;
+  grid-row: 1;
+  grid-column: 2;
+  width: 600px;
+  height: 500px;
+}
+
+.result {
+  border: 2px solid black;
+  border-radius: 15px;
+  width: 600px;
+  height: 500px;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  box-sizing: border-box;
+  bottom: 0;
+}
+
+.res_header {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.res_body {
+  border: 2px solid white;
+}
+
+.res_body_header {
+  text-align: center;
+  color: white;
+  border: 2px solid red;
+  font-size: 20px;
+}
+
+.res_body_winner {
+  border: 2px solid green;
+  color: white;
+
+  text-align: center;
+  margin-top: 10px;
+}
+
+.winner {
+  margin: 10px;
+}
+
+/*SelectWords********************************************************************/
+
+.WordBox {
+  border: 3px solid red;
+}
+=======
+>>>>>>> 708bbdf14d276243059d9e3020420b52fe2e1365
