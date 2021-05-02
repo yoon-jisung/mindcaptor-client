@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Paint({ reset, eraserBtn }) {
   return (
-    <div>
+    <div className="Paint">
       <button className="reset" onClick={reset}>
         초기화
       </button>

@@ -21,17 +21,13 @@ export default function Canvas3() {
     setCanvas(canvasRef.current);
     const canvas = canvasRef.current;
     canvas.width = '600';
-    canvas.height = '600';
-    canvas.style.position = 'fixed';
+    canvas.height = '500';
 
     setCtx(canvasRef.current.getContext('2d'));
     const context = canvas.getContext('2d');
     context.lineCap = 'round';
     context.strokeStyle = color;
     context.lineWidth = 5;
-    context.rect(0, 0, canvas.width, canvas.height);
-    context.fillStyle = 'white';
-    context.fill();
     contextRef.current = context;
   }, []);
 
@@ -103,8 +99,7 @@ export default function Canvas3() {
   }, [color]);
 
   return (
-    <div>
-      <div className="fake_canvas"></div>
+    <div className="WhiteBorad">
       <canvas
         style={cursor}
         onMouseDown={startDrawing}
@@ -112,12 +107,16 @@ export default function Canvas3() {
         onMouseMove={draw}
         ref={canvasRef}
       />
-      <Paint
-        handleColorClick={handleColorClick}
-        reset={reset}
-        eraserBtn={eraserBtn}
-      />
-      <Colors handleColorClick={handleColorClick} />
+      <div className="Color">
+        <Colors handleColorClick={handleColorClick} />
+      </div>
+      <div>
+        <Paint
+          handleColorClick={handleColorClick}
+          reset={reset}
+          eraserBtn={eraserBtn}
+        />
+      </div>
     </div>
   );
 }
