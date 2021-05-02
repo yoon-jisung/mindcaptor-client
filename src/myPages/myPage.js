@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter, useHistory } from 'react-router-dom';
-import SerchUser from './components/SerchUser';
+import SearchUser from './components/SearchUser';
 import Header from './components/Header';
 import Complete from './components/Complete';
 import Character1 from '../images/Character1.png';
@@ -56,7 +56,7 @@ function MyPage() {
 
         <div className="serch_user">
           <img src={nowPoto} alt="프로필사진" />
-          <SerchUser />
+          <SearchUser />
         </div>
       </content>
     </div>
