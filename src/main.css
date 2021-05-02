@@ -454,9 +454,7 @@ canvas {
   user-select: auto;
   display: flex;
 }
-.WordBox {
-  border: 3px solid red;
-}
+
 /*Colors********************************************************************/
 
 .black {
@@ -575,4 +573,10 @@ canvas {
 
 .winner {
   margin: 10px;
+}
+
+/*SelectWords********************************************************************/
+
+.WordBox {
+  border: 3px solid red;
 }
