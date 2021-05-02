@@ -1,5 +1,5 @@
 import React from 'react';
-
+// 테스트
 export default function Winner({ winner }) {
   return (
     <div>

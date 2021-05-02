@@ -1,7 +1,7 @@
 import React from 'react';
 import Timer from './Timer';
 import Winner from './Winner';
-// 타이머가 0이되면
+// 타이머가 0이되면 종료
 export default function Result() {
   return (
     <div>
