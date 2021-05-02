@@ -16,7 +16,6 @@ export default function SelectWord() {
 
   useEffect(() => {
     RandomItem();
-    console.log(Words);
     SetProblem([Word1, Word2, Word3]);
   }, []);
 
