@@ -13,10 +13,12 @@ export default function main() {
         <box className="logo_div">
           <img src={logo} className="logo"></img>
         </box>
+
         <div className="entry_div">
           <button className="guest_entry_btn">게스트 참가</button>
           <SigninBtn>로그인 참가</SigninBtn>
         </div>
+
         <div className="signup_div">
           <SignupBtn>회원가입</SignupBtn>
         </div>
@@ -27,14 +29,7 @@ export default function main() {
             position="bottom center"
             on={['hover', 'focus']}
           >
-            <p>
-              게임설명 입니다 게임설명 입니다게임설명 입니다게임설명
-              입니다게임설명 입니다게임설명 입니다게임설명 입니다게임설명
-              입니다게임설명 입니다게임설명 입니다게임설명 입니다게임설명
-              입니다게임설명 입니다게임설명 입니다게임설명 입니다게임설명
-              입니다게임설명 입니다게임설명 입니다게임설명 입니다게임설명
-              입니다게임설명 입니다게임설명 입니다게임설명 입니다
-            </p>
+            <p>그림도 그리고 친구들이 출제한 문제도 맞춰보세요 !</p>
           </Popup>
           <Popup
             className="howToPlay_btn"
@@ -43,12 +38,14 @@ export default function main() {
             on={['hover', 'focus']}
           >
             <div>
-              게임방법 입니다. 게임방법 입니다.게임방법 입니다.게임방법
-              입니다.게임방법 입니다.게임방법 입니다.게임방법 입니다.게임방법
-              입니다.게임방법 입니다.게임방법 입니다.게임방법 입니다.게임방법
-              입니다.게임방법 입니다.게임방법 입니다.게임방법 입니다.게임방법
-              입니다.게임방법 입니다.게임방법 입니다.게임방법 입니다.게임방법
-              입니다.게임방법 입니다.
+              <p>
+                1. 플레이 하는 인원이 2명이면 자동으로 게임은 플레이 됩니다.
+              </p>
+              <p>
+                2. 출체자가 된 경우 3개의 단어중에 하나를 선택 후 팬과 색깔을
+                사용하여 그림으로 표현하세요 !
+              </p>
+              <p>3. 제한시간은 3분입니다.</p>
             </div>
           </Popup>
         </div>

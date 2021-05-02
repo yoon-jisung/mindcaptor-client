@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function User() {
   return (
-    <div className="UserTabel">
+    <div className="UserTable">
       <ul>
         <li className="userProfile">
           <div className="userPic">유저 사진</div>

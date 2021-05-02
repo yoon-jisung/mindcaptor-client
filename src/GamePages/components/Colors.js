@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export default function Colors({ handleColorClick }) {
   return (
-    <div>
+    <div className="Colors">
       <div className="black" onClick={handleColorClick}>
         black
       </div>

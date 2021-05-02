@@ -7,12 +7,10 @@
 
 body {
   background: url('./images/mindcaptor_3kids.png');
-  /* brightness: 50%;
-  contrast: 50% */
   background-position: center;
   background-size: 530px;
   background-repeat: repeat;
-  background-color: teal;
+  background-color: rgb(0, 197, 197);
 }
 
 button {
@@ -80,7 +78,7 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 150px;
 }
 
 .logo_div {
@@ -97,15 +95,17 @@ button:hover {
 }
 
 .entry_div {
-  border: 2px solid blue;
   display: flex;
   justify-content: center;
+  justify-content: space-around;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 
 .signup_div {
-  border: 2px solid green;
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 .signup_btn {
@@ -113,7 +113,6 @@ button:hover {
 }
 
 .game {
-  border: 2px solid orange;
   display: flex;
   justify-content: center;
 }
@@ -384,44 +383,75 @@ button:hover {
 }
 
 .GameWindow {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
 }
 
 .userProfile {
   border: 2px solid tomato;
   list-style: none;
+  width: 200px;
 }
+
 .UserTable {
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-between; */
-  justify-content: flex-end;
-}
-
-canvas {
-  display: flex;
-  position: absolute;
-  right: 34.25%;
-  top: 100px;
-  border: 2px solid turquoise;
-  border-radius: 15px;
-}
-
-.fake_canvas {
-  width: 605px;
-  height: 605px;
-  background-color: white;
-  position: absolute;
-  right: 34.25%;
-  top: 100px;
-  border: 2px solid turquoise;
-  border-radius: 15px;
 }
 
 .eraser {
   cursor: url('./images/eraser.png'), pointer;
 }
 
+.WhiteBorad {
+  grid-row: 1;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  background-color: white;
+  border: 2px solid turquoise;
+  border-radius: 15px;
+}
+
+.Color {
+}
+
+.Paint {
+  display: flex;
+}
+.Paint > button {
+  margin: 5px;
+}
+
+.Answer {
+  display: flex;
+  grid-row: 2;
+  grid-column: 2;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Answer input {
+  user-select: auto;
+  width: 400px;
+  height: 35px;
+}
+
+.Back {
+  grid-column: 3;
+  order: 3;
+  flex-direction: column;
+
+  display: inline-flex;
+  align-content: center;
+  align-items: stretch;
+  justify-content: flex-end;
+}
+.Colors {
+  user-select: auto;
+  display: flex;
+}
 /*Colors********************************************************************/
 
 .black {

@@ -3,6 +3,7 @@ import Canvas from './components/Canvas3';
 import Timer from './components/Timer';
 import User from './components/User';
 import Answer from './components/Answer';
+import BackBtn from './components/BackBtn';
 
 export default function InGame() {
   const [IsReady, SetIsReady] = useState(false);
@@ -29,6 +30,7 @@ export default function InGame() {
             <Canvas className="canvas" />
             <Answer />
             <User />
+            <BackBtn />
           </div>
         </>
       ) : (

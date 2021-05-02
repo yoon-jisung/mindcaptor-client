@@ -51,6 +51,7 @@
   align-items: center;
   background: firebrick;
   flex-direction: column;
+  width: 500px;
 }
 .user {
   list-style: none;
