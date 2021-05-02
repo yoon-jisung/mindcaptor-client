@@ -392,7 +392,7 @@ button:hover {
 .userProfile {
   border: 2px solid tomato;
   list-style: none;
-  width: 200px;
+  width: 300px;
 }
 
 .UserTable {
@@ -576,7 +576,52 @@ canvas {
 }
 
 /*SelectWords********************************************************************/
-
+.background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+.container_WordBox {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
 .WordBox {
-  border: 3px solid red;
+  border: 2px solid black;
+  border-radius: 15px;
+  width: 600px;
+  height: 300px;
+  background-color: teal;
+  position: relative;
+  box-sizing: border-box;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  grid-column: 2;
+  grid-row: 1;
+
+  margin-right: 35px;
+  margin-top: 180px;
+}
+
+.wordBtns {
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+  justify-content: space-around;
+}
+
+.wordBtns button {
+  width: 150px;
+  height: 50px;
+}
+
+.blankForWordBox {
+  width: 300px;
 }

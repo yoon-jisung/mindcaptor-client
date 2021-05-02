@@ -16,14 +16,30 @@ export default function SelectWord() {
 
   useEffect(() => {
     RandomItem();
-    SetProblem([Word1, Word2, Word3]);
   }, []);
 
+  useEffect(() => {
+    SetProblem([Word1, Word2, Word3]);
+  }, [Word1]);
+
   return (
-    <div className="WordBox">
-      {Problem.map((word) => {
-        return <button>{word}</button>;
-      })}
+    <div className="background">
+      <div className="container_WordBox">
+        <div className="blankForWordBox" />
+
+        <div className="WordBox">
+          <h2 className="selectWord">단어를 선택해주세요.</h2>
+          <div className="wordBtns">
+            {Problem.map((word, idx) => {
+              if (Word1 !== Word2 && Word1 !== Word3 && Word2 !== Word3) {
+                return <button key={idx}>{word}</button>;
+              } else {
+                RandomItem();
+              }
+            })}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
