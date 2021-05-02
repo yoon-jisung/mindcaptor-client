@@ -5,7 +5,7 @@ export default function SelectWord() {
   const [Word1, SetWord1] = useState('');
   const [Word2, SetWord2] = useState('');
   const [Word3, SetWord3] = useState('');
-  const [Problem, SetProblem] = useState('');
+  const [Problem, SetProblem] = useState([]);
   // ! 단어 3개가 들어감
 
   const RandomItem = () => {
