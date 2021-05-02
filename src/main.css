@@ -413,7 +413,9 @@ button:hover {
   border: 2px solid turquoise;
   border-radius: 15px;
 }
-
+canvas {
+  border-bottom: dotted #c9c2c2;
+}
 .Color {
 }
 
