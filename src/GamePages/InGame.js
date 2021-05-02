@@ -4,10 +4,15 @@ import Timer from './components/Timer';
 import User from './components/User';
 import Answer from './components/Answer';
 import BackBtn from './components/BackBtn';
-import SelectWord from './components/SelectWords';
+import Result from './components/Result';
+import SelectWords from './components/SelectWords';
 
 export default function InGame() {
   const [IsReady, SetIsReady] = useState(false);
+  const [min, setMin] = useState(0);
+  const [sec, setSec] = useState(3);
+  const [resultPopup, setResultPopup] = useState(false);
+  const [Round, SetRound] = useState(0);
 
   const CanPlay = () => {
     setTimeout(() => SetIsReady(true), 3000);
@@ -22,17 +27,33 @@ export default function InGame() {
     CanPlay();
   });
 
+  const handleResult = () => {
+    setResultPopup(true);
+  };
+
+  useEffect(() => {
+    // 일정 시간이 지나면 결과창 닫히고 다시 게임 시작
+    const closeResult = setTimeout(() => setResultPopup(false), 3000);
+    SetRound(Round + 1);
+    return () => {
+      clearTimeout(closeResult);
+    };
+  }, [resultPopup]);
+
   return (
     <div>
       {IsReady ? (
         <>
-          <Timer />
-          <div classNamex="GameWindow">
-            <Canvas className="canvas" />
+          <Timer min={min} sec={sec} handleResult={handleResult} />{' '}
+          <div className="GameWindow">
+            <div className="result_box">
+              <Canvas Round={Round} className="canvas" />
+              <SelectWords />
+              {resultPopup ? <Result /> : null}
+            </div>
             <Answer />
             <User />
             <BackBtn />
-            <SelectWord />
           </div>
         </>
       ) : (

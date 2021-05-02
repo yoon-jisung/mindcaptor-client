@@ -5,7 +5,10 @@ export default function SelectWord() {
   const [Word1, SetWord1] = useState('');
   const [Word2, SetWord2] = useState('');
   const [Word3, SetWord3] = useState('');
-  const [Problem, SetProblem] = useState('');
+  const [Problem, SetProblem] = useState([]);
+  const [Answer, SetAnswer] = useState('');
+  const [IsOpen, SetIsOpen] = useState(true);
+
   // ! 단어 3개가 들어감
 
   const RandomItem = () => {
@@ -15,16 +18,44 @@ export default function SelectWord() {
   };
 
   useEffect(() => {
+    console.log(Answer);
+  });
+
+  useEffect(() => {
     RandomItem();
-    console.log(Words);
-    SetProblem([Word1, Word2, Word3]);
   }, []);
 
-  return (
-    <div className="WordBox">
-      {Problem.map((word) => {
-        return <button>{word}</button>;
-      })}
+  useEffect(() => {
+    SetProblem([Word1, Word2, Word3]);
+  }, [Word3]);
+
+  const HandleAnswer = (word) => {
+    SetAnswer(word);
+    SetIsOpen(false);
+  };
+
+  return IsOpen ? (
+    <div className="background">
+      <div className="container_WordBox">
+        <div className="blankForWordBox" />
+
+        <div className="WordBox">
+          <h2 className="selectWord">단어를 선택해주세요.</h2>
+          <div className="wordBtns">
+            {Problem.map((word, idx) => {
+              if (Word1 !== Word2 && Word1 !== Word3 && Word2 !== Word3) {
+                return (
+                  <button onClick={() => HandleAnswer(word)} key={idx}>
+                    {word}
+                  </button>
+                );
+              } else {
+                RandomItem();
+              }
+            })}
+          </div>
+        </div>
+      </div>
     </div>
-  );
+  ) : null;
 }

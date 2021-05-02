@@ -6,7 +6,7 @@ import Crayon_Black from '../../images/crayon_black.png';
 import Crayon_Red from '../../images/crayon_red.png';
 import Crayon_Green from '../../images/crayon_green.png';
 
-export default function Canvas3() {
+export default function Canvas3({ Round }) {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [canvas, setCanvas] = useState(undefined);
@@ -100,6 +100,7 @@ export default function Canvas3() {
 
   return (
     <div className="WhiteBorad">
+      <div className="Round">Round : {Round}</div>
       <canvas
         style={cursor}
         onMouseDown={startDrawing}
@@ -107,9 +108,11 @@ export default function Canvas3() {
         onMouseMove={draw}
         ref={canvasRef}
       />
+
       <div className="Color">
         <Colors handleColorClick={handleColorClick} />
       </div>
+
       <div>
         <Paint
           handleColorClick={handleColorClick}

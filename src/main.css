@@ -392,7 +392,7 @@ button:hover {
 .userProfile {
   border: 2px solid tomato;
   list-style: none;
-  width: 200px;
+  width: 300px;
 }
 
 .UserTable {
@@ -454,8 +454,10 @@ canvas {
   user-select: auto;
   display: flex;
 }
-.WordBox {
-  border: 3px solid red;
+
+.Round {
+  color: rgb(78, 252, 171);
+  font-size: 2em;
 }
 /*Colors********************************************************************/
 
@@ -523,4 +525,107 @@ canvas {
 
 .timer_num {
   font-weight: bold;
+}
+
+/*Result********************************************************************/
+.result_box {
+  position: relative;
+  grid-row: 1;
+  grid-column: 2;
+  width: 600px;
+  height: 500px;
+}
+
+.result {
+  border: 2px solid black;
+  border-radius: 15px;
+  width: 600px;
+  height: 500px;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  box-sizing: border-box;
+  bottom: 0;
+}
+
+.res_header {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.res_body {
+  border: 2px solid white;
+}
+
+.res_body_header {
+  text-align: center;
+  color: white;
+  border: 2px solid red;
+  font-size: 20px;
+}
+
+.res_body_winner {
+  border: 2px solid green;
+  color: white;
+
+  text-align: center;
+  margin-top: 10px;
+}
+
+.winner {
+  margin: 10px;
+}
+
+/*SelectWords********************************************************************/
+.background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+.container_WordBox {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+.WordBox {
+  border: 2px solid black;
+  border-radius: 15px;
+  width: 600px;
+  height: 300px;
+  background-color: teal;
+  position: relative;
+  box-sizing: border-box;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  grid-column: 2;
+  grid-row: 1;
+
+  margin-right: 35px;
+  margin-top: 180px;
+}
+
+.wordBtns {
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+  justify-content: space-around;
+}
+
+.wordBtns button {
+  width: 150px;
+  height: 50px;
+}
+
+.blankForWordBox {
+  width: 300px;
 }

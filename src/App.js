@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Main from './MainPages/main';
 import Waiting from './WaitingPages/Waiting';
-import MyPage from './MyPages/myPage';
+import MyPage from './MyPages/MyPage';
 import InGame from './GamePages/InGame';
 
 export default function App() {

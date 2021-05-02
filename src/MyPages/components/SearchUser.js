@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function SerchUser() {
+export default function SearchUser() {
   return (
     <div className="follow">
       <div>이메일로 유저 팔로잉</div>
