@@ -523,7 +523,6 @@ canvas {
   font-weight: bold;
 }
 
-
 /*Result********************************************************************/
 .result_box {
   position: relative;
@@ -581,4 +580,3 @@ canvas {
 .WordBox {
   border: 3px solid red;
 }
-
