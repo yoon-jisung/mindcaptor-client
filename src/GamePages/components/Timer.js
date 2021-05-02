@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Timer({ min, sec, handleResult }) {
-  const [minutes, setMinutes] = useState(parseInt(min));
-  const [seconds, setSeconds] = useState(parseInt(sec));
+export default function Timer({ mm, ss }) {
+  const [minutes, setMinutes] = useState(parseInt(3));
+  const [seconds, setSeconds] = useState(parseInt(0));
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -12,7 +12,6 @@ export default function Timer({ min, sec, handleResult }) {
       if (parseInt(seconds) === 0) {
         if (parseInt(minutes) === 0) {
           clearInterval(countdown);
-          handleResult(); // 타이머가 0이 되면 결과창 오픈
         } else {
           setMinutes(parseInt(minutes) - 1);
           setSeconds(59);

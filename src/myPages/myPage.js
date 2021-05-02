@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter, useHistory } from 'react-router-dom';
-import SerchUser from './components/serchUser';
+import SerchUser from './components/SerchUser';
 import Header from './components/Header';
 import Complete from './components/Complete';
 import Character1 from '../images/Character1.png';
