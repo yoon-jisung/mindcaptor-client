@@ -4,6 +4,7 @@ import Timer from './components/Timer';
 import User from './components/User';
 import Answer from './components/Answer';
 import BackBtn from './components/BackBtn';
+import SelectWord from './components/SelectWord';
 
 export default function InGame() {
   const [IsReady, SetIsReady] = useState(false);
@@ -31,6 +32,7 @@ export default function InGame() {
             <Answer />
             <User />
             <BackBtn />
+            <SelectWord />
           </div>
         </>
       ) : (
