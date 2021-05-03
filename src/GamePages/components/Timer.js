@@ -21,6 +21,7 @@ export default function Timer({ min, sec, handleResult }) {
     }, 1000);
     return () => clearInterval(countdown);
   }, [minutes, seconds]);
+
   return (
     <span className="timer">
       <h1>Timer</h1>

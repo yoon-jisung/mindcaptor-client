@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+
 import Words from '../../Words';
 
-export default function SelectWord() {
+export default function SelectWord({ answer, IsOpen, handleAnswer }) {
   const [Word1, SetWord1] = useState('');
   const [Word2, SetWord2] = useState('');
   const [Word3, SetWord3] = useState('');
   const [Problem, SetProblem] = useState([]);
+
   // ! 단어 3개가 들어감
 
   const RandomItem = () => {
@@ -20,9 +22,9 @@ export default function SelectWord() {
 
   useEffect(() => {
     SetProblem([Word1, Word2, Word3]);
-  }, [Word1]);
+  }, [Word3]);
 
-  return (
+  return IsOpen ? (
     <div className="background">
       <div className="container_WordBox">
         <div className="blankForWordBox" />
@@ -32,7 +34,11 @@ export default function SelectWord() {
           <div className="wordBtns">
             {Problem.map((word, idx) => {
               if (Word1 !== Word2 && Word1 !== Word3 && Word2 !== Word3) {
-                return <button key={idx}>{word}</button>;
+                return (
+                  <button onClick={() => handleAnswer(word)} key={idx}>
+                    {word}
+                  </button>
+                );
               } else {
                 RandomItem();
               }
@@ -41,5 +47,5 @@ export default function SelectWord() {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 }

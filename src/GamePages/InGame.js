@@ -10,8 +10,18 @@ import SelectWords from './components/SelectWords';
 export default function InGame() {
   const [IsReady, SetIsReady] = useState(false);
   const [min, setMin] = useState(0);
-  const [sec, setSec] = useState(3);
+  const [sec, setSec] = useState(0);
   const [resultPopup, setResultPopup] = useState(false);
+  const [Round, SetRound] = useState(0);
+  const [answer, setAnswer] = useState('');
+  const [IsOpen, SetIsOpen] = useState(true);
+
+  useEffect(() => {
+    console.log(IsReady);
+    console.log(min);
+    console.log(sec);
+    console.log(answer);
+  }, []);
 
   const CanPlay = () => {
     setTimeout(() => SetIsReady(true), 3000);
@@ -22,12 +32,26 @@ export default function InGame() {
   };
 
   useEffect(() => {
-    console.log(IsReady);
     CanPlay();
   });
 
+  useEffect(() => {
+    setMin(3);
+    setSec(0);
+  }, [answer]);
+
   const handleResult = () => {
     setResultPopup(true);
+  };
+  const countRound = () => {
+    SetRound(Round + 1);
+  };
+
+  const handleAnswer = (word) => {
+    setAnswer(word);
+    SetIsOpen(false);
+    SetRound(Round + 1);
+    setMin(3);
   };
 
   useEffect(() => {
@@ -45,8 +69,13 @@ export default function InGame() {
           <Timer min={min} sec={sec} handleResult={handleResult} />{' '}
           <div className="GameWindow">
             <div className="result_box">
-              <Canvas className="canvas" />
-              <SelectWords />
+              <Canvas Round={Round} className="canvas" />
+              <SelectWords
+                handleAnswer={handleAnswer}
+                IsOpen={IsOpen}
+                answer={answer}
+                CountRound={() => countRound}
+              />
               {resultPopup ? <Result /> : null}
             </div>
             <Answer />

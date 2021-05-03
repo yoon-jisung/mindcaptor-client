@@ -8,8 +8,9 @@
 }
 .header {
   display: grid;
-
-  grid-template-columns: 80% 20%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
 }
 
 .header span {
@@ -19,6 +20,7 @@
 }
 
 .UserProFile {
+
   display: flex;
   border: 5px solid rgb(25, 92, 119);
   justify-content: space-around;
@@ -31,6 +33,7 @@
   display: flex;
   align-items: center;
   border: 5px solid rgb(25, 92, 119);
+  flex-direction: column;
 }
 
 .ProfilePotos img {
@@ -69,10 +72,18 @@ button {
   box-shadow: rgb(39, 17, 13) 0 0px 0px 0px inset;
   font-size: 30px;
   background-color: thistle;
+  width: 190px;
 }
 
 button:hover {
   color: rgba(255, 255, 255, 0.85);
   box-shadow: rgb(39, 17, 13) 0 80px 0px 2px inset;
   cursor: pointer;
+}
+
+.Exit {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
 }
