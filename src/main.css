@@ -489,6 +489,7 @@ canvas {
   border-radius: 50%;
   border: 2px solid white;
   cursor: pointer;
+  cursor: url('./images/crayon_blue.png'), pointer;
 }
 
 .green {
@@ -509,6 +510,7 @@ canvas {
   border-radius: 50%;
   border: 2px solid white;
   cursor: pointer;
+  cursor: url('./images/crayon_yellow.png'), pointer;
 }
 
 /*Timer********************************************************************/
