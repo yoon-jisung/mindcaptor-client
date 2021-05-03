@@ -4,7 +4,9 @@ import Colors from './Colors';
 import Eraser from '../../images/eraser.png';
 import Crayon_Black from '../../images/crayon_black.png';
 import Crayon_Red from '../../images/crayon_red.png';
+import Crayon_Blue from '../../images/crayon_blue.png';
 import Crayon_Green from '../../images/crayon_green.png';
+import Crayon_Yellow from '../../images/crayon_yellow.png';
 
 export default function Canvas3({ Round }) {
   const canvasRef = useRef(null);
@@ -77,13 +79,13 @@ export default function Canvas3({ Round }) {
         setCursor({ cursor: `url(${Crayon_Red}), pointer` });
         break;
       case 'blue':
-        console.log('blue');
+        setCursor({ cursor: `url(${Crayon_Blue}), pointer` });
         break;
       case 'green':
         setCursor({ cursor: `url(${Crayon_Green}), pointer` });
         break;
       case 'yellow':
-        console.log('yellow');
+        setCursor({ cursor: `url(${Crayon_Yellow}), pointer` });
         break;
       default:
         setCursor({ cursor: `url(${Crayon_Black}), pointer` });
@@ -100,7 +102,6 @@ export default function Canvas3({ Round }) {
 
   return (
     <div className="WhiteBorad">
-      <div className="Round">Round : {Round}</div>
       <canvas
         style={cursor}
         onMouseDown={startDrawing}

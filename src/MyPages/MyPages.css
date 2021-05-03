@@ -59,7 +59,7 @@
 .user {
   list-style: none;
 }
-
+/* 
 button {
   -webkit-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
   -moz-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
@@ -79,7 +79,7 @@ button:hover {
   color: rgba(255, 255, 255, 0.85);
   box-shadow: rgb(39, 17, 13) 0 80px 0px 2px inset;
   cursor: pointer;
-}
+} */
 
 .Exit {
   display: flex;
@@ -87,3 +87,4 @@ button:hover {
   justify-content: flex-end;
   align-items: flex-start;
 }
+

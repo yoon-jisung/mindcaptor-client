@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Signin from './Signin';
 
-export default function SigninBtn() {
+export default function SigninBtn({loginHandler}) {
   const [isModalOpen, setOpen] = useState(false);
 
   const openModal = () => {
@@ -17,7 +17,7 @@ export default function SigninBtn() {
       <button onClick={openModal} className="member_entry_btn">
         로그인 참가
       </button>
-      <Signin isOpen={isModalOpen} close={closeModal} />
+      <Signin loginHandler={loginHandler}isOpen={isModalOpen} close={closeModal} />
     </>
   );
 }
