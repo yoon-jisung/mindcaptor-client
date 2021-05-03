@@ -508,6 +508,10 @@ canvas {
   display: flex;
 }
 
+.Round {
+  color: rgb(78, 252, 171);
+  font-size: 2em;
+}
 /*Colors********************************************************************/
 
 .black {
@@ -537,7 +541,7 @@ canvas {
   height: 50px;
   border-radius: 50%;
   border: 2px solid white;
-  cursor: pointer;
+  cursor: url('./images/crayon_blue.png'), pointer;
 }
 
 .green {
@@ -557,7 +561,7 @@ canvas {
   height: 50px;
   border-radius: 50%;
   border: 2px solid white;
-  cursor: pointer;
+  cursor: url('./images/crayon_yellow.png'), pointer;
 }
 
 /*Timer********************************************************************/
@@ -677,4 +681,12 @@ canvas {
 
 .blankForWordBox {
   width: 300px;
+}
+
+.isInGame {
+  font-size: 50px;
+  color: red;
+  position: absolute;
+  bottom: 230px;
+  right: 150px;
 }

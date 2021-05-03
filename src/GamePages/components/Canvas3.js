@@ -4,9 +4,11 @@ import Colors from './Colors';
 import Eraser from '../../images/eraser.png';
 import Crayon_Black from '../../images/crayon_black.png';
 import Crayon_Red from '../../images/crayon_red.png';
+import Crayon_Blue from '../../images/crayon_blue.png';
 import Crayon_Green from '../../images/crayon_green.png';
+import Crayon_Yellow from '../../images/crayon_yellow.png';
 
-export default function Canvas3() {
+export default function Canvas3({ Round }) {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [canvas, setCanvas] = useState(undefined);
@@ -77,13 +79,13 @@ export default function Canvas3() {
         setCursor({ cursor: `url(${Crayon_Red}), pointer` });
         break;
       case 'blue':
-        console.log('blue');
+        setCursor({ cursor: `url(${Crayon_Blue}), pointer` });
         break;
       case 'green':
         setCursor({ cursor: `url(${Crayon_Green}), pointer` });
         break;
       case 'yellow':
-        console.log('yellow');
+        setCursor({ cursor: `url(${Crayon_Yellow}), pointer` });
         break;
       default:
         setCursor({ cursor: `url(${Crayon_Black}), pointer` });
@@ -107,9 +109,11 @@ export default function Canvas3() {
         onMouseMove={draw}
         ref={canvasRef}
       />
+
       <div className="Color">
         <Colors handleColorClick={handleColorClick} />
       </div>
+
       <div>
         <Paint
           handleColorClick={handleColorClick}
