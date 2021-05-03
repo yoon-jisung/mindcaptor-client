@@ -1,26 +1,12 @@
 import React from 'react';
+import UserPic from '../../images/Character1.png';
 
 export default function User() {
   return (
     <div className="UserTable">
       <ul>
         <li className="userProfile">
-          <div className="userPic">유저 사진</div>
-          <div className="userNickName">닉네임</div>
-          <div className="correctAns">정답: ?</div>
-        </li>
-        <li className="userProfile">
-          <div className="userPic">유저 사진</div>
-          <div className="userNickName">닉네임</div>
-          <div className="correctAns">정답: ?</div>
-        </li>
-        <li className="userProfile">
-          <div className="userPic">유저 사진</div>
-          <div className="userNickName">닉네임</div>
-          <div className="correctAns">정답: ?</div>
-        </li>
-        <li className="userProfile">
-          <div className="userPic">유저 사진</div>
+          <img src={UserPic} className="userPic"></img>
           <div className="userNickName">닉네임</div>
           <div className="correctAns">정답: ?</div>
         </li>
