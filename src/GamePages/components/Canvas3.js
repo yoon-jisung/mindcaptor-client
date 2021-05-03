@@ -102,7 +102,6 @@ export default function Canvas3({ Round }) {
 
   return (
     <div className="WhiteBorad">
-      <div className="Round">Round : {Round}</div>
       <canvas
         style={cursor}
         onMouseDown={startDrawing}

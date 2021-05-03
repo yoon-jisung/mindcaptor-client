@@ -8,12 +8,14 @@ import Result from './components/Result';
 import SelectWords from './components/SelectWords';
 import GameStartBtn from './components/GameStartBtn';
 import Words from '../Words';
+import GameOver from './components/GameOver';
 
 export default function InGame() {
   const [resultPopup, setResultPopup] = useState(false);
   const [Round, SetRound] = useState(0);
   const [answer, setAnswer] = useState('');
   const [IsOpen, SetIsOpen] = useState(false);
+  const [isGameOver, setGameOver] = useState(false);
 
   //! SelectWords
   const [Word1, SetWord1] = useState('');
@@ -38,7 +40,7 @@ export default function InGame() {
           setSeconds(parseInt(seconds) - 1);
         }
         if (parseInt(seconds) === 0) {
-          if (parseInt(minutes) === 0) {
+          if (parseInt(minutes) === 0 && Round < 9) {
             clearInterval(countdown);
             handleResult();
           } else {
@@ -52,8 +54,8 @@ export default function InGame() {
       };
     }
   }, [minutes, seconds, isTrueTimer]);
-
   //!
+
   const handleResult = () => {
     setResultPopup(true);
   };
@@ -61,6 +63,14 @@ export default function InGame() {
   const countRound = () => {
     SetRound(Round + 1);
   };
+
+  useEffect(() => {
+    if (Round === 8 && seconds === 0 && minutes === 0) {
+      SetRound(0);
+      setGameOver(true);
+    }
+    // 최종 결과창 띄우기
+  }, [Round, seconds]);
 
   const handleGameStart = () => {
     SetIsOpen(true);
@@ -94,7 +104,7 @@ export default function InGame() {
         />
         <div className="GameWindow">
           <div className="result_box">
-            <Canvas Round={Round} className="canvas" />
+            <Canvas className="canvas" />
             <SelectWords
               Word1={Word1}
               Word2={Word2}
@@ -106,9 +116,10 @@ export default function InGame() {
               CountRound={() => countRound}
             />
             {resultPopup ? <Result /> : null}
+            {isGameOver ? <GameOver /> : null}
           </div>
           <Answer />
-          <User />
+          <User Round={Round} />
           <div className="startOrQuitBtns">
             <GameStartBtn handleGameStart={handleGameStart} />
             <BackBtn />
