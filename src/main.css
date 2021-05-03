@@ -630,7 +630,7 @@ canvas {
   width: 300px;
 }
 
-.gameOver {
+.isInGame {
   font-size: 50px;
   color: red;
   position: absolute;

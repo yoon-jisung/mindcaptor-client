@@ -8,14 +8,13 @@ import Result from './components/Result';
 import SelectWords from './components/SelectWords';
 import GameStartBtn from './components/GameStartBtn';
 import Words from '../Words';
-import GameOver from './components/GameOver';
+import GameOver from './components/IsInGameMsg';
 
 export default function InGame() {
   const [resultPopup, setResultPopup] = useState(false);
-  const [Round, SetRound] = useState(0);
   const [answer, setAnswer] = useState('');
   const [IsOpen, SetIsOpen] = useState(false);
-  const [isGameOver, setGameOver] = useState(false);
+  const [isInGame, setIsInGame] = useState(true);
 
   //! SelectWords
   const [Word1, SetWord1] = useState('');
@@ -30,7 +29,7 @@ export default function InGame() {
 
   //! Timer
   const [isTrueTimer, setIsTrueTimer] = useState(false);
-  const [minutes, setMinutes] = useState(parseInt(1));
+  const [minutes, setMinutes] = useState(parseInt(0));
   const [seconds, setSeconds] = useState(parseInt(0));
 
   useEffect(() => {
@@ -40,7 +39,7 @@ export default function InGame() {
           setSeconds(parseInt(seconds) - 1);
         }
         if (parseInt(seconds) === 0) {
-          if (parseInt(minutes) === 0 && Round < 9) {
+          if (parseInt(minutes) === 0) {
             clearInterval(countdown);
             handleResult();
           } else {
@@ -58,31 +57,22 @@ export default function InGame() {
 
   const handleResult = () => {
     setResultPopup(true);
+    setIsInGame(true);
   };
-
-  const countRound = () => {
-    SetRound(Round + 1);
-  };
-
-  useEffect(() => {
-    if (Round === 8 && seconds === 0 && minutes === 0) {
-      SetRound(0);
-      setGameOver(true);
-    }
-    // 최종 결과창 띄우기
-  }, [Round, seconds]);
 
   const handleGameStart = () => {
-    SetIsOpen(true);
-    RandomItem();
-    setIsTrueTimer(true); // Timer 다시 돌아감
-    setMinutes(1); // 시간 다시 설정
-    //selectwords에 있는 RandomItem를 들고오면 해결
+    if (minutes === 0 && seconds === 0) {
+      setMinutes(1); // 시간 다시 설정
+      setIsTrueTimer(true); // Timer 다시 돌아감
+      SetIsOpen(true);
+      RandomItem();
+      setIsInGame(false);
+    }
   };
+
   const handleAnswer = (word) => {
     setAnswer(word);
     SetIsOpen(false);
-    SetRound(Round + 1);
   };
 
   useEffect(() => {
@@ -113,16 +103,17 @@ export default function InGame() {
               handleAnswer={handleAnswer}
               IsOpen={IsOpen}
               answer={answer}
-              CountRound={() => countRound}
             />
             {resultPopup ? <Result /> : null}
-            {isGameOver ? <GameOver /> : null}
           </div>
           <Answer />
-          <User Round={Round} />
+          <User />
           <div className="startOrQuitBtns">
-            <GameStartBtn handleGameStart={handleGameStart} />
             <BackBtn />
+            <GameStartBtn
+              isInGame={isInGame}
+              handleGameStart={handleGameStart}
+            />
           </div>
         </div>
       </>
