@@ -6,6 +6,12 @@ import Answer from './components/Answer';
 import BackBtn from './components/BackBtn';
 import Result from './components/Result';
 import SelectWords from './components/SelectWords';
+import Chat from './components/Chat';
+import io from 'socket.io-client';
+
+const socket = io.connect('http://localhost:4000', {
+  transports: ['websocket', 'polling'],
+});
 
 export default function InGame() {
   const [IsReady, SetIsReady] = useState(false);
@@ -15,13 +21,9 @@ export default function InGame() {
   const [Round, SetRound] = useState(0);
   const [answer, setAnswer] = useState('');
   const [IsOpen, SetIsOpen] = useState(true);
-
-  useEffect(() => {
-    console.log(IsReady);
-    console.log(min);
-    console.log(sec);
-    console.log(answer);
-  }, []);
+  const [users, setUsers] = useState([]);
+  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState([]);
 
   const CanPlay = () => {
     setTimeout(() => SetIsReady(true), 3000);
@@ -30,15 +32,6 @@ export default function InGame() {
   const CantPlay = () => {
     SetIsReady(false);
   };
-
-  useEffect(() => {
-    CanPlay();
-  });
-
-  useEffect(() => {
-    setMin(3);
-    setSec(0);
-  }, [answer]);
 
   const handleResult = () => {
     setResultPopup(true);
@@ -53,6 +46,45 @@ export default function InGame() {
     SetRound(Round + 1);
     setMin(3);
   };
+
+  const submit = (event) => {
+    event.preventDefault();
+    socket.emit('send', message);
+    setMessage('');
+  };
+
+  //! - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  useEffect(() => {
+    // 사용자 정보 소켓으로 불러 오기
+    CanPlay();
+    socket.on('connect', () => {
+      socket.emit('username', username);
+    });
+
+    socket.on('users', (users) => {
+      setUsers(users);
+    });
+
+    socket.on('message', (message) => {
+      setMessages((messages) => [...messages, message]);
+    });
+
+    socket.on('connected', (user) => {
+      setUsers((users) => [...users, user]);
+    });
+
+    socket.on('disconnected', (id) => {
+      setUsers((users) => {
+        return users.filter((user) => user.id !== id);
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    setMin(3);
+    setSec(0);
+  }, [answer]);
 
   useEffect(() => {
     // 일정 시간이 지나면 결과창 닫히고 다시 게임 시작
@@ -80,6 +112,12 @@ export default function InGame() {
             </div>
             <Answer />
             <User />
+            <Chat
+              users={users}
+              message={message}
+              messages={messages}
+              submit={submit}
+            />
             <BackBtn />
           </div>
         </>

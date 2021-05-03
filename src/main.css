@@ -444,10 +444,10 @@ canvas {
   grid-column: 3;
   order: 3;
   flex-direction: column;
-
+  grid-row: 2;
   display: inline-flex;
   align-content: center;
-  align-items: stretch;
+  align-items: center;
   justify-content: flex-end;
 }
 .Colors {
@@ -458,6 +458,23 @@ canvas {
 .Round {
   color: rgb(78, 252, 171);
   font-size: 2em;
+}
+.chatBox {
+  display: flex;
+  user-select: auto;
+  flex-direction: column;
+  align-items: center;
+}
+.chat {
+  user-select: auto;
+  height: 450px;
+  background-color: white;
+  margin-bottom: 30px;
+}
+.chatBox input {
+  user-select: auto;
+  width: 200px;
+  height: 40px;
 }
 /*Colors********************************************************************/
 
