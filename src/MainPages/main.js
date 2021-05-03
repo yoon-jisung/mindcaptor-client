@@ -5,8 +5,10 @@ import SignupBtn from './components/SignupBtn';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import Waiting from '../WaitingPages/Waiting';
+const axios = require('axios');
 
-export default function main() {
+export default function main({loginHandler}) {
+  
   return (
     <div>
       <div className="main">
@@ -16,7 +18,7 @@ export default function main() {
 
         <div className="entry_div">
           <button className="guest_entry_btn">게스트 참가</button>
-          <SigninBtn>로그인 참가</SigninBtn>
+          <SigninBtn loginHandler={loginHandler}>로그인 참가</SigninBtn>
         </div>
 
         <div className="signup_div">
