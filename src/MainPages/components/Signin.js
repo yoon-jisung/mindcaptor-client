@@ -8,8 +8,7 @@ export default function Signin({ isOpen, close, loginHandler }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
-  const url = `https://accounts.google.com/o/oauth2/auth?client_id=970331179604-upa291p2st8pmj3676qmnm4geurg21cb.apps.googleusercontent.com&redirect_uri=http://localhost:3000&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile email`
-
+  const url = `https://accounts.google.com/o/oauth2/auth?client_id=970331179604-upa291p2st8pmj3676qmnm4geurg21cb.apps.googleusercontent.com&redirect_uri=http://localhost:3000&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile email`;
 
   const emailInputValue = (e) => {
     setEmail(e.target.value);
@@ -23,25 +22,28 @@ export default function Signin({ isOpen, close, loginHandler }) {
   //   history.push('/Waiting');
   // };
 
-  const loginRequestHandler= ()=> {
+  const loginRequestHandler = () => {
+    history.push('/Waiting');
 
     axios
       .post(
-        "http://localhost:4000/login",
+        'http://localhost:4000/login',
         { email, password },
-        { headers: { "Content-Type": "application/json" }, withCredentials: true }
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        }
       )
       .then((res) => {
         loginHandler(res.data);
-        history.push('/Waiting')
+        history.push('/Waiting');
       })
       .catch((err) => console.log(err));
-  }
+  };
 
-  const socialLoginHandler=() =>{
-    window.location.assign(url)
-  }
-
+  const socialLoginHandler = () => {
+    window.location.assign(url);
+  };
 
   return (
     <>
@@ -81,7 +83,9 @@ export default function Signin({ isOpen, close, loginHandler }) {
               </button>
             </div>
             <div className="social_box">
-              <div onClick={socialLoginHandler}className="social_btn">구글</div>
+              <div onClick={socialLoginHandler} className="social_btn">
+                구글
+              </div>
               <div className="social_btn">카카오</div>
               <div className="social_btn">네이버</div>
             </div>
