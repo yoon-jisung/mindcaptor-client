@@ -48,6 +48,7 @@ export default function InGame() {
   };
 
   const submit = (event) => {
+    // * 소켓에 메세지 보낼때
     event.preventDefault();
     socket.emit('send', message);
     setMessage('');
