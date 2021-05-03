@@ -4,7 +4,7 @@ import { Link, withRouter, useHistory } from 'react-router-dom';
 export default function ExitBtn() {
   const history = useHistory();
   return (
-    <span>
+    <span className='Exit'>
       <button onClick={() => history.push('/Waiting')}>나가기</button>
     </span>
   );

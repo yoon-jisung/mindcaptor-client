@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
+
 import Words from '../../Words';
 
-export default function SelectWord() {
+export default function SelectWord({ answer, IsOpen, handleAnswer }) {
   const [Word1, SetWord1] = useState('');
   const [Word2, SetWord2] = useState('');
   const [Word3, SetWord3] = useState('');
   const [Problem, SetProblem] = useState([]);
-  const [Answer, SetAnswer] = useState('');
-  const [IsOpen, SetIsOpen] = useState(true);
 
   // ! 단어 3개가 들어감
 
@@ -18,21 +17,12 @@ export default function SelectWord() {
   };
 
   useEffect(() => {
-    console.log(Answer);
-  });
-
-  useEffect(() => {
     RandomItem();
   }, []);
 
   useEffect(() => {
     SetProblem([Word1, Word2, Word3]);
   }, [Word3]);
-
-  const HandleAnswer = (word) => {
-    SetAnswer(word);
-    SetIsOpen(false);
-  };
 
   return IsOpen ? (
     <div className="background">
@@ -45,7 +35,7 @@ export default function SelectWord() {
             {Problem.map((word, idx) => {
               if (Word1 !== Word2 && Word1 !== Word3 && Word2 !== Word3) {
                 return (
-                  <button onClick={() => HandleAnswer(word)} key={idx}>
+                  <button onClick={() => handleAnswer(word)} key={idx}>
                     {word}
                   </button>
                 );

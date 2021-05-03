@@ -20,6 +20,7 @@
 }
 
 .UserProFile {
+
   display: flex;
   border: 5px solid rgb(25, 92, 119);
   justify-content: space-around;
