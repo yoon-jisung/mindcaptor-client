@@ -7,6 +7,12 @@ import Crayon_Red from '../../images/crayon_red.png';
 import Crayon_Blue from '../../images/crayon_blue.png';
 import Crayon_Green from '../../images/crayon_green.png';
 import Crayon_Yellow from '../../images/crayon_yellow.png';
+import io from 'socket.io-client';
+
+const socket = io.connect('http://localhost:4000', {
+  transports: ['websocket', 'polling'],
+  path: '/socket.io',
+});
 
 export default function Canvas3({ Round }) {
   const canvasRef = useRef(null);

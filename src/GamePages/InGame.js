@@ -19,11 +19,15 @@ const socket = io.connect('http://localhost:4000', {
 export default function InGame({}) {
   const [resultPopup, setResultPopup] = useState(false);
   const [IsOpen, SetIsOpen] = useState(true);
-
-  const socketRef = useRef();
-  const [state, setState] = useState({ message: '', name: '' });
-  const [chat, setChat] = useState([]);
+  const [presenter, setPresenter] = useState();
   const [isInGame, setIsInGame] = useState(true);
+
+  // ! Chat
+  const socketRef = useRef();
+  const [state, setState] = useState({ message: '', name: '김코딩' });
+  // ! App.js 에서 유저이름 name에 넣으면 됨 !
+
+  const [chat, setChat] = useState([]);
 
   // ! SelectWords
   const [Word1, SetWord1] = useState('');
@@ -35,7 +39,7 @@ export default function InGame({}) {
   const [isTrueTimer, setIsTrueTimer] = useState(false);
   const [minutes, setMinutes] = useState(parseInt(0));
   const [seconds, setSeconds] = useState(parseInt(0));
-  const [presenter, setPresenter] = useState();
+
   // ! ---------------------state---------------------------
 
   const RandomItem = () => {
@@ -43,29 +47,6 @@ export default function InGame({}) {
     SetWord2(Words[Math.floor(Math.random() * Words.length)]);
     SetWord3(Words[Math.floor(Math.random() * Words.length)]);
   };
-
-  useEffect(() => {
-    if (isTrueTimer) {
-      const countdown = setInterval(() => {
-        if (parseInt(seconds) > 0) {
-          setSeconds(parseInt(seconds) - 1);
-        }
-        if (parseInt(seconds) === 0) {
-          if (parseInt(minutes) === 0) {
-            clearInterval(countdown);
-            handleResult();
-          } else {
-            setMinutes(parseInt(minutes) - 1);
-            setSeconds(59);
-          }
-        }
-      }, 1000);
-      return () => {
-        clearInterval(countdown);
-      };
-    }
-  }, [minutes, seconds, isTrueTimer]);
-  //!
 
   const handleResult = () => {
     setResultPopup(true);
@@ -99,11 +80,10 @@ export default function InGame({}) {
   };
 
   const onMessageSubmit = (e) => {
-    // * 소켓에 메세지 보낼때
-    console.log('메세지가 보내짐');
+    // * 메세지 보낼때
+    e.preventDefault();
     const { name, message } = state;
     socketRef.current.emit('message', { name, message });
-    e.preventDefault();
     setState({ message: '', name });
   };
 
@@ -126,7 +106,31 @@ export default function InGame({}) {
   };
 
   //! --------------------------method--------------------------
+
   useEffect(() => {
+    if (isTrueTimer) {
+      const countdown = setInterval(() => {
+        if (parseInt(seconds) > 0) {
+          setSeconds(parseInt(seconds) - 1);
+        }
+        if (parseInt(seconds) === 0) {
+          if (parseInt(minutes) === 0) {
+            clearInterval(countdown);
+            handleResult();
+          } else {
+            setMinutes(parseInt(minutes) - 1);
+            setSeconds(59);
+          }
+        }
+      }, 1000);
+      return () => {
+        clearInterval(countdown);
+      };
+    }
+  }, [minutes, seconds, isTrueTimer]);
+
+  useEffect(() => {
+    // * 메세지
     socketRef.current = socket;
     socketRef.current.on('message', ({ name, message }) => {
       setChat([...chat, { name, message }]);
@@ -135,46 +139,25 @@ export default function InGame({}) {
   }, [chat]);
 
   useEffect(() => {
+    // * 문제가 선택되면 게임스타트와 문제를 서버에 보내줌
     SetAnswer(answer);
+    startRound();
+    console.log(presenter);
   }, [answer]);
 
   useEffect(() => {
-    // 사용자 정보 소켓으로 불러 오기
+    // * 사용자 정보 소켓으로 불러 오기
     socket.on('my socket id', (data) => {
       console.log('mySocketID : ', data);
-      // socket.on('connection', () => {
-      //   console.log('users connected');
-      //   socket.emit('username', users);
-      // });
-
-      // socket.on('users', (users) => {
-      //   setUsers(users);
-      // });
-
-      // socket.on();
-
-      // socket.on('message', (message) => {
-      //   setMessages((messages) => [...messages, message]);
-      // });
-
-      // socket.on('connected', (user) => {
-      //   setUsers((users) => [...users, user]);
-      // });
-
-      // socket.on('disconnected', (id) => {
-      //   setUsers((users) => {
-      //     return users.filter((user) => user.id !== id);
-      //   });
     });
   }, []);
 
   useEffect(() => {
-    // 일정 시간이 지나면 결과창 닫히고 다시 게임 시작
-
+    // * 결과창이 열리고 서버에 라운드가 종료메세지 보냄 , 일정 시간이 지나면 결과창 닫히고 다시 게임 시작
     const closeResult = setTimeout(() => setResultPopup(false), 3000);
+    endRound();
     return () => {
       clearTimeout(closeResult);
-      endRound();
     };
   }, [resultPopup]);
 
@@ -201,7 +184,6 @@ export default function InGame({}) {
             />
             {resultPopup ? <Result /> : null}
           </div>
-          {/* <Answer /> */}
           <User />
           <Chat
             state={state}
@@ -211,11 +193,11 @@ export default function InGame({}) {
             renderChat={renderChat}
           />
           <div className="startOrQuitBtns">
-            <BackBtn />
             <GameStartBtn
               isInGame={isInGame}
               handleGameStart={handleGameStart}
             />
+            <BackBtn />
           </div>
         </div>
       </>
