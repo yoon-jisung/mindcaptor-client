@@ -7,8 +7,7 @@ import 'reactjs-popup/dist/index.css';
 import Waiting from '../WaitingPages/Waiting';
 const axios = require('axios');
 
-export default function main({loginHandler}) {
-  
+export default function main({ loginHandler }) {
   return (
     <div>
       <div className="main">

@@ -1,50 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import { Container, Form, Button, Modal } from 'react-bootstrap';
+import TextField from '@material-ui/core/TextField';
 
-export default function Chat({ user, message, messages, submit, setMessage }) {
+export default function Chat({
+  chat,
+  onMessageSubmit,
+  onTextChange,
+  state,
+  renderChat,
+}) {
+  console.log(chat);
+
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-12 mt-4 mb-4">
-          <h6>Hello {user}</h6>
+    <div className="card">
+      <form onSubmit={(e) => onMessageSubmit(e)}>
+        <h1>Messenger</h1>
+
+        <div className="name-field">
+          <TextField
+            name="name"
+            onChange={(e) => onTextChange(e)}
+            value={state.name}
+            label="Name"
+          />
         </div>
-      </div>
-      <div className="row">
-        <div className="col-md-8">
-          <h6>Messages</h6>
-
-          <div id="messages">
-            {messages.map(({ user, date, text }, index) => (
-              <div key={index} className="row mb-2">
-                <div className="col-md-3">
-                  {moment(date).format('h:mm:ss a')}
-                </div>
-                <div className="col-md-2">{user.name}</div>
-                <div className="col-md-2">{text}</div>
-              </div>
-            ))}
-          </div>
-
-          <form onSubmit={submit} id="form">
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                onChange={(e) => setMessage(e.currentTarget.value)}
-                value={message}
-                id="text"
-              />
-
-              <span className="input-group-btn">
-                <button id="submit" type="submit" className="btn btn-primary">
-                  Send
-                </button>
-              </span>
-            </div>
-          </form>
+        <div>
+          <TextField
+            name="message"
+            onChange={(e) => onTextChange(e)}
+            value={state.message}
+            id="outlined-multiline-static"
+            variant="outlined"
+            label="Message"
+          />
         </div>
-      </div>
+        <button>Send Message</button>
+        <div className="render-chat">
+          <h1>Chat Log</h1>
+          {renderChat()}
+        </div>
+      </form>
     </div>
   );
 }

@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
+
 import ExitBtn from './ExitBtn';
 import Complete from './Complete';
 
 export default function Header({ isOpen, closeModal }) {
-  const history = useHistory();
-
   useEffect(() => {
     console.log('메세지 송출');
     setTimeout(closeModal(), 4000);

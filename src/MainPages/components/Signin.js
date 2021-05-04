@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../main.css';
 import logo from '../../images/mindcaptor_logo1.png';
-import { useHistory, withRouter, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 const axios = require('axios');
 
 export default function Signin({ isOpen, close, loginHandler }) {

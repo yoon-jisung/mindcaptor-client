@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import Canvas from './components/Canvas3';
 import Timer from './components/Timer';
 import User from './components/User';
-import Answer from './components/AnswerInput';
 import BackBtn from './components/BackBtn';
 import Result from './components/Result';
 import SelectWords from './components/SelectWords';
@@ -11,21 +10,19 @@ import io from 'socket.io-client';
 import GameStartBtn from './components/GameStartBtn';
 import Words from '../Words';
 import GameOver from './components/IsInGameMsg';
-import { string } from 'prop-types';
 
 const socket = io.connect('http://localhost:4000', {
   transports: ['websocket', 'polling'],
   path: '/socket.io',
 });
 
-export default function InGame() {
+export default function InGame({}) {
   const [resultPopup, setResultPopup] = useState(false);
   const [IsOpen, SetIsOpen] = useState(true);
 
-  const [users, setUsers] = useState(['김코딩']);
-  const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([]);
-
+  const socketRef = useRef();
+  const [state, setState] = useState({ message: '', name: '' });
+  const [chat, setChat] = useState([]);
   const [isInGame, setIsInGame] = useState(true);
 
   // ! SelectWords
@@ -77,7 +74,7 @@ export default function InGame() {
 
   const handleGameStart = () => {
     if (minutes === 0 && seconds === 0) {
-      startRound();
+      // startRound();
       setMinutes(1); // 시간 다시 설정
       setIsTrueTimer(true); // Timer 다시 돌아감
       SetIsOpen(true);
@@ -91,11 +88,27 @@ export default function InGame() {
     SetIsOpen(false);
   };
 
-  const submit = (event) => {
+  const renderChat = () => {
+    return chat.map(({ name, message }, index) => (
+      <div key={index}>
+        <h3>
+          {name}: <span>{message}</span>
+        </h3>
+      </div>
+    ));
+  };
+
+  const onMessageSubmit = (e) => {
     // * 소켓에 메세지 보낼때
-    event.preventDefault();
-    socket.emit('send message', message);
-    setMessage('');
+    console.log('메세지가 보내짐');
+    const { name, message } = state;
+    socketRef.current.emit('message', { name, message });
+    e.preventDefault();
+    setState({ message: '', name });
+  };
+
+  const onTextChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
   };
 
   const startRound = () => {
@@ -113,6 +126,14 @@ export default function InGame() {
   };
 
   //! --------------------------method--------------------------
+  useEffect(() => {
+    socketRef.current = socket;
+    socketRef.current.on('message', ({ name, message }) => {
+      setChat([...chat, { name, message }]);
+    });
+    // return () => socketRef.current.disconnect();
+  }, [chat]);
+
   useEffect(() => {
     SetAnswer(answer);
   }, [answer]);
@@ -183,11 +204,11 @@ export default function InGame() {
           {/* <Answer /> */}
           <User />
           <Chat
-            users={users}
-            message={message}
-            messages={messages}
-            submit={submit}
-            setMessage={setMessage}
+            state={state}
+            chat={chat}
+            onTextChange={onTextChange}
+            onMessageSubmit={onMessageSubmit}
+            renderChat={renderChat}
           />
           <div className="startOrQuitBtns">
             <BackBtn />
