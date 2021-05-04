@@ -45,7 +45,10 @@ export default function App() {
           exact={true}
           render={() => <Main loginHandler={loginHandler} />}
         />
-        <Route path="/Waiting" render={() => <Waiting />} />
+        <Route
+          path="/Waiting"
+          render={() => <Waiting accessToken={accessToken} />}
+        />
         <Route path="/MyPage" render={() => <MyPage />} />
         <Route path="/InGame" render={() => <InGame />} />
       </Switch>

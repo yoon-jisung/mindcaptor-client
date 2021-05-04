@@ -4,63 +4,59 @@
   margin: 0;
   padding: 0;
 }
-
+html {
+  width: 100%;
+  height: 100%;
+}
 body {
-  background-image: url('./images/mindcaptor_3kids.png');
-  background-size: contain;
+  /* background-image: url('./images/mindcaptor_background_girl.jpg'); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(#f4f9f9, #ccf2f4, #a4ebf3, #aaaaaa);
 }
 
-:root {
-  --background: #e5ffb3;
-  --background-accent: #dbf8a3;
-  --background-accent-2: #bde66e;
-  --light: #92de34;
-  --dark: #69bc22;
-  --text: #025600;
+/* .entry_div button {
+  background: #1aab8a;
+  color: #fff;
+  border: none;
+  height: 60px;
+  font-size: 1.6em;
+  padding: 0 2em;
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+  margin: 10px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
 }
+
+.entry_div button:hover {
+  background: #fff;
+  color: #1aab8a;
+}
+.entry_div button:before,
+.entry_div button:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  background: #1aab8a;
+  transition: 400ms ease all;
+}
+.entry_div button:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
+.entry_div button:hover:before,
+.entry_div button:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
+} */
 
 button {
-  display: block;
-  cursor: pointer;
-  outline: none;
-  background-color: var(--light);
-  width: 300px;
-  height: 70px;
-  border-radius: 30px;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--text);
-  background-size: 100% 100%;
-  margin: 10px;
-  border: 3px solid rgb(1, 48, 1);
-}
-
-button:hover {
-  background-image: linear-gradient(
-    139deg,
-    transparent 10%,
-    var(--dark) 10% 20%,
-    transparent 20% 30%,
-    var(--dark) 30% 40%,
-    transparent 40% 50%,
-    var(--dark) 50% 60%,
-    transparent 60% 70%,
-    var(--dark) 70% 80%,
-    transparent 80% 90%,
-    var(--dark) 90% 100%
-  );
-  animation: background 50s linear infinite;
-}
-
-@keyframes background {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 4000px 0px;
-  }
-}
-/* button {
   -webkit-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
   -moz-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
   -ms-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
@@ -69,17 +65,18 @@ button:hover {
   display: block;
   border-radius: 4px;
   color: rgb(2, 22, 22);
-  box-shadow: rgb(39, 17, 13) 0 0px 0px 2px inset;
+  box-shadow: rgb(39, 17, 13) 0 0px 0px 0px inset;
   font-size: 30px;
-  background-color: rgb(248, 144, 7);
-  border: none;
-  padding: 5px;
+  background-color: rgb(150, 236, 52);
+  border: 0;
+  padding: 10px;
+  margin: 10px;
 }
 
 button:hover {
   color: rgba(255, 255, 255, 0.85);
   box-shadow: rgb(39, 17, 13) 0 80px 0px 2px inset;
-} */
+}
 
 /* 왼쪽 밑에서 차오르는 버튼 효과 button,
 button::after {
@@ -118,7 +115,10 @@ button::after {
 button:hover {
   color: #efab00;
 } */
-
+.mainTotal {
+  display: flex;
+  flex-direction: row;
+}
 .main {
   flex-direction: column;
   width: 500px;
@@ -133,21 +133,25 @@ button:hover {
 .logo_div {
   width: 400px;
   height: 400px;
-  margin-top: 250px;
   display: flex;
-  justify-content: center;
-  clip-path: circle(40% at 50% 50%);
   position: relative;
-  width: 65vmin;
-  height: 65vmin;
-  background: tomato;
+  /* width: 65vmin;
+  height: 65vmin; */
+  background-color: rgb(247, 241, 231);
+  /* rgb(252 247 212) */
+  border-radius: 50%;
+  box-shadow: 10px 12px 10px rgb(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: row;
+  margin-top: 250px;
 }
 
 .logo {
   width: 400px;
   height: 400px;
-  background-color: white;
-  clip-path: circle(45% at 50% 50%);
+  /* clip-path: circle(45% at 50% 50%); */
+  /* background-color: wheat; */
+  filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.5));
 }
 
 .member_entry_btn {
@@ -162,19 +166,44 @@ button:hover {
   margin-bottom: 10px;
 }
 
-.signup_div {
+.main_btns {
+  width: 100px;
+  height: 250px;
   display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  margin-top: 50px;
+  margin-right: 20px;
+  right: 0;
 }
 
-.signup_btn {
+.member_signup_btn {
+  background-color: #1aab8a;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
+  border-radius: 50%;
+  border: 0;
 }
 
-.game {
-  display: flex;
-  justify-content: center;
+.summery_btn {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 0;
+  border-radius: 50%;
+}
+
+.howToPlay_btn {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 0;
+  border-radius: 50%;
 }
 
 /*Signin********************************************************************/
@@ -186,6 +215,19 @@ button:hover {
   bottom: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.6);
+}
+
+.failed_sginin {
+  position: absolute;
+  box-sizing: border-box;
+  text-align: center;
+  width: 400px;
+  height: 100px;
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 35px;
+  background-color: white;
+  transition: visibility 2s, opacity 0.5s linear;
 }
 
 .signin {
@@ -251,6 +293,8 @@ button:hover {
   justify-content: center;
 }
 
+/*googleSocialLogin*****************************************************/
+
 .social_box {
   display: flex;
   flex-direction: column;
@@ -269,8 +313,6 @@ button:hover {
 /* $white: #fff;
 $google-blue: #4285f4;
 $button-active-blue: #1669f2; */
-
-/*googleSocialLogin*****************************************************/
 
 .google-btn {
   width: 400px;

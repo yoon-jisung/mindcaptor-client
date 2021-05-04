@@ -9,6 +9,8 @@ const axios = require('axios');
 export default function Signin({ isOpen, close, loginHandler }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSigin, setIsSignin] = useState(true);
+  const [isNone, setIsNone] = useState(true);
   const history = useHistory();
 
   const emailInputValue = (e) => {
@@ -24,7 +26,7 @@ export default function Signin({ isOpen, close, loginHandler }) {
   // };
 
   const loginRequestHandler = () => {
-    history.push('/Waiting');
+    // history.push('/Waiting');
 
     axios
       .post(
@@ -39,7 +41,14 @@ export default function Signin({ isOpen, close, loginHandler }) {
         loginHandler(res.data);
         history.push('/Waiting');
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err) {
+          setIsNone(false);
+          setTimeout(() => {
+            setIsNone(true);
+          }, 2000);
+        }
+      });
   };
 
   return (
@@ -61,6 +70,13 @@ export default function Signin({ isOpen, close, loginHandler }) {
               <box className="logo_box">
                 <img src={logo} className="logo"></img>
               </box>
+              <div
+                className="failed_sginin"
+                style={{ opacity: isNone ? '0' : '1' }}
+              >
+                이메일과 비밀번호를 확인해주세요.
+              </div>
+
               <input
                 name="email"
                 className="signin_input"
