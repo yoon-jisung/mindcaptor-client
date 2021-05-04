@@ -24,7 +24,6 @@ export default function App() {
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
-    console.log('hi');
     console.log(authorizationCode);
     if (authorizationCode) {
       getAccessToken(authorizationCode);

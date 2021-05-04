@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import moment from 'moment';
 import { Container, Form, Button, Modal } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-const username = prompt('what is your username');
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const socket = io.connect('http://localhost:4000', {
   transports: ['websocket', 'polling'],

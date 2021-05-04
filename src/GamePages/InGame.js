@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Canvas from './components/Canvas3';
 import Timer from './components/Timer';
 import User from './components/User';
-import Answer from './components/Answer';
+import Answer from './components/AnswerInput';
 import BackBtn from './components/BackBtn';
 import Result from './components/Result';
 import SelectWords from './components/SelectWords';
@@ -12,6 +12,7 @@ import io from 'socket.io-client';
 const socket = io.connect('http://localhost:4000', {
   transports: ['websocket', 'polling'],
 });
+
 import GameStartBtn from './components/GameStartBtn';
 import Words from '../Words';
 import GameOver from './components/IsInGameMsg';
@@ -20,14 +21,11 @@ export default function InGame() {
   const [resultPopup, setResultPopup] = useState(false);
   const [answer, setAnswer] = useState('');
   const [IsOpen, SetIsOpen] = useState(true);
+
   const [users, setUsers] = useState([]);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
 
-  const CanPlay = () => {
-    setTimeout(() => SetIsReady(true), 3000);
-  };
-  const [IsOpen, SetIsOpen] = useState(false);
   const [isInGame, setIsInGame] = useState(true);
 
   //! SelectWords
@@ -100,14 +98,16 @@ export default function InGame() {
 
   useEffect(() => {
     // 사용자 정보 소켓으로 불러 오기
-    CanPlay();
-    socket.on('connect', () => {
-      socket.emit('username', username);
+    socket.on('connection', () => {
+      console.log('users connected');
+      socket.emit('username', users);
     });
 
     socket.on('users', (users) => {
       setUsers(users);
     });
+
+    socket.on();
 
     socket.on('message', (message) => {
       setMessages((messages) => [...messages, message]);
@@ -127,6 +127,7 @@ export default function InGame() {
   useEffect(() => {
     setMin(3);
     setSec(0);
+    socket.emit('set answer', answer);
   }, [answer]);
 
   useEffect(() => {
