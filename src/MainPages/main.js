@@ -1,3 +1,7 @@
+import React, { useEffect, useState } from 'react';
+
+import BGM from '../bgms/bgm1.mp3';
+import useSound from 'use-sound';
 import logo from '../images/mindcaptor_logo_game.png';
 import '../main.css';
 import SigninBtn from './components/SigninBtn';
@@ -8,8 +12,36 @@ import Waiting from '../WaitingPages/Waiting';
 const axios = require('axios');
 
 export default function main({ loginHandler }) {
+  const [play, { stop }] = useSound(BGM);
+  const [bgmOff, setBgmOff] = useState(false);
+
+  // useEffect(() => {
+  //   handelOnBGM();
+  //   return () => {
+  //     handleOffBGM();
+  //   };
+  // }, [play]);
+
+  const handelOnBGM = () => {
+    setBgmOff(true);
+    play();
+  };
+
+  const handleOffBGM = () => {
+    setBgmOff(false);
+    stop();
+  };
   return (
     <div>
+      {bgmOff ? (
+        <button className="bgm" onClick={handleOffBGM}>
+          On
+        </button>
+      ) : (
+        <button className="bgm" onClick={handelOnBGM}>
+          Off
+        </button>
+      )}
       <div className="mainTotal">
         <div className="main">
           <div className="logo_div">
