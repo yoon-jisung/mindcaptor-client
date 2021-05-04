@@ -1,41 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
 import moment from 'moment';
 import { Container, Form, Button, Modal } from 'react-bootstrap';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
-const socket = io.connect('http://localhost:4000', {
-  transports: ['websocket', 'polling'],
-});
-
-export default function Chat() {
-  //   const handleSubmit = (e) => {
-  //     e.preventDafault();
-  //   };
-  useEffect(() => {
-    socket.on('connect', () => {
-      socket.emit('userId', userId);
-    });
-
-    socket.on('userId', (users) => {
-      setUserId(users);
-    });
-
-    socket.on('message', (message) => {
-      setChat((chat) => [...chat, message]);
-    });
-  });
-
+export default function Chat({ user, message, messages, submit, setMessage }) {
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-12 mt-4 mb-4">
-          <h6>Hello {username}</h6>
+          <h6>Hello {user}</h6>
         </div>
       </div>
       <div className="row">
         <div className="col-md-8">
           <h6>Messages</h6>
+
           <div id="messages">
             {messages.map(({ user, date, text }, index) => (
               <div key={index} className="row mb-2">
@@ -47,6 +25,7 @@ export default function Chat() {
               </div>
             ))}
           </div>
+
           <form onSubmit={submit} id="form">
             <div className="input-group">
               <input
@@ -56,6 +35,7 @@ export default function Chat() {
                 value={message}
                 id="text"
               />
+
               <span className="input-group-btn">
                 <button id="submit" type="submit" className="btn btn-primary">
                   Send
@@ -63,14 +43,6 @@ export default function Chat() {
               </span>
             </div>
           </form>
-        </div>
-        <div className="col-md-4">
-          <h6>Users</h6>
-          <ul id="users">
-            {users.map(({ name, id }) => (
-              <li key={id}>{name}</li>
-            ))}
-          </ul>
         </div>
       </div>
     </div>

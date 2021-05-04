@@ -46,7 +46,7 @@ export default function App() {
         />
         <Route path="/Waiting" render={() => <Waiting />} />
         <Route path="/MyPage" render={() => <MyPage />} />
-        <Route path="/InGame" render={() => <InGame />} />
+        <Route path="/room" render={() => <InGame />} />
       </Switch>
     </div>
   );

@@ -492,15 +492,12 @@ canvas {
   height: 35px;
 }
 
-.Back {
-  grid-column: 3;
-  order: 3;
-  flex-direction: column;
-  grid-row: 2;
-  display: inline-flex;
-  align-content: center;
-  align-items: center;
-  justify-content: flex-end;
+.startOrQuitBtns {
+  display: flex;
+  grid-row: 3;
+  grid-column: 2;
+}
+.startOrQuitBtns button {
 }
 .Colors {
   user-select: auto;
