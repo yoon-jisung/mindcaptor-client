@@ -6,11 +6,8 @@
 }
 
 body {
-  background: url('./images/mindcaptor_3kids.png');
-  background-position: center;
-  background-size: 530px;
-  background-repeat: repeat;
-  background-color: rgb(0, 197, 197);
+  background-image: url('./images/mindcaptor_3kids.png');
+  background-size: contain;
 }
 
 :root {
@@ -134,12 +131,23 @@ button:hover {
 }
 
 .logo_div {
+  width: 400px;
+  height: 400px;
+  margin-top: 250px;
   display: flex;
   justify-content: center;
+  clip-path: circle(40% at 50% 50%);
+  position: relative;
+  width: 65vmin;
+  height: 65vmin;
+  background: tomato;
 }
 
 .logo {
+  width: 400px;
+  height: 400px;
   background-color: white;
+  clip-path: circle(45% at 50% 50%);
 }
 
 .member_entry_btn {
@@ -245,22 +253,70 @@ button:hover {
 
 .social_box {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   justify-content: space-around;
 }
 
 .social_btn {
-  background-color: #feec34;
-  border-color: #feec34;
-  height: 60px;
-  width: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
   border-radius: 50%;
 }
+
+/* $white: #fff;
+$google-blue: #4285f4;
+$button-active-blue: #1669f2; */
+
+/*googleSocialLogin*****************************************************/
+
+.google-btn {
+  width: 400px;
+  height: 42px;
+  background-color: #4285f4;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.google-icon-wrapper {
+  position: absolute;
+  margin-top: 1px;
+  margin-left: 1px;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  background-color: #fff;
+}
+
+.google-icon {
+  position: absolute;
+  margin-top: 11px;
+  margin-left: 11px;
+  width: 18px;
+  height: 18px;
+}
+
+.btn-text {
+  margin: 11px 11px 0 0;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  font-family: 'Roboto';
+  text-align: center;
+  margin-left: 25px;
+}
+
+.google-btn:hover {
+  box-shadow: 0 0 6px #4285f4;
+}
+.google-btn:active {
+  background: #1669f2;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:500);
 
 /*Signup********************************************************************/
 
@@ -632,7 +688,7 @@ canvas {
 }
 
 /*SelectWords********************************************************************/
-.background {
+.selectWords_background {
   position: fixed;
   top: 0;
   right: 0;
@@ -688,4 +744,7 @@ canvas {
   position: absolute;
   bottom: 230px;
   right: 150px;
+}
+
+.social_btn {
 }

@@ -22,7 +22,7 @@ export default function SelectWord({
   }, [Word3]);
 
   return IsOpen ? (
-    <div className="background">
+    <div className="selectWords_background">
       <div className="container_WordBox">
         <div className="blankForWordBox" />
 

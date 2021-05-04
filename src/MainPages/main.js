@@ -1,4 +1,4 @@
-import logo from '../images/mindcaptor_logo2.png';
+import logo from '../images/mindcaptor_logo_cat.png';
 import '../main.css';
 import SigninBtn from './components/SigninBtn';
 import SignupBtn from './components/SignupBtn';
@@ -7,8 +7,7 @@ import 'reactjs-popup/dist/index.css';
 import Waiting from '../WaitingPages/Waiting';
 const axios = require('axios');
 
-export default function main({loginHandler}) {
-  
+export default function main({ loginHandler }) {
   return (
     <div>
       <div className="main">
