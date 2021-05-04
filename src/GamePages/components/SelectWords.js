@@ -27,7 +27,7 @@ export default function SelectWord({
         <div className="blankForWordBox" />
 
         <div className="WordBox">
-          <h2 className="selectWord">단어를 선택해주세요.</h2>
+          <div className="selectWord" />
           <div className="wordBtns">
             {Problem.map((word, idx) => {
               if (Word1 !== Word2 && Word1 !== Word3 && Word2 !== Word3) {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../../main.css';
-import logo from '../../images/mindcaptor_logo1.png';
+import logo from '../../images/mindcaptor_logo_login.png';
 import { useHistory, withRouter, Link } from 'react-router-dom';
 import SocialLogin from './SocialLogin';
 
@@ -67,9 +67,9 @@ export default function Signin({ isOpen, close, loginHandler }) {
               </span>
             </div>
             <div className="signin_box">
-              <box className="logo_box">
-                <img src={logo} className="logo"></img>
-              </box>
+              <div className="logo_box">
+                <img src={logo} className="logo_sign" alt="siginin" />
+              </div>
               <div
                 className="failed_sginin"
                 style={{ opacity: isNone ? '0' : '1' }}

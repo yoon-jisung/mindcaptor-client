@@ -3,80 +3,82 @@
   font-family: 'Courier New', Courier, monospace;
   margin: 0;
   padding: 0;
+  font-family: 'CookieRunOTF-Bold';
 }
+@font-face {
+  font-family: 'CookieRunOTF-Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
   width: 100%;
   height: 100%;
+  background-image: url('./images/mindcaptor_background_blueGame.png');
 }
 body {
-  /* background-image: url('./images/mindcaptor_background_girl.jpg'); */
+  /* background-image: url('./images/mindcaptor_background_game.png'); */
   background-size: cover;
-  background-repeat: no-repeat;
-  background-image: linear-gradient(#f4f9f9, #ccf2f4, #a4ebf3, #aaaaaa);
+  background-repeat: repeat;
+  background-size: 1000px;
+  /* background-image: linear-gradient(#f4f9f9, #ccf2f4, #a4ebf3, #aaaaaa); */
 }
 
-/* .entry_div button {
-  background: #1aab8a;
+input {
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+  font-size: 15px;
+}
+
+button {
+  background: #4fb3db;
   color: #fff;
-  border: none;
+  border: 5px solid #0f4d86;
+  border-radius: 30px;
   height: 60px;
-  font-size: 1.6em;
-  padding: 0 2em;
+  font-size: 1.5rem;
   cursor: pointer;
   transition: 800ms ease all;
-  outline: none;
   margin: 10px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+  margin: 30px;
 }
 
-.entry_div button:hover {
+button:hover {
   background: #fff;
-  color: #1aab8a;
+  color: #0f4d86;
 }
-.entry_div button:before,
-.entry_div button:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 2px;
-  width: 0;
-  background: #1aab8a;
-  transition: 400ms ease all;
-}
-.entry_div button:after {
+
+button:after {
   right: inherit;
   top: inherit;
   left: 0;
   bottom: 0;
 }
-.entry_div button:hover:before,
-.entry_div button:hover:after {
+button:hover:before,
+button:hover:after {
   width: 100%;
   transition: 800ms ease all;
-} */
+}
 
-button {
-  -webkit-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
-  -moz-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
-  -ms-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
-  -o-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
-  transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+/* button {
   display: block;
-  border-radius: 4px;
-  color: rgb(2, 22, 22);
-  box-shadow: rgb(39, 17, 13) 0 0px 0px 0px inset;
   font-size: 30px;
-  background-color: rgb(150, 236, 52);
-  border: 0;
+  background-color: #4fb3db;
+  border: 5px solid #0f4d86;
+  border-radius: 30px;
   padding: 10px;
-  margin: 10px;
+  margin: 30px;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
 }
 
 button:hover {
   color: rgba(255, 255, 255, 0.85);
-  box-shadow: rgb(39, 17, 13) 0 80px 0px 2px inset;
-}
+  box-shadow: #0f4d86 0 80px 0px 2px inset;
+} */
 
 /* 왼쪽 밑에서 차오르는 버튼 효과 button,
 button::after {
@@ -130,80 +132,65 @@ button:hover {
   margin-top: 150px;
 }
 
-.logo_div {
-  width: 400px;
-  height: 400px;
-  display: flex;
-  position: relative;
-  /* width: 65vmin;
-  height: 65vmin; */
-  background-color: rgb(247, 241, 231);
-  /* rgb(252 247 212) */
-  border-radius: 50%;
-  box-shadow: 10px 12px 10px rgb(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: row;
-  margin-top: 250px;
-}
-
 .logo {
-  width: 400px;
-  height: 400px;
-  /* clip-path: circle(45% at 50% 50%); */
-  /* background-color: wheat; */
-  filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.5));
-}
-
-.member_entry_btn {
-  cursor: pointer;
+  margin-top: 78px;
+  border-radius: 30px;
+  filter: drop-shadow(5px 5px 5px #000);
 }
 
 .entry_div {
   display: flex;
   justify-content: center;
-  justify-content: space-around;
   margin-top: 30px;
-  margin-bottom: 10px;
+}
+/*guest login*/
+.entry_btn {
+  width: 300px;
+  font-size: 30px;
+  height: 80px;
+  cursor: pointer;
+  margin-right: 60px;
+}
+
+.member_entry_btn {
+  width: 300px;
+  font-size: 30px;
+  height: 80px;
+  cursor: pointer;
+  margin-left: 60px;
 }
 
 .main_btns {
-  width: 100px;
-  height: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
   position: absolute;
-  margin-top: 50px;
   margin-right: 20px;
   right: 0;
+  top: 0;
 }
 
 .member_signup_btn {
-  background-color: #1aab8a;
-  width: 60px;
+  width: 150px;
   height: 60px;
   cursor: pointer;
-  border-radius: 50%;
-  border: 0;
+  border-radius: 100px;
+  margin-bottom: 10px;
 }
 
 .summery_btn {
-  width: 60px;
+  width: 150px;
   height: 60px;
   cursor: pointer;
-  border-radius: 50%;
-  border: 0;
-  border-radius: 50%;
+  border-radius: 100px;
+  margin-bottom: 10px;
 }
 
 .howToPlay_btn {
-  width: 60px;
+  width: 150px;
   height: 60px;
   cursor: pointer;
-  border-radius: 50%;
-  border: 0;
-  border-radius: 50%;
+  border-radius: 100px;
 }
 
 /*Signin********************************************************************/
@@ -223,16 +210,19 @@ button:hover {
   text-align: center;
   width: 400px;
   height: 100px;
-  border: 2px solid black;
+  border: 5px solid #0f4d86;
   border-radius: 15px;
   padding: 35px;
-  background-color: white;
+  background-color: #77acf1;
   transition: visibility 2s, opacity 0.5s linear;
+  font-size: 20px;
+  color: white;
+  bottom: 500px;
 }
 
 .signin {
   width: 480px;
-  height: 621px;
+  height: 600px;
   background-color: white;
   position: relative;
   box-sizing: border-box;
@@ -244,18 +234,21 @@ button:hover {
 .signin_box {
   margin: 0 auto;
   width: 100%;
+  height: 500px;
+
   position: relative;
   padding: 0 20px 30px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
   align-items: center;
 }
 
 .signin_exit {
   float: right;
-  font-size: 25px;
+  font-size: 30px;
   cursor: pointer;
   color: black;
 }
@@ -280,10 +273,9 @@ button:hover {
 .signin_btn {
   height: 40px;
   width: 100%;
-  font-size: 14px;
+  font-size: 15px;
   padding: 13px 30px;
   cursor: pointer;
-  background-color: black;
   color: white;
   line-height: 1px;
   margin-top: 20px;
@@ -291,6 +283,13 @@ button:hover {
   border-radius: 3px;
   border-style: none;
   justify-content: center;
+}
+
+.signin_btn:hover {
+  box-shadow: 0 0 6px #4285f4;
+}
+.signin_btn:active {
+  background: #1669f2;
 }
 
 /*googleSocialLogin*****************************************************/
@@ -319,8 +318,8 @@ $button-active-blue: #1669f2; */
   height: 42px;
   background-color: #4285f4;
   border-radius: 2px;
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
   cursor: pointer;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
 }
 
 .google-icon-wrapper {
@@ -344,7 +343,7 @@ $button-active-blue: #1669f2; */
 .btn-text {
   margin: 11px 11px 0 0;
   color: #fff;
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: 0.2px;
   font-family: 'Roboto';
   text-align: center;
@@ -352,6 +351,8 @@ $button-active-blue: #1669f2; */
 }
 
 .google-btn:hover {
+  transition: 800ms ease all;
+
   box-shadow: 0 0 6px #4285f4;
 }
 .google-btn:active {
@@ -378,7 +379,7 @@ $button-active-blue: #1669f2; */
 
 .signup {
   width: 480px;
-  height: 621px;
+  height: 600px;
   background-color: white;
   position: relative;
   box-sizing: border-box;
@@ -390,25 +391,22 @@ $button-active-blue: #1669f2; */
 .signup_box {
   margin: 0 auto;
   width: 100%;
+  height: 500px;
   position: relative;
   padding: 0 20px 30px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
   align-items: center;
 }
 
 .signup_exit {
   float: right;
-  font-size: 25px;
+  font-size: 30px;
   cursor: pointer;
   color: black;
-}
-
-.signup_logo {
-  width: 150px;
-  margin: 0 auto;
 }
 
 .signup_input {
@@ -426,10 +424,9 @@ $button-active-blue: #1669f2; */
 .signup_btn {
   height: 40px;
   width: 100%;
-  font-size: 14px;
+  font-size: 15px;
   padding: 13px 30px;
   cursor: pointer;
-  background-color: black;
   color: white;
   line-height: 1px;
   margin-top: 20px;
@@ -439,12 +436,38 @@ $button-active-blue: #1669f2; */
   justify-content: center;
 }
 
+.signup_btn:hover {
+  box-shadow: 0 0 6px #4285f4;
+}
+.signup_btn:active {
+  background: #1669f2;
+}
+
 /*Waiting********************************************************************/
 
+.waiting {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile_img {
+  filter: drop-shadow(5px 5px 5px #000);
+  border-radius: 30px;
+  margin-bottom: 30px;
+}
+
 .waiting_signout_btn {
-  display: block;
-  position: fixed;
-  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  margin-right: 20px;
+  right: 0;
+}
+
+.signout_btn {
+  width: 45px;
+  height: 160px;
 }
 
 .waiting_box {
@@ -457,69 +480,27 @@ $button-active-blue: #1669f2; */
 .waiting_btns {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   margin: 20px;
 }
 
-/* .entry_game_btn {
-  zoom: 4;
-  overflow: hidden;
-}
-
-.entry_game_btn::after {
-  height: 100%;
-  left: -35%;
-  top: 0;
-  transform: skew(50deg);
-  transition-duration: 0.6s;
-  transform-origin: top left;
-  width: 0;
-}
-
-.entry_game_btn:hover:after {
-  height: 100%;
-  width: 135%;
+.entry_game_btn {
+  width: 300px;
+  font-size: 50px;
+  height: 110px;
 }
 
 .create_game_btn {
-  zoom: 4;
-  overflow: hidden;
-}
-
-.create_game_btn::after {
-  height: 100%;
-  left: -35%;
-  top: 0;
-  transform: skew(50deg);
-  transition-duration: 0.6s;
-  transform-origin: top left;
-  width: 0;
-}
-
-.create_game_btn:hover:after {
-  height: 100%;
-  width: 135%;
+  width: 300px;
+  font-size: 50px;
+  height: 110px;
 }
 
 .mypage_btn {
-  zoom: 4;
-  overflow: hidden;
+  width: 300px;
+  font-size: 50px;
+  height: 110px;
 }
-
-.mypage_btn::after {
-  height: 100%;
-  left: -35%;
-  top: 0;
-  transform: skew(50deg);
-  transition-duration: 0.6s;
-  transform-origin: top left;
-  width: 0;
-}
-
-.mypage_btn:hover:after {
-  height: 100%;
-  width: 135%;
-} */
 
 .userInfo {
   zoom: 3;
@@ -560,11 +541,12 @@ $button-active-blue: #1669f2; */
   align-items: center;
   align-content: center;
   background-color: white;
-  border: 2px solid turquoise;
+  border: 5px solid #0f4d86;
   border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
 }
 canvas {
-  border-bottom: dotted #c9c2c2;
+  border-bottom: dotted #0f4d86;
 }
 .Color {
 }
@@ -605,10 +587,6 @@ canvas {
   display: flex;
 }
 
-.Round {
-  color: rgb(78, 252, 171);
-  font-size: 2em;
-}
 /*Colors********************************************************************/
 
 .black {
@@ -745,11 +723,13 @@ canvas {
   grid-auto-rows: minmax(100px, auto);
 }
 .WordBox {
-  border: 2px solid black;
+  background-image: url('./images/mindcaptor_background_game.png');
+  background-size: 500px;
+  border: 5px solid #0f4d86;
   border-radius: 15px;
   width: 600px;
   height: 300px;
-  background-color: teal;
+  background-color: rgb(100, 194, 194);
   position: relative;
   box-sizing: border-box;
   margin: 50px auto;
@@ -764,11 +744,22 @@ canvas {
   margin-top: 180px;
 }
 
+.selectWord {
+  height: 100%;
+  width: 240px;
+  background-image: url('./images/mindcaptor_logo_word2.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgb(100, 194, 194);
+  /* -webkit-text-stroke: 1px white; */
+}
+
 .wordBtns {
   display: flex;
   flex-direction: row;
   width: 600px;
   justify-content: space-around;
+  margin-bottom: 10px;
 }
 
 .wordBtns button {

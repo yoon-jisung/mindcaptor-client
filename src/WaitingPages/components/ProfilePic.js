@@ -1,10 +1,10 @@
 import React from 'react';
-import profile from '../../images/profile.png';
+import logo from '../../images/mindcaptor_logo_wait.png';
 
 export default function ProfilePic() {
   return (
     <div>
-      <img src={profile} className="profile_img" alt="프로필사진" />
+      <img src={logo} className="profile_img" alt="프로필사진" />
     </div>
   );
 }

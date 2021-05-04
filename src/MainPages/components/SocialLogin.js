@@ -14,14 +14,14 @@ export default function SocialLogin() {
           type="text/css"
           href="//fonts.googleapis.com/css?family=Open+Sans"
         />
-        <div class="google-btn" onClick={socialLoginHandler}>
-          <div class="google-icon-wrapper">
+        <div className="google-btn" onClick={socialLoginHandler}>
+          <div className="google-icon-wrapper">
             <img
-              class="google-icon"
+              className="google-icon"
               src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
             />
           </div>
-          <p class="btn-text">
+          <p className="btn-text">
             <b>Sign in with google</b>
           </p>
         </div>

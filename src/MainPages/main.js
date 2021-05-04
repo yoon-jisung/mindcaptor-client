@@ -1,4 +1,4 @@
-import logo from '../images/mindcaptor_logo_cat.png';
+import logo from '../images/mindcaptor_logo_game.png';
 import '../main.css';
 import SigninBtn from './components/SigninBtn';
 import SignupBtn from './components/SignupBtn';
@@ -16,43 +16,53 @@ export default function main({ loginHandler }) {
             <img src={logo} className="logo" />
           </div>
 
+          <div className="main_btns">
+            <div className="signup_div">
+              <SignupBtn>회원가입</SignupBtn>
+            </div>
+
+            <Popup
+              trigger={<button className="summery_btn"> 게임설명</button>}
+              position="left center"
+              on={['hover', 'focus']}
+            >
+              <p>
+                제한시간 안에 <br></br>친구의 그림을 맞춰보세요!
+              </p>
+            </Popup>
+
+            <div>
+              <Popup
+                trigger={<button className="howToPlay_btn"> 게임방법</button>}
+                position="left center"
+                on={['hover', 'focus']}
+              >
+                <div>
+                  <p>
+                    1. 출제자가 된 경우 게임시작 &nbsp;&nbsp;&nbsp;&nbsp;버튼을
+                    누르면 단어를 <br></br>&nbsp;&nbsp;&nbsp;&nbsp;선택하실 수
+                    있습니다.
+                  </p>
+                  <br></br>
+                  <p>
+                    2. 여러가지 색을 활용하여 <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;당신의 그림을 완성하세요.
+                  </p>
+                  <br></br>
+                  <p>3. 출제자는 랜덤입니다.</p>
+                  <br></br>
+                  <p>4. 최대인원은 4명입니다.</p>
+                  <br></br>
+                  <p>5. 제한시간은 3분입니다.</p>
+                </div>
+              </Popup>
+            </div>
+          </div>
           <div className="entry_div">
             <button className="entry_btn">게스트 참가</button>
             <SigninBtn className="entry_btn" loginHandler={loginHandler}>
               로그인 참가
             </SigninBtn>
-          </div>
-        </div>
-        <div className="main_btns">
-          <div className="signup_div">
-            <SignupBtn>회원가입</SignupBtn>
-          </div>
-
-          <Popup
-            trigger={<button className="summery_btn"> 게임설명</button>}
-            position="bottom center"
-            on={['hover', 'focus']}
-          >
-            <p>그림도 그리고 친구들이 출제한 문제도 맞춰보세요 !</p>
-          </Popup>
-
-          <div>
-            <Popup
-              trigger={<button className="howToPlay_btn"> 게임방법</button>}
-              position="bottom center"
-              on={['hover', 'focus']}
-            >
-              <div>
-                <p>
-                  1. 플레이 하는 인원이 2명이면 자동으로 게임은 플레이 됩니다.
-                </p>
-                <p>
-                  2. 출체자가 된 경우 3개의 단어중에 하나를 선택 후 팬과 색깔을
-                  사용하여 그림으로 표현하세요 !
-                </p>
-                <p>3. 제한시간은 3분입니다.</p>
-              </div>
-            </Popup>
           </div>
         </div>
       </div>

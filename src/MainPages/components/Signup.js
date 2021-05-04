@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../../main.css';
-import logo from '../../images/mindcaptor_logo1.png';
+import logo from '../../images/mindcaptor_logo_join.png';
 
 export default function Signup({ isOpen, close }) {
   const [email, setEmail] = useState('');
@@ -34,9 +34,9 @@ export default function Signup({ isOpen, close }) {
               </span>
             </div>
             <div className="signup_box">
-              <box className="logo_box">
-                <img src={logo} className="logo"></img>
-              </box>
+              <div className="logo_box">
+                <img src={logo} className="logo_signup" alt="siginup" />
+              </div>
               <input
                 name="email"
                 className="signup_input"
