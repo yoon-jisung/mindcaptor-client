@@ -36,7 +36,7 @@ export default function Signin({ isOpen, close, loginHandler }) {
       )
       .then((res) => {
         loginHandler(res.data);
-        //history.push('/Waiting');
+        history.push('/Waiting');
       })
       .catch((err) => console.log(err));
   };

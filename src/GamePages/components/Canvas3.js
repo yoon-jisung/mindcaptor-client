@@ -56,6 +56,7 @@ export default function Canvas3({ Round }) {
     if (!isDrawing) return;
     const { offsetX, offsetY } = nativeEvent;
     contextRef.current.lineTo(offsetX, offsetY);
+    // ! 소켓
     contextRef.current.stroke();
   };
 

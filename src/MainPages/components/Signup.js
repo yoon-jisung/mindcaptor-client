@@ -8,7 +8,6 @@ export default function Signup({ isOpen, close, loginHandler }) {
   const [password, setPassword] = useState('');
   const [nickname, setNickName] = useState('');
 
-
   const emailInputValue = (e) => {
     setEmail(e.target.value);
   };
@@ -20,6 +19,7 @@ export default function Signup({ isOpen, close, loginHandler }) {
   const nickNameInputValue = (e) => {
     setNickName(e.target.value);
   };
+
   const signUpHandler = () => {
     axios
       .post(
@@ -35,7 +35,7 @@ export default function Signup({ isOpen, close, loginHandler }) {
         //history.push('/Waiting');
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   return (
     <>
@@ -77,7 +77,9 @@ export default function Signup({ isOpen, close, loginHandler }) {
                 placeholder="닉네임"
                 onChange={nickNameInputValue}
               />
-              <button onClick={signUpHandler}className="signup_btn">회원가입</button>
+              <button onClick={signUpHandler} className="signup_btn">
+                회원가입
+              </button>
             </div>
           </div>
         </div>
