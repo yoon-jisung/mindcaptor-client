@@ -7,6 +7,8 @@ import MyPage from './MyPages/MyPage';
 import InGame from './GamePages/InGame';
 import Character1 from './images/Character1.png';
 import { useHistory } from 'react-router-dom';
+import './main.css';
+
 const axios = require('axios');
 
 export default function App() {

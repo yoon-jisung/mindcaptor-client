@@ -2,19 +2,42 @@ import React from 'react';
 
 export default function SearchUser() {
   return (
-    <div className="follow">
-      <div>이메일로 유저 팔로잉</div>
-      <input type="text" placeholder="유저 이메일"></input>
-      <article className="follow/folloing">
-        <div>팔로워</div>
-        <ul>
-          <li className="user">김코딩</li>
-        </ul>
-        <div>팔로잉</div>
-        <ul>
-          <li className="user">박해커</li>
-        </ul>
-      </article>
+    <div>
+      <div className="community">
+        <div className="communityBox">
+          <h1>커뮤니티</h1>
+          <div className="followBox">
+            <div className="following">
+              <div>팔로잉</div>
+              <input type="text" placeholder="유저 이메일"></input>
+              <ul className="followList">{<li>김재헌</li>}</ul>
+            </div>
+            <div className="follower">
+              <div>팔로워</div>
+              <input type="text" placeholder="유저 닉네임"></input>
+              <ul className="followList">
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+                <li>김재헌</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

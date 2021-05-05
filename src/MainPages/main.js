@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import BGM from '../bgms/bgm1.mp3';
 import useSound from 'use-sound';
+
 import logo from '../images/mindcaptor_logo_game.png';
-import '../main.css';
 import SigninBtn from './components/SigninBtn';
 import SignupBtn from './components/SignupBtn';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import { useHistory } from 'react-router-dom';
+
 const axios = require('axios');
 
 export default function Main({ loginHandler }) {
