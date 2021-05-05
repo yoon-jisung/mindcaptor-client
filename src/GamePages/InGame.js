@@ -61,6 +61,7 @@ export default function InGame({}) {
       SetIsOpen(true);
       RandomItem();
       setIsInGame(false);
+      startRound();
     }
   };
 
@@ -141,8 +142,8 @@ export default function InGame({}) {
   useEffect(() => {
     // * 문제가 선택되면 게임스타트와 문제를 서버에 보내줌
     SetAnswer(answer);
-    startRound();
-    console.log(presenter);
+
+    console.log(('presenter', presenter));
   }, [answer]);
 
   useEffect(() => {
