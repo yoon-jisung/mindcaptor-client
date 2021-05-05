@@ -82,6 +82,7 @@ export default function Signup({ isOpen, close, loginHandler }) {
                 className="signup_input"
                 type="password"
                 placeholder="패스워드"
+                onChange={passwordInputValue}
                 onKeyDown={signUpHandler}
               />
               <input
