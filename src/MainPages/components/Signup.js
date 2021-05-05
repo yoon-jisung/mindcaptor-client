@@ -7,7 +7,6 @@ export default function Signup({ isOpen, close, loginHandler }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [nickname, setNickName] = useState('');
-
   const emailInputValue = (e) => {
     setEmail(e.target.value);
   };
@@ -32,9 +31,8 @@ export default function Signup({ isOpen, close, loginHandler }) {
       )
       .then((res) => {
         console.log(res.message);
-        //history.push('/Waiting');
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log('여기로?'));
   };
 
   return (

@@ -29,15 +29,9 @@ export default function App() {
         withCredentials: true,
       })
       .then((res) => {
-        if (res.data.message !== 'ok') {
-          const message =
-            'access token이 만료되어 불러올 수 없습니다. refresh token을 사용해주시기 바랍니다.';
-          //return setState({ email: message, createdAt: message });
-        }
-
-        //console.log(res.message)
-        //console.log(res.data.data.userInfo.dataValues)
-        const { nickname, email, profile_image } = res.data.data.userInfo;
+        console.log(res.message);
+        console.log(res.data.data);
+        const { nickname, email, profile_image } = res.data.data;
         // !
         setUserInfo({
           nickname: nickname,
@@ -83,12 +77,23 @@ export default function App() {
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
+    console.log('accessToken', accessToken);
+    console.log('userInfo:', userInfo);
     if (authorizationCode) {
       getAccessToken(authorizationCode);
     }
   });
 
+  useEffect(() => {
+    console.log('엑세스 토큰', accessToken.accessToken);
+    if (accessToken.accessToken !== null) {
+      setIsLogIn(true);
+    }
+    console.log('로그인상태', isLogIn);
+  }, [accessToken]);
+
   const getAccessToken = async (authorizationCode) => {
+    // ! 구글 로그인
     let resp = await axios.post('http://localhost:4000/googlelogin', {
       authorizationCode: authorizationCode,
     });
@@ -97,19 +102,24 @@ export default function App() {
   return (
     <div>
       <Switch>
+        <Route path="/Waiting" render={() => <Waiting />} />
+        <Route path="/MyPage" render={() => <MyPage />} />
+        <Route path="/room" render={() => <InGame />} />
         <Route
           path="/"
           exact={true}
           render={() => <Main loginHandler={loginHandler} />}
         />
-        <Route
-          path="/Waiting"
-          render={() => <Waiting accessToken={accessToken} />}
-        />
-        <Route path="/" exact={true} render={() => <Main />} />
-        <Route path="/Waiting" render={() => <Waiting />} />
-        <Route path="/MyPage" render={() => <MyPage />} />
-        <Route path="/room" render={() => <InGame />} />
+        {/* <Route
+          path="/"
+          render={() => {
+            if (!isLogIn) {
+              <Redirect to="/" render={() => <Main />} />;
+            } else {
+              <Redirect to="/Waiting" render={() => <Waiting />} />;
+            }
+          }}
+        /> */}
       </Switch>
     </div>
   );
@@ -118,3 +128,14 @@ export default function App() {
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+{
+  /* <Route
+  path="/"
+  render={() => {
+    if (isLogin) {
+      return <Redirect to="/mypage" />;
+    }
+    return <Redirect to="/login" />;
+  }}
+/>; */
+}
