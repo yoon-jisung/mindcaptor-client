@@ -21,7 +21,6 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
       openModal();
     }
   };
-
   const openModal = () => {
     setIsOpen(true);
     setTimeout(() => {
@@ -54,11 +53,13 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
               <button className="changeProPhoto" onClick={handlePhotoBox}>
                 편집
               </button>
-              <div className="userNickName">닉네임 : 김코딩 </div>
+              <div className="userNickName">닉네임 : {userInfo.nickname} </div>
             </div>
             <div className="intro">
               <h1>자기소개</h1>
-              <textarea placeholder="안녕하세요, 김코딩입니다" />
+              <textarea
+                placeholder={`안녕하세요, ${userInfo.nickname}입니다.`}
+              />
             </div>
           </div>
           <SearchUser />
