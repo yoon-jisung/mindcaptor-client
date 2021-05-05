@@ -65,6 +65,7 @@ export default function Waiting({
             openModal={openModal}
             createModal={createModal}
             closeModal={closeModal}
+            accessToken={accessToken}
           />
           <MyPageBtn />
         </div>
