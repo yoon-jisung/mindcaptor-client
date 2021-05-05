@@ -26,7 +26,8 @@ export default function Signin({ isOpen, close, loginHandler }) {
   // };
 
   const loginRequestHandler = (e) => {
-    if (e.key === 'Enter') {
+    console.log(e);
+    if (e.key === 'Enter' || e.type === 'click') {
       axios
         .post(
           'http://localhost:4000/login',

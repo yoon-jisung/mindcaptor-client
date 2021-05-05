@@ -23,7 +23,7 @@ export default function Signup({ isOpen, close, loginHandler }) {
   };
 
   const signUpHandler = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' || e.type === 'click') {
       axios
         .post(
           'http://localhost:4000/signup',
