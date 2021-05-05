@@ -8,7 +8,7 @@ import SigninBtn from './components/SigninBtn';
 import SignupBtn from './components/SignupBtn';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import Waiting from '../WaitingPages/Waiting';
+import { useHistory } from 'react-router-dom';
 const axios = require('axios');
 
 export default function main({ loginHandler }) {
@@ -21,6 +21,18 @@ export default function main({ loginHandler }) {
   //     handleOffBGM();
   //   };
   // }, [play]);
+
+  const history = useHistory();
+  const guestLogIn = () => {
+    axios
+    .get("http://localhost:4000/guest")
+    .then((res) => {
+      console.log(res.data)
+      loginHandler(res.data);
+      history.push('/Waiting');
+    })
+    .catch((err) => console.log(err));
+  };
 
   const handelOnBGM = () => {
     setBgmOff(true);
@@ -58,12 +70,9 @@ export default function main({ loginHandler }) {
               position="left center"
               on={['hover', 'focus']}
             >
-              <p>
-                제한시간 안에 <br></br>친구의 그림을 맞춰보세요!
-              </p>
-            </Popup>
-
-            <div>
+              <p>그림도 그리고 친구들이 출제한 문제도 맞춰보세요 !</p>
+          </Popup>
+          
               <Popup
                 trigger={<button className="howToPlay_btn"> 게임방법</button>}
                 position="left center"
@@ -88,7 +97,6 @@ export default function main({ loginHandler }) {
                   <p>5. 제한시간은 3분입니다.</p>
                 </div>
               </Popup>
-            </div>
           </div>
           <div className="entry_div">
             <button className="entry_btn">게스트 참가</button>
@@ -101,3 +109,7 @@ export default function main({ loginHandler }) {
     </div>
   );
 }
+
+
+
+            

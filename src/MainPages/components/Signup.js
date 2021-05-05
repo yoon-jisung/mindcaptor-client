@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import '../../main.css';
 import logo from '../../images/mindcaptor_logo_join.png';
+const axios = require('axios');
 
-export default function Signup({ isOpen, close }) {
+export default function Signup({ isOpen, close, loginHandler }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [nickname, setNickName] = useState('');
 
   const emailInputValue = (e) => {
     setEmail(e.target.value);
@@ -15,7 +17,24 @@ export default function Signup({ isOpen, close }) {
   };
 
   const nickNameInputValue = (e) => {
-    setPassword(e.target.value);
+    setNickName(e.target.value);
+  };
+
+  const signUpHandler = () => {
+    axios
+      .post(
+        'http://localhost:4000/signup',
+        { email, password, nickname },
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res.message);
+        //history.push('/Waiting');
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -58,7 +77,9 @@ export default function Signup({ isOpen, close }) {
                 placeholder="닉네임"
                 onChange={nickNameInputValue}
               />
-              <button className="signup_btn">회원가입</button>
+              <button onClick={signUpHandler} className="signup_btn">
+                회원가입
+              </button>
             </div>
           </div>
         </div>

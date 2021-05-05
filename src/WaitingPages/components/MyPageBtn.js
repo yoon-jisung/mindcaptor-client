@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter, useHistory } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 
 function MyPageBtn() {
   const history = useHistory();

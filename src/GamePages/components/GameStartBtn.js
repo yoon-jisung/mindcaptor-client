@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function GameStartBtn({ handleGameStart, isInGame }) {
-  console.log(isInGame);
   return (
     <div>
       <button

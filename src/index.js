@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import Canvas from './GamePages/components/Canvas3';
 
 ReactDOM.render(
   <BrowserRouter>

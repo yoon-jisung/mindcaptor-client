@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../main.css';
 import logo from '../../images/mindcaptor_logo_login.png';
-import { useHistory, withRouter, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import SocialLogin from './SocialLogin';
 
 const axios = require('axios');
