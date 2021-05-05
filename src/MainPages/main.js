@@ -4,11 +4,21 @@ import SigninBtn from './components/SigninBtn';
 import SignupBtn from './components/SignupBtn';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import Waiting from '../WaitingPages/Waiting';
+import { useHistory } from 'react-router-dom';
 const axios = require('axios');
 
-export default function main({loginHandler}) {
-  
+export default function Main({loginHandler}) {
+  const history = useHistory();
+  const guestLogIn = () => {
+    axios
+    .get("http://localhost:4000/guest")
+    .then((res) => {
+      console.log(res.data)
+      loginHandler(res.data);
+      history.push('/Waiting');
+    })
+    .catch((err) => console.log(err));
+  };
   return (
     <div>
       <div className="main">
@@ -17,12 +27,12 @@ export default function main({loginHandler}) {
         </box>
 
         <div className="entry_div">
-          <button className="guest_entry_btn">게스트 참가</button>
+          <button onClick={guestLogIn} className="guest_entry_btn">게스트 참가</button>
           <SigninBtn loginHandler={loginHandler}>로그인 참가</SigninBtn>
         </div>
 
         <div className="signup_div">
-          <SignupBtn>회원가입</SignupBtn>
+          <SignupBtn loginHandler={loginHandler}>회원가입</SignupBtn>
         </div>
         <div className="game">
           <Popup
