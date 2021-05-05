@@ -1,9 +1,12 @@
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
 import React, { useEffect, useState } from 'react';
 
-export default function CreateGame({ createModal, closeModal }) {
+export default function CreateGame({ createModal, closeModal,accessToken }) {
   const [roomName, setRoomName] = useState('');
   const [roomPassword, setRoomPassword] = useState('');
+  const history = useHistory();
 
   const roomNameInputValue = (e) => {
     setRoomName(e.target.value);
@@ -22,12 +25,16 @@ export default function CreateGame({ createModal, closeModal }) {
         'http://localhost:4000/room/new',
         { room_name, room_pw },
         {
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'authorization': accessToken
+          },
           Credentials: 'include',
         }
       )
       .then((res) => {
         console.log(res.data);
+        history.push(`/room/${res.data.data}`)
       })
       .catch((err) => console.log(err));
   };
