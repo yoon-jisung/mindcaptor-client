@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, withRouter, useHistory } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import SearchUser from './components/SearchUser';
 import Header from './components/Header';
-import Complete from './components/Complete';
+
 import Character1 from '../images/Character1.png';
 import Character2 from '../images/Character2.png';
 import Character3 from '../images/Character3.png';
@@ -14,8 +14,6 @@ function MyPage() {
   const PotoData = [Character1, Character2, Character3, Character4];
   const [nowPoto, setPoto] = useState(Character1);
   const [isModalOpen, setOpen] = useState(false);
-
-  const history = useHistory();
 
   const ChangeInputPoto = function (el) {
     // e.preventDefault();

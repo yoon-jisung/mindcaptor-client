@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Main from './MainPages/main';
 import Waiting from './WaitingPages/Waiting';
 import MyPage from './MyPages/MyPage';
@@ -67,7 +67,6 @@ export default function App() {
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
-    console.log('hi');
     console.log(authorizationCode);
     console.log(accessToken)
     if (authorizationCode) {
@@ -91,7 +90,7 @@ export default function App() {
         />
         <Route path="/Waiting" render={() => <Waiting />} />
         <Route path="/MyPage" render={() => <MyPage />} />
-        <Route path="/InGame" render={() => <InGame />} />
+        <Route path="/room" render={() => <InGame />} />
       </Switch>
     </div>
   );

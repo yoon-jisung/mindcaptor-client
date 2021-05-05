@@ -7,6 +7,8 @@ import 'reactjs-popup/dist/index.css';
 import { useHistory } from 'react-router-dom';
 const axios = require('axios');
 
+
+
 export default function Main({loginHandler}) {
   const history = useHistory();
   const guestLogIn = () => {
@@ -19,6 +21,7 @@ export default function Main({loginHandler}) {
     })
     .catch((err) => console.log(err));
   };
+
   return (
     <div>
       <div className="main">
