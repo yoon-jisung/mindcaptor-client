@@ -59,7 +59,7 @@ export default function Main({ loginHandler }) {
       <div className="mainTotal">
         <div className="main">
           <div className="logo_div">
-            <img src={logo} className="logo" />
+            <img src={logo} className="logo" alt="logo" />
           </div>
 
           <div className="main_btns">

@@ -86,7 +86,6 @@ button:hover:after {
 }
 
 .logo {
-  margin-top: 78px;
   border-radius: 30px;
   filter: drop-shadow(5px 5px 5px #000);
 }
