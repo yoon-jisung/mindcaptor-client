@@ -7,20 +7,22 @@ import MyPageBtn from './components/MyPageBtn';
 import Signout from './components/Signout';
 import '../main.css';
 
-export default function Waiting() {
+export default function Waiting({ accessToken }) {
   return (
-    <div className="waiting">
-      <div className="waiting_signout_btn">
-        <Signout />
-      </div>
-      <div className="waiting_box">
-        <ProfilePic />
-        <UserInfo />
-      </div>
-      <div className="waiting_btns">
-        <EntryGame />
-        <CreateGame />
-        <MyPageBtn />
+    <div>
+      <div className="waiting">
+        <div className="waiting_box">
+          <ProfilePic />
+          <UserInfo accessToken={accessToken} />
+        </div>
+        <div className="waiting_btns">
+          <EntryGame />
+          <CreateGame />
+          <MyPageBtn />
+        </div>
+        <div className="waiting_signout_btn">
+          <Signout />
+        </div>
       </div>
     </div>
   );
