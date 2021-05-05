@@ -17,6 +17,17 @@ export default function App() {
     email: null,
     profile_image: Character1,
   });
+  const history = useHistory();
+
+  const loginCheck = (isLogIn) => {
+    if (!isLogIn) {
+      history.push('/');
+    }
+  };
+  const hendleLogout = () => {
+    setIsLogIn(false);
+    setAccessToken({ accessToken: null });
+  };
 
   const accessTokenRequest = (accessToken) => {
     // ! 유저 정보를 알려달라는 코드
@@ -77,6 +88,7 @@ export default function App() {
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
+
     console.log('accessToken', accessToken);
     console.log('userInfo:', userInfo);
     if (authorizationCode) {
@@ -98,28 +110,47 @@ export default function App() {
       authorizationCode: authorizationCode,
     });
     setAccessToken({ accessToken: resp.data.accessToken });
+    //accessToken={accessToken}
   };
   return (
     <div>
       <Switch>
-        <Route path="/Waiting" render={() => <Waiting />} />
-        <Route path="/MyPage" render={() => <MyPage />} />
-        <Route path="/room" render={() => <InGame />} />
+        <Route
+          path="/Waiting"
+          render={() => (
+            <Waiting
+              isLogIn={isLogIn}
+              loginCheck={loginCheck}
+              hendleLogout={hendleLogout}
+              userInfo={userInfo}
+            />
+          )}
+        />
+        <Route
+          path="/MyPage"
+          render={() => (
+            <MyPage
+              isLogIn={isLogIn}
+              loginCheck={loginCheck}
+              userInfo={userInfo}
+            />
+          )}
+        />
+        <Route
+          path="/room"
+          render={() => (
+            <InGame
+              isLogIn={isLogIn}
+              loginCheck={loginCheck}
+              userInfo={userInfo}
+            />
+          )}
+        />
         <Route
           path="/"
           exact={true}
           render={() => <Main loginHandler={loginHandler} />}
         />
-        {/* <Route
-          path="/"
-          render={() => {
-            if (!isLogIn) {
-              <Redirect to="/" render={() => <Main />} />;
-            } else {
-              <Redirect to="/Waiting" render={() => <Waiting />} />;
-            }
-          }}
-        /> */}
       </Switch>
     </div>
   );

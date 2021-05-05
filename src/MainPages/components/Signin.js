@@ -26,8 +26,6 @@ export default function Signin({ isOpen, close, loginHandler }) {
   // };
 
   const loginRequestHandler = () => {
-    // history.push('/Waiting');
-
     axios
       .post(
         'http://localhost:4000/login',
@@ -40,6 +38,7 @@ export default function Signin({ isOpen, close, loginHandler }) {
       .then((res) => {
         console.dir(loginHandler);
         loginHandler(res.data);
+        history.push('/Waiting');
       })
       .catch((err) => {
         if (err) {
@@ -55,7 +54,7 @@ export default function Signin({ isOpen, close, loginHandler }) {
     <>
       {isOpen ? (
         <div className="container_singin">
-          <form className="signin" onSubmit={(e) => e.preventDefault()}>
+          <div className="signin" onSubmit={(e) => e.preventDefault()}>
             <div className="close">
               <span
                 type="button"
@@ -100,7 +99,7 @@ export default function Signin({ isOpen, close, loginHandler }) {
               </button>
               <SocialLogin />
             </div>
-          </form>
+          </div>
         </div>
       ) : null}
     </>

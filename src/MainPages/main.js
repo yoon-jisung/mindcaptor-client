@@ -22,6 +22,7 @@ export default function Main({ loginHandler }) {
   // }, [play]);
 
   const history = useHistory();
+
   const guestLogIn = () => {
     axios
       .get('http://localhost:4000/guest')
@@ -98,7 +99,9 @@ export default function Main({ loginHandler }) {
             </Popup>
           </div>
           <div className="entry_div">
-            <button className="entry_btn">게스트 참가</button>
+            <button onClick={guestLogIn} className="entry_btn">
+              게스트 참가
+            </button>
             <SigninBtn className="entry_btn" loginHandler={loginHandler}>
               로그인 참가
             </SigninBtn>

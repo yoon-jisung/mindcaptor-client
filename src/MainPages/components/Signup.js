@@ -7,6 +7,9 @@ export default function Signup({ isOpen, close, loginHandler }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [nickname, setNickName] = useState('');
+  const [isNone, setIsNone] = useState(true);
+  const [message, setMessage] = useState('');
+
   const emailInputValue = (e) => {
     setEmail(e.target.value);
   };
@@ -30,9 +33,13 @@ export default function Signup({ isOpen, close, loginHandler }) {
         }
       )
       .then((res) => {
-        console.log(res.message);
+        setIsNone(false);
+        setMessage(res.data.message);
+        setTimeout(() => {
+          setIsNone(true);
+        }, 2000);
       })
-      .catch((err) => console.log('여기로?'));
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -53,6 +60,12 @@ export default function Signup({ isOpen, close, loginHandler }) {
             <div className="signup_box">
               <div className="logo_box">
                 <img src={logo} className="logo_signup" alt="siginup" />
+              </div>
+              <div
+                className="failed_sginin"
+                style={{ opacity: isNone ? '0' : '1' }}
+              >
+                {message}
               </div>
               <input
                 name="email"

@@ -10,7 +10,7 @@ import Character4 from '../images/Character4.png';
 
 import './MyPages.css';
 
-function MyPage() {
+function MyPage({ accessToken, isLogIn, loginCheck }) {
   const PotoData = [Character1, Character2, Character3, Character4];
   const [nowPoto, setPoto] = useState(Character1);
   const [isModalOpen, setOpen] = useState(false);
@@ -32,6 +32,12 @@ function MyPage() {
     console.log('프로필이 변경 되었습니다.');
     openModal();
   }, [nowPoto]);
+
+  useEffect(() => {
+    return () => {
+      loginCheck(isLogIn);
+    };
+  });
 
   return (
     <div>
