@@ -127,6 +127,7 @@ export default function App() {
               loginCheck={loginCheck}
               hendleLogout={hendleLogout}
               userInfo={userInfo}
+              accessToken={accessToken}
             />
           )}
         />
@@ -137,6 +138,7 @@ export default function App() {
               isLogIn={isLogIn}
               loginCheck={loginCheck}
               userInfo={userInfo}
+              accessToken={accessToken}
             />
           )}
         />
@@ -147,6 +149,7 @@ export default function App() {
               isLogIn={isLogIn}
               loginCheck={loginCheck}
               userInfo={userInfo}
+              accessToken={accessToken}
             />
           )}
         />

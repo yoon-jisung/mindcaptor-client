@@ -397,7 +397,41 @@ $button-active-blue: #1669f2; */
 }
 
 /*Waiting********************************************************************/
-
+.createRoomForm {
+  background: linear-gradient(#05fbff, #1d62f0) fixed;
+  display: flex;
+  border-radius: 30px;
+  width: 400px;
+  height: 300px;
+  position: relative;
+  box-sizing: border-box;
+  margin: 50px auto;
+  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border: 5px solid #0f4d86;
+}
+.createRoom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+.createRoomInput {
+  display: flex;
+  flex-direction: column;
+}
+.createRoomInput input {
+  margin: 10px;
+  width: 250px;
+  height: 40px;
+}
 .waiting {
   display: flex;
   flex-direction: column;
@@ -651,7 +685,6 @@ $button-active-blue: #1669f2; */
   width: 250px;
   margin: 10px;
 }
-
 .follower input {
   border-radius: 4px;
   border: 0;
