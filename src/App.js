@@ -5,11 +5,53 @@ import Main from './MainPages/main';
 import Waiting from './WaitingPages/Waiting';
 import MyPage from './MyPages/MyPage';
 import InGame from './GamePages/InGame';
+import Character1 from './images/Character1.png';
 const axios = require('axios');
+
 
 export default function App() {
   const [isLogIn, setIsLogIn] = useState(false);
-  const [accessToken, setAccessToken] = useState({ accessToken: '' });
+  const [accessToken, setAccessToken] = useState({ accessToken: null });
+  const [userInfo, setUserInfo] = useState({nickname:null,email:null,profile_image:Character1});
+
+  const accessTokenRequest=(accessToken)=> {
+    axios
+      .get("http://localhost:4000/accessTokenHandler", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (res.data.message !== "ok") {
+          const message =
+            "access token이 만료되어 불러올 수 없습니다. refresh token을 사용해주시기 바랍니다.";
+          //return setState({ email: message, createdAt: message });
+        }
+        console.log(res)
+        //console.log(res.message)
+        //console.log(res.data.data.userInfo.dataValues)
+        const {nickname,email,profile_image} = res.data.data.userInfo;
+        setUserInfo({nickname:nickname,email:email,profile_image:profile_image})
+      });
+  }
+
+  const refreshTokenRequest=()=> {
+    axios
+      .get("http://localhost:4000/refreshTokenHandler", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (res.data.message !== "ok") {
+          const message =
+            "refresh token이 만료되어 불러올 수 없습니다. 다시 로그인 해주시기 바랍니다.";
+          //return this.setState({ email: message, createdAt: message });
+        }
+        const {nickname,email,profile_image} = res.data.data.userInfo;
+        setUserInfo({nickname:nickname,email:email,profile_image:profile_image})
+      });
+  }
 
   const loginHandler = (data) => {
     setIsLogIn(true);
@@ -18,6 +60,7 @@ export default function App() {
 
   const issueAccessToken = (token) => {
     setAccessToken({ accessToken: token });
+    accessTokenRequest(token)
     console.log(token);
   };
 
@@ -25,6 +68,7 @@ export default function App() {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
     console.log(authorizationCode);
+    console.log(accessToken)
     if (authorizationCode) {
       getAccessToken(authorizationCode);
     }
