@@ -22,40 +22,39 @@ export default function Signup({ isOpen, close, idCreatedOk }) {
     setNickName(e.target.value);
   };
 
-
-  const signUpHandler = async () => {
-    
+  const signUpHandler = async (e) => {
+    if (e.key === 'Enter' || e.type === 'click') {
       try {
-        const data = await axios
-          .post(
+        const data = await axios.post(
           'http://localhost:4000/signup',
-        { email, password, nickname },
-        {
-          headers: { 'Content-Type': 'application/json' },
-          Credentials: 'include',
-        }
-      )
-      console.log(data)
-      idCreatedOk()
-      close()
+          { email, password, nickname },
+          {
+            headers: { 'Content-Type': 'application/json' },
+            Credentials: 'include',
+          }
+        );
+        console.log(data);
+        idCreatedOk();
+        close();
       } catch (error) {
-        console.log(error.response)
+        console.log(error.response);
         setIsNone(false);
         setMessage(error.response.data.message);
         setTimeout(() => {
           setIsNone(true);
         }, 2000);
       }
-      // console.log(data)
-      // //((res) => {
-      //   setIsNone(false);
-      //   setMessage(data.data.message);
-      //   setTimeout(() => {
-      //     setIsNone(true);
-      //   }, 2000);
-      // //})
-      // //.catch((err) => console.log(err));
+    }
 
+    // console.log(data)
+    // //((res) => {
+    //   setIsNone(false);
+    //   setMessage(data.data.message);
+    //   setTimeout(() => {
+    //     setIsNone(true);
+    //   }, 2000);
+    // //})
+    // //.catch((err) => console.log(err));
   };
 
   return (
