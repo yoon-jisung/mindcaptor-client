@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Signup from './Signup';
 
-export default function SignupBtn() {
+export default function SignupBtn({ idCreatedOk }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -30,7 +30,7 @@ export default function SignupBtn() {
       <button onClick={openModal} className="member_signup_btn">
         회원가입
       </button>
-      <Signup isOpen={isOpen} close={closeModal} />
+      <Signup isOpen={isOpen} close={closeModal} idCreatedOk={idCreatedOk} />
     </>
   );
 }
