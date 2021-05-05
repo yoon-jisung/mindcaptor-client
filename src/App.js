@@ -8,6 +8,7 @@ import InGame from './GamePages/InGame';
 import Character1 from './images/Character1.png';
 import { useHistory } from 'react-router-dom';
 const axios = require('axios');
+import './main.css';
 
 export default function App() {
   const [isLogIn, setIsLogIn] = useState(false);

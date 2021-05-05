@@ -27,8 +27,16 @@ body {
 }
 
 input {
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 30px;
   font-size: 15px;
+  transition: 500ms ease all;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+  outline: none;
+}
+
+input:focus {
+  box-shadow: 0px 0px 5px 0px #1669f2;
+  color: #0f4d86;
 }
 
 button {
@@ -39,13 +47,13 @@ button {
   height: 60px;
   font-size: 1.5rem;
   cursor: pointer;
-  transition: 800ms ease all;
-  margin: 10px;
+  transition: 500ms ease all;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
   margin: 30px;
 }
 
 button:hover {
+  border: 2px solid #4fb3db;
   background: #fff;
   color: #0f4d86;
 }
@@ -59,64 +67,9 @@ button:after {
 button:hover:before,
 button:hover:after {
   width: 100%;
-  transition: 800ms ease all;
+  transition: 500ms ease all;
 }
 
-/* button {
-  display: block;
-  font-size: 30px;
-  background-color: #4fb3db;
-  border: 5px solid #0f4d86;
-  border-radius: 30px;
-  padding: 10px;
-  margin: 30px;
-  color: white;
-  font-weight: bold;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
-}
-
-button:hover {
-  color: rgba(255, 255, 255, 0.85);
-  box-shadow: #0f4d86 0 80px 0px 2px inset;
-} */
-
-/* 왼쪽 밑에서 차오르는 버튼 효과 button,
-button::after {
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
-button {
-  ---버튼 모든 css제거---
-  background: inherit;
-  border: none;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0;
-  overflow: visible;
-  cursor: pointer; 
-  ---버튼 모든 css제거---
-  background: none;
-  border: 3px solid #fff;
-  border-radius: 5px;
-  font-weight: bold;
-  text-transform: uppercase;
-  position: relative;
-}
-
-button::before,
-button::after {
-  background: #fff;
-  content: '';
-  position: absolute;
-  z-index: -1;
-}
-
-button:hover {
-  color: #efab00;
-} */
 .mainTotal {
   display: flex;
   flex-direction: row;
@@ -351,7 +304,7 @@ $button-active-blue: #1669f2; */
 }
 
 .google-btn:hover {
-  transition: 800ms ease all;
+  transition: 500ms ease all;
 
   box-shadow: 0 0 6px #4285f4;
 }
@@ -504,6 +457,203 @@ $button-active-blue: #1669f2; */
 
 .userInfo {
   zoom: 3;
+}
+
+/*MyPages********************************************************************/
+
+.container {
+  margin-top: 20px;
+}
+.header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.header h1 {
+  font-size: 50px;
+  line-height: 120px;
+  text-align: center;
+}
+
+.header span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.UserProFile {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+}
+
+.UserProFile img {
+  margin: 10px;
+  border: 5px solid rgb(25, 92, 119);
+  cursor: pointer;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+}
+.ProfilePhotos {
+  display: inline-flex;
+}
+.ProfilePhotos > div {
+  /* display: flex; */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.ProfilePhotos img {
+  /* border: 5px solid rgb(17, 18, 19); */
+  justify-content: space-around;
+}
+
+.pro_search_box {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.user {
+  list-style: none;
+}
+
+.Exit {
+  display: flex;
+  position: absolute;
+  right: 0;
+}
+
+.Exit button {
+  width: 100px;
+}
+
+.proBox {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  height: 250px;
+  position: relative;
+  border: 5px solid rgb(25, 92, 119);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.changeProPhoto {
+  margin: 10px;
+  font-size: 15px;
+  width: 50px;
+  height: 35px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  box-shadow: 0px 0px rgba(0, 0, 0, 0.5);
+  background-color: white;
+  color: #0f4d86;
+}
+
+.changeProPhoto:hover {
+  background-color: #0f4d86;
+  color: white;
+  border: 2px solid white;
+}
+
+.proPhoto {
+  position: absolute;
+}
+.userNickName {
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 5px;
+  padding-left: 3px;
+}
+
+.community {
+  display: flex;
+  flex-direction: row;
+  height: 250px;
+}
+.communityBox {
+  display: flex;
+  flex-direction: column;
+}
+.followBox {
+  display: flex;
+  flex-direction: row;
+}
+
+.introBox {
+  margin-top: 10px;
+  width: 700px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.intro {
+  display: flex;
+  width: 250px;
+  height: 256px;
+  flex-direction: column;
+  background-image: url('./images/mindcaptor_canvas.png');
+}
+
+.intro h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.intro textarea {
+  vertical-align: text-top;
+  border-radius: 4px;
+  width: 160px;
+  height: 75px;
+  margin-left: 49px;
+  border: 0;
+  box-shadow: 0px 0px rgba(0, 0, 0, 0.5);
+  background-color: #e5e5e5;
+  padding-left: 2px;
+  padding-bottom: 40px;
+  outline: none;
+}
+
+.following {
+  width: 250px;
+  margin: 10px;
+}
+
+.following input {
+  border-radius: 4px;
+  border: 0;
+  height: 30px;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.followList {
+  padding-left: 5px;
+  line-height: 30px;
+  margin-top: 10px;
+  width: 200px;
+  height: 150px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+.follower {
+  width: 250px;
+  margin: 10px;
+}
+
+.follower input {
+  border-radius: 4px;
+  border: 0;
+  height: 30px;
+  padding: 5px;
+  margin-top: 10px;
 }
 
 /*GamePages********************************************************************/

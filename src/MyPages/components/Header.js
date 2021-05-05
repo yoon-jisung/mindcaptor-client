@@ -3,11 +3,10 @@ import React, { useEffect } from 'react';
 import ExitBtn from './ExitBtn';
 import Complete from './Complete';
 
-export default function Header({ isOpen, closeModal }) {
+export default function Header({ isOpen, closeModal, nowPhoto }) {
   useEffect(() => {
-    console.log('메세지 송출');
-    setTimeout(closeModal(), 4000);
-  });
+    setTimeout(closeModal, 2000);
+  }, [nowPhoto]);
 
   return (
     <header className="header">

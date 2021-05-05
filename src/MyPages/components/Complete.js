@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function Complete({ isOpen, close }) {
+  console.log(isOpen);
   return (
     <span>
       {isOpen ? (
