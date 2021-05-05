@@ -96,6 +96,15 @@ export default function App() {
   return (
     <div>
       <Switch>
+        <Route
+          path="/"
+          exact={true}
+          render={() => <Main loginHandler={loginHandler} />}
+        />
+        <Route
+          path="/Waiting"
+          render={() => <Waiting accessToken={accessToken} />}
+        />
         <Route path="/" exact={true} render={() => <Main />} />
         <Route path="/Waiting" render={() => <Waiting />} />
         <Route path="/MyPage" render={() => <MyPage />} />
