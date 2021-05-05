@@ -35,8 +35,9 @@ export default function Signin({ isOpen, close, loginHandler }) {
         }
       )
       .then((res) => {
-        loginHandler(res.data);
-        history.push('/Waiting');
+        console.dir(loginHandler);
+        // loginHandler(res.data);
+        // history.push('/Waiting');
       })
       .catch((err) => console.log(err));
   };
@@ -49,7 +50,7 @@ export default function Signin({ isOpen, close, loginHandler }) {
     <>
       {isOpen ? (
         <div className="container_singin">
-          <div className="signin">
+          <form className="signin" onSubmit={(e) => e.preventDefault()}>
             <div className="close">
               <span
                 type="button"
@@ -89,7 +90,7 @@ export default function Signin({ isOpen, close, loginHandler }) {
               <div className="social_btn">카카오</div>
               <div className="social_btn">네이버</div>
             </div>
-          </div>
+          </form>
         </div>
       ) : null}
     </>

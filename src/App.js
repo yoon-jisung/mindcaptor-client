@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Main from './MainPages/main';
 import Waiting from './WaitingPages/Waiting';
 import MyPage from './MyPages/MyPage';
@@ -17,6 +17,7 @@ export default function App() {
     email: null,
     profile_image: Character1,
   });
+
   const accessTokenRequest = (accessToken) => {
     // ! 유저 정보를 알려달라는 코드
     axios
@@ -96,7 +97,11 @@ export default function App() {
   return (
     <div>
       <Switch>
-        <Route path="/" exact={true} render={() => <Main />} />
+        <Route
+          path="/"
+          exact={true}
+          render={() => <Main loginHandler={loginHandler} />}
+        />
         <Route path="/Waiting" render={() => <Waiting />} />
         <Route path="/MyPage" render={() => <MyPage />} />
         <Route path="/room" render={() => <InGame />} />
