@@ -16,7 +16,7 @@ export default function Waiting({
 }) {
   useEffect(() => {
     loginCheck(isLogIn);
-  }, []);
+  });
 
   return (
     <div>

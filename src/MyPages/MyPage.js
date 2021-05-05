@@ -10,7 +10,7 @@ import Character4 from '../images/Character4.png';
 
 import './MyPages.css';
 
-function MyPage({ accessToken, isLogIn, loginCheck }) {
+function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
   const PotoData = [Character1, Character2, Character3, Character4];
   const [nowPoto, setPoto] = useState(Character1);
   const [isModalOpen, setOpen] = useState(false);

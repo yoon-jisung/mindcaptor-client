@@ -29,7 +29,7 @@ export default function Signup({ isOpen, close, loginHandler }) {
         { email, password, nickname },
         {
           headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
+          Credentials: 'include',
         }
       )
       .then((res) => {

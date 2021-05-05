@@ -32,7 +32,7 @@ export default function Signin({ isOpen, close, loginHandler }) {
         { email, password },
         {
           headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
+          Credentials: 'include',
         }
       )
       .then((res) => {
