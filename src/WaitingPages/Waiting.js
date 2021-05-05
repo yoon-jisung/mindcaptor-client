@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import UserInfo from './components/UserInfo';
 import ProfilePic from './components/ProfilePic';
 import EntryGame from './components/EntryGame';
-import CreateGame from './components/CreateGame';
+import CreateGameBtn from './components/CreateGameBtn';
 import MyPageBtn from './components/MyPageBtn';
 import Signout from './components/Signout';
 import { useHistory } from 'react-router-dom';
@@ -16,6 +16,15 @@ export default function Waiting({
   hendleLogout,
   userInfo,
 }) {
+  const [createModal, setCreateModal] = useState(false);
+
+  const closeModal = () => {
+    setCreateModal(false);
+  };
+  const openModal = () => {
+    setCreateModal(true);
+  };
+
   const [locationKeys, setLocationKeys] = useState([]);
   const history = useHistory();
 
@@ -51,8 +60,12 @@ export default function Waiting({
           <UserInfo accessToken={accessToken} userInfo={userInfo} />
         </div>
         <div className="waiting_btns">
-          <EntryGame />
-          <CreateGame />
+          <EntryGame accessToken={accessToken} userInfo={userInfo} />
+          <CreateGameBtn
+            openModal={openModal}
+            createModal={createModal}
+            closeModal={closeModal}
+          />
           <MyPageBtn />
         </div>
         <div className="waiting_signout_btn">
