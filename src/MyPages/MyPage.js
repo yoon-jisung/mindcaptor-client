@@ -25,7 +25,6 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
       openModal();
     }
   };
-
   const openModal = () => {
     setIsOpen(true);
     setTimeout(() => {

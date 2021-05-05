@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../main.css';
 import logo from '../../images/mindcaptor_logo_login.png';
 import { useHistory } from 'react-router-dom';
@@ -25,31 +25,34 @@ export default function Signin({ isOpen, close, loginHandler }) {
   //   history.push('/Waiting');
   // };
 
-  const loginRequestHandler = () => {
-    axios
-      .post(
-        'http://localhost:4000/login',
-        { email, password },
-        {
-          headers: { 'Content-Type': 'application/json' },
-          Credentials: 'include',
-        }
-      )
-      .then((res) => {
-        console.dir(loginHandler);
-        loginHandler(res.data);
-        history.push('/Waiting');
-      })
-      .catch((err) => {
-        if (err) {
-          setIsNone(false);
-          setTimeout(() => {
-            setIsNone(true);
-          }, 2000);
-        }
-      });
+  const loginRequestHandler = (e) => {
+    if (e.key === 'Enter' || e.type === 'click') {
+      axios
+        .post(
+          'http://localhost:4000/login',
+          { email, password },
+          {
+            headers: { 'Content-Type': 'application/json' },
+            Credentials: 'include',
+          }
+        )
+        .then((res) => {
+          console.dir(loginHandler);
+          loginHandler(res.data);
+          history.push('/Waiting');
+        })
+        .catch((err) => {
+          if (err) {
+            setIsNone(false);
+            setTimeout(() => {
+              setIsNone(true);
+            }, 2000);
+          }
+        });
+    } else if (e.keyCode === 27) {
+      close();
+    }
   };
-
   return (
     <>
       {isOpen ? (
@@ -82,6 +85,7 @@ export default function Signin({ isOpen, close, loginHandler }) {
                 type="text"
                 placeholder="이메일"
                 onChange={emailInputValue}
+                onKeyDown={loginRequestHandler}
               />
               <input
                 name="password"
@@ -89,6 +93,7 @@ export default function Signin({ isOpen, close, loginHandler }) {
                 type="password"
                 placeholder="패스워드"
                 onChange={passwordInputValue}
+                onKeyDown={loginRequestHandler}
               />
               <button
                 type="submit"

@@ -86,7 +86,6 @@ button:hover:after {
 }
 
 .logo {
-  margin-top: 78px;
   border-radius: 30px;
   filter: drop-shadow(5px 5px 5px #000);
 }
@@ -419,7 +418,7 @@ $button-active-blue: #1669f2; */
 }
 
 .signout_btn {
-  width: 45px;
+  width: 40px;
   height: 160px;
 }
 
@@ -683,6 +682,10 @@ $button-active-blue: #1669f2; */
   font-size: 20px;
   color: white;
   margin-top: 20px;
+}
+
+.logo_signup {
+  width: 300px;
 }
 
 /*GamePages********************************************************************/
