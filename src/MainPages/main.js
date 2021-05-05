@@ -45,6 +45,7 @@ export default function Main({ loginHandler }) {
     setBgmOff(false);
     stop();
   };
+
   return (
     <div>
       {bgmOff ? (

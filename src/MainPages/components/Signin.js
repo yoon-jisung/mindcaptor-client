@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../main.css';
 import logo from '../../images/mindcaptor_logo_login.png';
 import { useHistory } from 'react-router-dom';
@@ -26,7 +26,6 @@ export default function Signin({ isOpen, close, loginHandler }) {
   // };
 
   const loginRequestHandler = (e) => {
-    console.log(e);
     if (e.key === 'Enter' || e.type === 'click') {
       axios
         .post(
@@ -50,9 +49,10 @@ export default function Signin({ isOpen, close, loginHandler }) {
             }, 2000);
           }
         });
+    } else if (e.keyCode === 27) {
+      close();
     }
   };
-
   return (
     <>
       {isOpen ? (
