@@ -16,7 +16,7 @@ const socket = io.connect('http://localhost:4000', {
   path: '/socket.io',
 });
 
-export default function InGame({}) {
+export default function InGame({ accessToken, isLogIn, loginCheck }) {
   const [resultPopup, setResultPopup] = useState(false);
   const [IsOpen, SetIsOpen] = useState(true);
   const [presenter, setPresenter] = useState();
@@ -107,6 +107,10 @@ export default function InGame({}) {
   };
 
   //! --------------------------method--------------------------
+
+  useEffect(() => {
+    loginCheck(isLogIn);
+  });
 
   useEffect(() => {
     if (isTrueTimer) {

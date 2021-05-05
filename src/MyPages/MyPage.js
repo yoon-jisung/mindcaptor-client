@@ -8,12 +8,11 @@ import Character2 from '../images/Character2.png';
 import Character3 from '../images/Character3.png';
 import Character4 from '../images/Character4.png';
 
-function MyPage() {
+function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
   const PhotoData = [Character1, Character2, Character3, Character4];
   const [nowPhoto, setPhoto] = useState(Character1);
   const [isOpen, setIsOpen] = useState(false);
   const [isPhotoBoxOpen, setIsPhotoBoxOpen] = useState(false);
-
   const ChangeInputPhoto = function (photo) {
     // e.preventDefault();
     setPhoto(photo);
@@ -37,6 +36,12 @@ function MyPage() {
       setIsPhotoBoxOpen(true);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      loginCheck(isLogIn);
+    };
+  });
 
   return (
     <div>

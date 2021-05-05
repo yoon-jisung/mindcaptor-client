@@ -7,6 +7,8 @@ export default function Signup({ isOpen, close, loginHandler }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [nickname, setNickName] = useState('');
+  const [isNone, setIsNone] = useState(true);
+  const [message, setMessage] = useState('');
 
   const emailInputValue = (e) => {
     setEmail(e.target.value);
@@ -27,12 +29,15 @@ export default function Signup({ isOpen, close, loginHandler }) {
         { email, password, nickname },
         {
           headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
+          Credentials: 'include',
         }
       )
       .then((res) => {
-        console.log(res.message);
-        //history.push('/Waiting');
+        setIsNone(false);
+        setMessage(res.data.message);
+        setTimeout(() => {
+          setIsNone(true);
+        }, 2000);
       })
       .catch((err) => console.log(err));
   };
@@ -55,6 +60,12 @@ export default function Signup({ isOpen, close, loginHandler }) {
             <div className="signup_box">
               <div className="logo_box">
                 <img src={logo} className="logo_signup" alt="siginup" />
+              </div>
+              <div
+                className="failed_sginin"
+                style={{ opacity: isNone ? '0' : '1' }}
+              >
+                {message}
               </div>
               <input
                 name="email"

@@ -26,18 +26,17 @@ export default function Signin({ isOpen, close, loginHandler }) {
   // };
 
   const loginRequestHandler = () => {
-    // history.push('/Waiting');
-
     axios
       .post(
         'http://localhost:4000/login',
         { email, password },
         {
           headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
+          Credentials: 'include',
         }
       )
       .then((res) => {
+        console.dir(loginHandler);
         loginHandler(res.data);
         history.push('/Waiting');
       })
@@ -55,7 +54,7 @@ export default function Signin({ isOpen, close, loginHandler }) {
     <>
       {isOpen ? (
         <div className="container_singin">
-          <div className="signin">
+          <div className="signin" onSubmit={(e) => e.preventDefault()}>
             <div className="close">
               <span
                 type="button"

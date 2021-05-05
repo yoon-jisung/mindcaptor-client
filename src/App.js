@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Main from './MainPages/main';
 import Waiting from './WaitingPages/Waiting';
 import MyPage from './MyPages/MyPage';
 import InGame from './GamePages/InGame';
 import Character1 from './images/Character1.png';
 import { useHistory } from 'react-router-dom';
-const axios = require('axios');
 import './main.css';
+
+const axios = require('axios');
 
 export default function App() {
   const [isLogIn, setIsLogIn] = useState(false);
@@ -18,6 +19,18 @@ export default function App() {
     email: null,
     profile_image: Character1,
   });
+  const history = useHistory();
+
+  const loginCheck = (isLogIn) => {
+    if (!isLogIn) {
+      history.push('/');
+    }
+  };
+  const hendleLogout = () => {
+    setIsLogIn(false);
+    setAccessToken({ accessToken: null });
+  };
+
   const accessTokenRequest = (accessToken) => {
     // ! 유저 정보를 알려달라는 코드
     axios
@@ -29,15 +42,9 @@ export default function App() {
         withCredentials: true,
       })
       .then((res) => {
-        if (res.data.message !== 'ok') {
-          const message =
-            'access token이 만료되어 불러올 수 없습니다. refresh token을 사용해주시기 바랍니다.';
-          //return setState({ email: message, createdAt: message });
-        }
-
-        //console.log(res.message)
-        //console.log(res.data.data.userInfo.dataValues)
-        const { nickname, email, profile_image } = res.data.data.userInfo;
+        console.log(res.message);
+        console.log(res.data.data);
+        const { nickname, email, profile_image } = res.data.data;
         // !
         setUserInfo({
           nickname: nickname,
@@ -83,33 +90,69 @@ export default function App() {
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
+
+    console.log('accessToken', accessToken);
+    console.log('userInfo:', userInfo);
     if (authorizationCode) {
       getAccessToken(authorizationCode);
     }
   });
 
+  useEffect(() => {
+    console.log('엑세스 토큰', accessToken.accessToken);
+    if (accessToken.accessToken !== null) {
+      setIsLogIn(true);
+    }
+    console.log('로그인상태', isLogIn);
+  }, [accessToken]);
+
   const getAccessToken = async (authorizationCode) => {
+    // ! 구글 로그인
     let resp = await axios.post('http://localhost:4000/googlelogin', {
       authorizationCode: authorizationCode,
     });
     setAccessToken({ accessToken: resp.data.accessToken });
+    //accessToken={accessToken}
   };
   return (
     <div>
       <Switch>
         <Route
+          path="/Waiting"
+          render={() => (
+            <Waiting
+              isLogIn={isLogIn}
+              loginCheck={loginCheck}
+              hendleLogout={hendleLogout}
+              userInfo={userInfo}
+            />
+          )}
+        />
+        <Route
+          path="/MyPage"
+          render={() => (
+            <MyPage
+              isLogIn={isLogIn}
+              loginCheck={loginCheck}
+              userInfo={userInfo}
+            />
+          )}
+        />
+        <Route
+          path="/room"
+          render={() => (
+            <InGame
+              isLogIn={isLogIn}
+              loginCheck={loginCheck}
+              userInfo={userInfo}
+            />
+          )}
+        />
+        <Route
           path="/"
           exact={true}
           render={() => <Main loginHandler={loginHandler} />}
         />
-        <Route
-          path="/Waiting"
-          render={() => <Waiting accessToken={accessToken} />}
-        />
-        <Route path="/" exact={true} render={() => <Main />} />
-        <Route path="/Waiting" render={() => <Waiting />} />
-        <Route path="/MyPage" render={() => <MyPage />} />
-        <Route path="/room" render={() => <InGame />} />
       </Switch>
     </div>
   );
@@ -118,3 +161,14 @@ export default function App() {
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+{
+  /* <Route
+  path="/"
+  render={() => {
+    if (isLogin) {
+      return <Redirect to="/mypage" />;
+    }
+    return <Redirect to="/login" />;
+  }}
+/>; */
+}
