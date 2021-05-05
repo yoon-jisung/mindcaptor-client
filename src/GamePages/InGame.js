@@ -16,7 +16,7 @@ const socket = io.connect('http://localhost:4000', {
   path: '/socket.io',
 });
 
-export default function InGame({}) {
+export default function InGame({ accessToken, isLogIn, loginCheck }) {
   const [resultPopup, setResultPopup] = useState(false);
   const [IsOpen, SetIsOpen] = useState(true);
   const [presenter, setPresenter] = useState({ nickname: '', id: '' });
@@ -118,6 +118,31 @@ export default function InGame({}) {
   //! --------------------------method--------------------------
 
   useEffect(() => {}, [minutes, seconds, isTrueTimer]);
+  // useEffect(() => {
+  //   loginCheck(isLogIn);
+  // });
+
+  // useEffect(() => {
+  //   if (isTrueTimer) {
+  //     const countdown = setInterval(() => {
+  //       if (parseInt(seconds) > 0) {
+  //         setSeconds(parseInt(seconds) - 1);
+  //       }
+  //       if (parseInt(seconds) === 0) {
+  //         if (parseInt(minutes) === 0) {
+  //           clearInterval(countdown);
+  //           handleResult();
+  //         } else {
+  //           setMinutes(parseInt(minutes) - 1);
+  //           setSeconds(59);
+  //         }
+  //       }
+  //     }, 1000);
+  //     return () => {
+  //       clearInterval(countdown);
+  //     };
+  //   }
+  // }, [minutes, seconds, isTrueTimer]);
 
   useEffect(() => {
     // * 메세지

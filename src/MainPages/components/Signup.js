@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import '../../main.css';
-import logo from '../../images/mindcaptor_logo1.png';
+import logo from '../../images/mindcaptor_logo_join.png';
 const axios = require('axios');
 
 export default function Signup({ isOpen, close, loginHandler }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [nickname, setNickName] = useState('');
-
+  const [isNone, setIsNone] = useState(true);
+  const [message, setMessage] = useState('');
 
   const emailInputValue = (e) => {
     setEmail(e.target.value);
@@ -20,6 +21,7 @@ export default function Signup({ isOpen, close, loginHandler }) {
   const nickNameInputValue = (e) => {
     setNickName(e.target.value);
   };
+
   const signUpHandler = () => {
     axios
       .post(
@@ -27,15 +29,18 @@ export default function Signup({ isOpen, close, loginHandler }) {
         { email, password, nickname },
         {
           headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
+          Credentials: 'include',
         }
       )
       .then((res) => {
-        console.log(res.message);
-        //history.push('/Waiting');
+        setIsNone(false);
+        setMessage(res.data.message);
+        setTimeout(() => {
+          setIsNone(true);
+        }, 2000);
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   return (
     <>
@@ -53,9 +58,15 @@ export default function Signup({ isOpen, close, loginHandler }) {
               </span>
             </div>
             <div className="signup_box">
-              <box className="logo_box">
-                <img src={logo} className="logo"></img>
-              </box>
+              <div className="logo_box">
+                <img src={logo} className="logo_signup" alt="siginup" />
+              </div>
+              <div
+                className="failed_sginin"
+                style={{ opacity: isNone ? '0' : '1' }}
+              >
+                {message}
+              </div>
               <input
                 name="email"
                 className="signup_input"
@@ -77,7 +88,9 @@ export default function Signup({ isOpen, close, loginHandler }) {
                 placeholder="닉네임"
                 onChange={nickNameInputValue}
               />
-              <button onClick={signUpHandler}className="signup_btn">회원가입</button>
+              <button onClick={signUpHandler} className="signup_btn">
+                회원가입
+              </button>
             </div>
           </div>
         </div>
