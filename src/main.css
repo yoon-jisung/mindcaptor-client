@@ -644,7 +644,16 @@ $button-active-blue: #1669f2; */
   width: 200px;
   height: 150px;
   overflow-y: scroll;
-  overflow-x: scroll;
+  
+}
+.followList::-webkit-scrollbar{
+  width: 10px;
+}
+.followList::-webkit-scrollbar-track{
+  background-color: rgba(0, 0, 0, 0);
+}
+.followList::-webkit-scrollbar-thumb{
+  background-color: rgb(0, 0, 0);
 }
 
 .follower {
@@ -966,4 +975,20 @@ canvas {
 .bgm {
   width: 60px;
   height: 60px;
+}
+
+.idCreatedOk{
+    position: absolute;
+    box-sizing: border-box;
+    text-align: center;
+    width: 400px;
+    height: 100px;
+    border: 5px solid #0f4d86;
+    border-radius: 15px;
+    padding: 35px;
+    background-color: #77acf1;
+    transition: opacity 1.5s ease;
+    font-size: 20px;
+    color: white;
+    top: 10%;
 }

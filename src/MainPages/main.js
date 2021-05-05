@@ -15,6 +15,7 @@ const axios = require('axios');
 export default function Main({ loginHandler, handleGeuetLogin }) {
   const [play, { stop }] = useSound(BGM);
   const [bgmOff, setBgmOff] = useState(false);
+  const [isNone, setIsNone] = useState(true);
 
   // useEffect(() => {
   //   handelOnBGM();
@@ -42,6 +43,14 @@ export default function Main({ loginHandler, handleGeuetLogin }) {
     play();
   };
 
+  const idCreatedOk = () =>{
+    setIsNone(false)
+    setTimeout(() => {
+      setIsNone(true);
+    }, 2000);
+  }
+  
+
   const handleOffBGM = () => {
     setBgmOff(false);
     stop();
@@ -62,10 +71,16 @@ export default function Main({ loginHandler, handleGeuetLogin }) {
           <div className="logo_div">
             <img src={logo} className="logo" />
           </div>
+          <div
+                className="idCreatedOk"
+                style={{ opacity: isNone ? '0' : '1' }}
+              >
+                회원가입 완료!
+          </div>
 
           <div className="main_btns">
             <div className="signup_div">
-              <SignupBtn>회원가입</SignupBtn>
+              <SignupBtn idCreatedOk={idCreatedOk}>회원가입</SignupBtn>
             </div>
 
             <Popup

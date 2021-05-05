@@ -14,9 +14,12 @@ export default function App() {
   const [isLogIn, setIsLogIn] = useState(false);
   const [accessToken, setAccessToken] = useState({ accessToken: null });
   const [userInfo, setUserInfo] = useState({
+    id: null,
     nickname: null,
     email: null,
     profile_image: Character1,
+    comment: null,
+    room_id: null,
   });
   const history = useHistory();
 
@@ -46,12 +49,14 @@ export default function App() {
       .then((res) => {
         console.log(res.message);
         console.log(res.data.data);
-        const { nickname, email, profile_image } = res.data.data;
+        const { nickname, email, profile_image, comment,id } = res.data.data;
         // !
         setUserInfo({
+          id: id,
           nickname: nickname,
           email: email,
           profile_image: profile_image,
+          comment: comment
         });
       });
   };
@@ -113,8 +118,9 @@ export default function App() {
     let resp = await axios.post('http://localhost:4000/googlelogin', {
       authorizationCode: authorizationCode,
     });
-    setAccessToken({ accessToken: resp.data.accessToken });
-    //accessToken={accessToken}
+    console.log(resp.data)
+    issueAccessToken(resp.data.accessToken)
+    history.push('/Waiting')
   };
   return (
     <div>
