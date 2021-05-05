@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Main from './MainPages/main';
 import Waiting from './WaitingPages/Waiting';
@@ -21,6 +20,9 @@ export default function App() {
   });
   const history = useHistory();
 
+  const handleGeuetLogin = () => {
+    setUserInfo({ nickname: '게스트' });
+  };
   const loginCheck = (isLogIn) => {
     if (!isLogIn) {
       history.push('/');
@@ -151,7 +153,12 @@ export default function App() {
         <Route
           path="/"
           exact={true}
-          render={() => <Main loginHandler={loginHandler} />}
+          render={() => (
+            <Main
+              loginHandler={loginHandler}
+              handleGeuetLogin={handleGeuetLogin}
+            />
+          )}
         />
       </Switch>
     </div>

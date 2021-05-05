@@ -12,7 +12,7 @@ import 'reactjs-popup/dist/index.css';
 
 const axios = require('axios');
 
-export default function Main({ loginHandler }) {
+export default function Main({ loginHandler, handleGeuetLogin }) {
   const [play, { stop }] = useSound(BGM);
   const [bgmOff, setBgmOff] = useState(false);
 
@@ -32,6 +32,7 @@ export default function Main({ loginHandler }) {
         console.log(res.data);
         loginHandler(res.data);
         history.push('/Waiting');
+        handleGeuetLogin();
       })
       .catch((err) => console.log(err));
   };
