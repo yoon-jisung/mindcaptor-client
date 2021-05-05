@@ -18,16 +18,16 @@ function MyPage() {
     // e.preventDefault();
     setPhoto(photo);
     if (photo !== nowPhoto) {
+      console.log('openModal');
       openModal();
     }
   };
 
   const openModal = () => {
     setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 2000);
   };
 
   const handlePhotoBox = () => {
@@ -40,7 +40,7 @@ function MyPage() {
 
   return (
     <div>
-      <Header isOpen={isOpen} closeModal={closeModal} nowPhoto={nowPhoto} />
+      <Header isOpen={isOpen} nowPhoto={nowPhoto} />
       <content className="container">
         <div className="pro_search_box">
           <div className="introBox">

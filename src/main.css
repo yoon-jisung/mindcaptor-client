@@ -167,7 +167,7 @@ button:hover:after {
   border-radius: 15px;
   padding: 35px;
   background-color: #77acf1;
-  transition: visibility 2s, opacity 0.5s linear;
+  transition: opacity 1.5s ease;
   font-size: 20px;
   color: white;
   bottom: 500px;
@@ -508,6 +508,8 @@ $button-active-blue: #1669f2; */
 .ProfilePhotos img {
   /* border: 5px solid rgb(17, 18, 19); */
   justify-content: space-around;
+  width: 220px;
+  height: 220px;
 }
 
 .pro_search_box {
@@ -562,6 +564,8 @@ $button-active-blue: #1669f2; */
 }
 
 .proPhoto {
+  width: 210px;
+  height: 210px;
   position: absolute;
 }
 .userNickName {
@@ -654,6 +658,22 @@ $button-active-blue: #1669f2; */
   height: 30px;
   padding: 5px;
   margin-top: 10px;
+}
+
+.changedPro {
+  position: absolute;
+  box-sizing: border-box;
+  text-align: center;
+  width: 400px;
+  height: 100px;
+  border: 5px solid #0f4d86;
+  border-radius: 15px;
+  padding: 25px;
+  background-color: #77acf1;
+  transition: opacity 1.5s ease;
+  font-size: 20px;
+  color: white;
+  margin-top: 20px;
 }
 
 /*GamePages********************************************************************/
