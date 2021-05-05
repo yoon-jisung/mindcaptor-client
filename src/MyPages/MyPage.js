@@ -8,54 +8,74 @@ import Character2 from '../images/Character2.png';
 import Character3 from '../images/Character3.png';
 import Character4 from '../images/Character4.png';
 
-import './MyPages.css';
-
 function MyPage() {
-  const PotoData = [Character1, Character2, Character3, Character4];
-  const [nowPoto, setPoto] = useState(Character1);
-  const [isModalOpen, setOpen] = useState(false);
+  const PhotoData = [Character1, Character2, Character3, Character4];
+  const [nowPhoto, setPhoto] = useState(Character1);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isPhotoBoxOpen, setIsPhotoBoxOpen] = useState(false);
 
-  const ChangeInputPoto = function (el) {
+  const ChangeInputPhoto = function (photo) {
     // e.preventDefault();
-    setPoto(el);
+    setPhoto(photo);
+    if (photo !== nowPhoto) {
+      console.log('openModal');
+      openModal();
+    }
   };
 
   const openModal = () => {
-    setOpen(true);
+    setIsOpen(true);
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 2000);
   };
 
-  const closeModal = () => {
-    setOpen(false);
+  const handlePhotoBox = () => {
+    if (isPhotoBoxOpen) {
+      setIsPhotoBoxOpen(false);
+    } else {
+      setIsPhotoBoxOpen(true);
+    }
   };
-
-  useEffect(() => {
-    console.log('프로필이 변경 되었습니다.');
-    openModal();
-  }, [nowPoto]);
 
   return (
     <div>
-      <Header isOpen={isModalOpen} closeModal={() => closeModal} />
+      <Header isOpen={isOpen} nowPhoto={nowPhoto} />
       <content className="container">
-        <section className="UserProFile">
-          <div>
-            <div className="ProfilePotos">
-              {PotoData.map((el) => (
-                <div>
-                  <img src={el} alt="프로필사진" />
-                  <div>
-                    <button onClick={() => ChangeInputPoto(el)}>선택</button>
-                  </div>
-                </div>
-              ))}
+        <div className="pro_search_box">
+          <div className="introBox">
+            <div className="proBox">
+              <img src={nowPhoto} alt="프로필사진" className="proPhoto" />
+              <button className="changeProPhoto" onClick={handlePhotoBox}>
+                편집
+              </button>
+              <div className="userNickName">닉네임 : 김코딩 </div>
+            </div>
+            <div className="intro">
+              <h1>자기소개</h1>
+              <textarea placeholder="안녕하세요, 김코딩입니다" />
             </div>
           </div>
-        </section>
-
-        <div className="serch_user">
-          <img src={nowPoto} alt="프로필사진" />
           <SearchUser />
         </div>
+        {isPhotoBoxOpen ? (
+          <section className="UserProFile">
+            <div>
+              <div className="ProfilePhotos">
+                {PhotoData.map((photo) => (
+                  <div>
+                    <img
+                      className="profileImg"
+                      src={photo}
+                      alt="프로필사진"
+                      onClick={() => ChangeInputPhoto(photo)}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
       </content>
     </div>
   );
