@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../../main.css';
-import logo from '../../images/mindcaptor_logo_join.png';
+import logo from '../../images/mindcaptor_logo_sign.png';
 const axios = require('axios');
 
 export default function Signup({ isOpen, close, loginHandler }) {
