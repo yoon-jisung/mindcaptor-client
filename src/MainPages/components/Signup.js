@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import '../../main.css';
-import logo from '../../images/mindcaptor_logo_join.png';
+import logo from '../../images/mindcaptor_logo_sign.png';
 const axios = require('axios');
 
-export default function Signup({ isOpen, close, loginHandler }) {
+export default function Signup({ isOpen, close, idCreatedOk }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [nickname, setNickName] = useState('');
@@ -22,24 +22,40 @@ export default function Signup({ isOpen, close, loginHandler }) {
     setNickName(e.target.value);
   };
 
-  const signUpHandler = () => {
-    axios
-      .post(
-        'http://localhost:4000/signup',
+
+  const signUpHandler = async () => {
+    
+      try {
+        const data = await axios
+          .post(
+          'http://localhost:4000/signup',
         { email, password, nickname },
         {
           headers: { 'Content-Type': 'application/json' },
           Credentials: 'include',
         }
       )
-      .then((res) => {
+      console.log(data)
+      idCreatedOk()
+      close()
+      } catch (error) {
+        console.log(error.response)
         setIsNone(false);
-        setMessage(res.data.message);
+        setMessage(error.response.data.message);
         setTimeout(() => {
           setIsNone(true);
         }, 2000);
-      })
-      .catch((err) => console.log(err));
+      }
+      // console.log(data)
+      // //((res) => {
+      //   setIsNone(false);
+      //   setMessage(data.data.message);
+      //   setTimeout(() => {
+      //     setIsNone(true);
+      //   }, 2000);
+      // //})
+      // //.catch((err) => console.log(err));
+
   };
 
   return (
@@ -73,6 +89,7 @@ export default function Signup({ isOpen, close, loginHandler }) {
                 type="text"
                 placeholder="이메일"
                 onChange={emailInputValue}
+                onKeyDown={signUpHandler}
               />
               <input
                 name="password"
@@ -80,6 +97,7 @@ export default function Signup({ isOpen, close, loginHandler }) {
                 type="password"
                 placeholder="패스워드"
                 onChange={passwordInputValue}
+                onKeyDown={signUpHandler}
               />
               <input
                 name="nickname"
@@ -87,6 +105,7 @@ export default function Signup({ isOpen, close, loginHandler }) {
                 type="text"
                 placeholder="닉네임"
                 onChange={nickNameInputValue}
+                onKeyDown={signUpHandler}
               />
               <button onClick={signUpHandler} className="signup_btn">
                 회원가입

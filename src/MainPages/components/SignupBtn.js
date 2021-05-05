@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Signup from './Signup';
 
 export default function SignupBtn() {
-  const [isModalOpen, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
-    setOpen(true);
+    setIsOpen(true);
   };
 
   const closeModal = () => {
-    setOpen(false);
+    setIsOpen(false);
   };
+
+  const handleESC = (e) => {
+    if (e.keyCode === 27) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleESC, false);
+    return () => {
+      document.removeEventListener('keydown', handleESC, false);
+    };
+  }, []);
 
   return (
     <>
       <button onClick={openModal} className="member_signup_btn">
         회원가입
       </button>
-      <Signup isOpen={isModalOpen} close={closeModal} />
+      <Signup isOpen={isOpen} close={closeModal} />
     </>
   );
 }
