@@ -117,8 +117,11 @@ export default function App() {
 
   const getAccessToken = async (authorizationCode) => {
     // ! 구글 로그인
-    let resp = await axios.post('http://localhost:4000/googlelogin', {
+    let resp = await axios.post('http://localhost:4000/googlelogin',
+    {
       authorizationCode: authorizationCode,
+    },{
+      withCredentials: true
     });
     console.log(resp.data)
     issueAccessToken(resp.data.accessToken)
