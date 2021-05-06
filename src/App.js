@@ -27,7 +27,7 @@ export default function App() {
 
   //로그인 상태 관리하기--------------------------------
   useEffect(() => {
-    refreshTokenRequest()
+    //refreshTokenRequest()
     if(accessToken.accessToken!==null){
       history.push('/Waiting')
     }      
@@ -46,12 +46,7 @@ export default function App() {
     axios
         .get(
           'http://localhost:4000/user/logout',
-          {
-            headers:{
-              'Content-Type': 'application/json',
-              'Clear-Site-Data': "cookies"
-            },
-          }
+          {withCredentials: true}
         ).then((res) => {})
     setUserInfo({
       id: null,
@@ -100,12 +95,14 @@ export default function App() {
       })
       .then((res) => {
         if (res.data.message !== 'ok') {}
-        const { nickname, email, profile_image } = res.data.data.userInfo;
+        const { nickname, email, profile_image, id,comment } = res.data.data.userInfo;
         console.log(res.data.data.accessToken)
         setAccessToken({accessToken:res.data.data.accessToken})
         setUserInfo({
+          id : id,
           nickname: nickname,
           email: email,
+          comment:comment,
           profile_image: profile_image,
         });
       });
