@@ -22,6 +22,7 @@ export default function Chat({ chat, onMessageSubmit, onTextChange, state }) {
     <div className="card">
       <div className="render-chat">
         <h1>Chat Log</h1>
+
         {chat.map(({ name, message }, index) => {
           return (
             <div key={index}>
