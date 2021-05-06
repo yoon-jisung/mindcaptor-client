@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Canvas from './components/Canvas3';
+import ListnerCanvas from './components/ListnerCanvas';
 import Timer from './components/Timer';
 import User from './components/User';
 import BackBtn from './components/BackBtn';
@@ -11,6 +12,7 @@ import GameStartBtn from './components/GameStartBtn';
 import Words from '../Words';
 import GameOver from './components/IsInGameMsg';
 import { useHistory } from 'react-router-dom';
+import Board from './components/Canvas';
 
 const socket = io.connect('http://localhost:4000', {
   transports: ['websocket', 'polling'],
@@ -82,14 +84,12 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   };
 
   const handleGameStart = () => {
-    if (minutes === 0 && seconds === 0) {
-      startRound();
-      // setMinutes(1); // 시간 다시 설정
-      // setIsTrueTimer(true); // Timer 다시 돌아감
-      SetIsOpen(true);
-      // RandomItem();
-      // setIsInGame(false);
-    }
+    startRound();
+    // setMinutes(1); // 시간 다시 설정
+    // setIsTrueTimer(true); // Timer 다시 돌아감
+    SetIsOpen(true);
+    // RandomItem();
+    // setIsInGame(false);
   };
 
   const handleAnswer = (word) => {
@@ -122,6 +122,8 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     // setIsPresenter(false);
     // setPresenter({ nickname: '', id: '' });
     setWinner([]);
+    setAnswer('');
+    setIsPresenter(false);
     socket.emit('start round');
     SetIsOpen(true);
     RandomItem();
@@ -198,16 +200,13 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
 
   useEffect(() => {
     // * 결과창이 열리고 서버에 라운드가 종료메세지 보냄 , 일정 시간이 지나면 결과창 닫히고 다시 게임 시작
-    const closeResult = setTimeout(() => setResultPopup(false), 3000);
-    setChat([]);
-    console.log(presenter.nickname);
-    console.log(userInfo.name);
-
-    console.log(presenter);
-    console.log(userInfo);
-    if (presenter.id === userInfo.id) {
-      startRound();
-    }
+    const closeResult = setTimeout(() => {
+      setResultPopup(false);
+      setChat([]);
+      if (presenter.id === userInfo.id) {
+        startRound();
+      }
+    }, 3000);
   }, [resultPopup]);
 
   return (
@@ -221,7 +220,12 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
         />
         <div className="GameWindow">
           <div className="result_box">
-            <Canvas className="canvas" />
+            {/* {isPresenter ? (
+              <Canvas className="canvas" />
+            ) : (
+              <ListnerCanvas className="canvas" />
+            )} */}
+            <Board />
             {isPresenter ? (
               <SelectWords
                 Word1={Word1}
