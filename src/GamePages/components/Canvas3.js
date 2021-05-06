@@ -116,17 +116,18 @@ export default function Canvas3({ Round }) {
         onMouseMove={draw}
         ref={canvasRef}
       />
+      <div className="pallette">
+        <div className="Color">
+          <Colors handleColorClick={handleColorClick} />
+        </div>
 
-      <div className="Color">
-        <Colors handleColorClick={handleColorClick} />
-      </div>
-
-      <div>
-        <Paint
-          handleColorClick={handleColorClick}
-          reset={reset}
-          eraserBtn={eraserBtn}
-        />
+        <div>
+          <Paint
+            handleColorClick={handleColorClick}
+            reset={reset}
+            eraserBtn={eraserBtn}
+          />
+        </div>
       </div>
     </div>
   );
