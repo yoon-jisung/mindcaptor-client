@@ -74,6 +74,8 @@ export default function App() {
           //return this.setState({ email: message, createdAt: message });
         }
         const { nickname, email, profile_image } = res.data.data.userInfo;
+        console.log(res.data.data.accessToken)
+        setAccessToken({accessToken:res.data.data.accessToken})
         setUserInfo({
           nickname: nickname,
           email: email,
@@ -124,6 +126,7 @@ export default function App() {
   };
   return (
     <div>
+      <button onClick={refreshTokenRequest}>리프레쉬 토큰</button>
       <Switch>
         <Route
           path="/Waiting"
