@@ -41,11 +41,6 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
     }
   };
 
-  useEffect(() => {
-    return () => {
-      loginCheck(isLogIn);
-    };
-  });
 
   const MyPageSaveData= async () =>{
     const PhotoNum = PhotoData.findIndex(nowPhoto)

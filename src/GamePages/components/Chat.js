@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
 import TextField from '@material-ui/core/TextField';
 
 export default function Chat({
@@ -16,7 +14,7 @@ export default function Chat({
         {renderChat()}
       </div>
 
-      <form onSubmit={(e) => onMessageSubmit(e)}>
+      <form onSubmit={onMessageSubmit}>
         <div className="msgBtn">
           <TextField
             name="message"
