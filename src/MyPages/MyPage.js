@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import SearchUser from './components/SearchUser';
 import Header from './components/Header';
-
+import ChangePsw from './components/ChangePsw';
+import axios from 'axios';
 import Character1 from '../images/Character1.png';
 import Character2 from '../images/Character2.png';
 import Character3 from '../images/Character3.png';
 import Character4 from '../images/Character4.png';
 
-const axios = require('axios');
-
 function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
   const PhotoData = [Character1, Character2, Character3, Character4];
-  const [nowPhoto, setPhoto] = useState(Character1);
+
   const [isOpen, setIsOpen] = useState(false);
   const [isPhotoBoxOpen, setIsPhotoBoxOpen] = useState(false);
-  const { nickname, email, profile_image, comment, id } = userInfo
-
+  const { nickname, email, profile_image, comment, id } = userInfo;
+  const defaultImageNum = profile_image === null ? 0 : profile_image;
+  const [nowPhoto, setPhoto] = useState(PhotoData[defaultImageNum]);
   const ChangeInputPhoto = function (photo) {
     // e.preventDefault();
     setPhoto(photo);
@@ -46,40 +46,44 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
     };
   });
 
-
-  const MyPageSaveData= async () =>{
-    const SavePhoto = await axios.post(`http://localhost:4000/mypage/${id}/profile`,
-    {
-      authorization: accessToken,
-      //new_profile: number
-    },
-    {
-      headers: { 'Content-Type': 'application/json' },
-      Credentials: 'include',
-    }
-      
-    )
-  }
-
-
-
+  const MyPageSaveData = async () => {
+    const PhotoNum = PhotoData.findIndex(nowPhoto);
+    const SavePhoto = await axios.post(
+      `http://localhost:4000/mypage/${id}/profile`,
+      {
+        authorization: accessToken,
+        new_profile: PhotoNum,
+      },
+      {
+        headers: { 'Content-Type': 'application/json' },
+        Credentials: 'include',
+      }
+    );
+  };
 
   return (
     <div>
-      <Header nickname={nickname}isOpen={isOpen} nowPhoto={nowPhoto} MyPageSaveData={MyPageSaveData}/>
+      <Header isOpen={isOpen} nowPhoto={nowPhoto} />
       <content className="container">
         <div className="pro_search_box">
           <div className="introBox">
-            <div className="proBox">
-              <img src={nowPhoto} alt="프로필사진" className="proPhoto" />
-              <button className="changeProPhoto" onClick={handlePhotoBox}>
-                편집
-              </button>
-              <div className="userNickName">닉네임 : {nickname} </div>
+            <div className="pswBox">
+              <div className="proBox">
+                <img src={nowPhoto} alt="프로필사진" className="proPhoto" />
+                <button className="changeProPhoto" onClick={handlePhotoBox}>
+                  편집
+                </button>
+                <div className="userNickName">
+                  닉네임 : {userInfo.nickname}{' '}
+                </div>
+              </div>
+              <ChangePsw />
             </div>
             <div className="intro">
               <h1>자기소개</h1>
-              <textarea placeholder={comment===null ? "클릭하여 자기소개를 적어주세요!" : comment} />
+              <textarea
+                placeholder={`안녕하세요, ${userInfo.nickname}입니다.`}
+              />
             </div>
           </div>
           <SearchUser />
