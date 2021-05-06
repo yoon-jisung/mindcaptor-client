@@ -930,15 +930,23 @@ canvas {
 }
 
 .card {
+<<<<<<< HEAD
+=======
   border: 2px solid #0f4d86;
+>>>>>>> b3d2fa2f4bd5a1a35c87b3fda67e7f91c185472c
   background-color: white;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+<<<<<<< HEAD
+  border: 5px solid #0f4d86;
+  border-radius: 15px;
+=======
   width: 600px;
   height: 400px;
+>>>>>>> b3d2fa2f4bd5a1a35c87b3fda67e7f91c185472c
 }
 .card h1 {
   text-align: center;
