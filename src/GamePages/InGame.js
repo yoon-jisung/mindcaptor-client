@@ -10,6 +10,7 @@ import io from 'socket.io-client';
 import GameStartBtn from './components/GameStartBtn';
 import Words from '../Words';
 import GameOver from './components/IsInGameMsg';
+import { useHistory } from 'react-router-dom';
 
 const socket = io.connect('http://localhost:4000', {
   transports: ['websocket', 'polling'],
@@ -24,6 +25,30 @@ export default function InGame({ accessToken, isLogIn, loginCheck }) {
   const [isPresenter, setIsPresenter] = useState(false);
   const [winner, setWinner] = useState([]);
   const [userlist, setUserlist] = useState([]);
+
+  //뒤로가기 버튼 방지
+
+  const [locationKeys, setLocationKeys] = useState([]);
+  const history = useHistory();
+
+  useEffect(() => {
+    return history.listen((location) => {
+      if (history.action === 'PUSH') {
+        setLocationKeys([location.key]);
+      }
+
+      if (history.action === 'POP') {
+        if (locationKeys[1] === location.key) {
+          setLocationKeys(([_, ...keys]) => keys);
+
+          // Handle forward event
+        } else {
+          setLocationKeys((keys) => [location.key, ...keys]);
+          history.push('/room');
+        }
+      }
+    });
+  }, [locationKeys]);
 
   // ! Chat
   const socketRef = useRef();
