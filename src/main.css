@@ -402,7 +402,8 @@ $button-active-blue: #1669f2; */
 
 /*Waiting********************************************************************/
 .createRoomForm {
-  background: linear-gradient(#05fbff, #1d62f0) fixed;
+  background-image: url('./images/mindcaptor_background_blue.png');
+  background-size: cover;
   display: flex;
   border-radius: 30px;
   width: 400px;
@@ -415,6 +416,14 @@ $button-active-blue: #1669f2; */
   align-items: center;
   justify-content: space-around;
   border: 5px solid #0f4d86;
+}
+.createRoom_exit {
+  font-size: 30px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-right: 10px;
+  cursor: pointer;
 }
 .createRoom {
   display: flex;
@@ -435,6 +444,7 @@ $button-active-blue: #1669f2; */
   margin: 10px;
   width: 250px;
   height: 40px;
+  padding: 10px;
 }
 .waiting {
   display: flex;
@@ -531,16 +541,15 @@ $button-active-blue: #1669f2; */
   margin-top: 20px;
 }
 .header {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 50px;
 }
 
 .header h1 {
   font-size: 50px;
   line-height: 120px;
-  text-align: center;
 }
 
 .header span {
@@ -562,8 +571,21 @@ $button-active-blue: #1669f2; */
   cursor: pointer;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
 }
+.profileImg0 {
+  transition: opacity 0.3s ease;
+}
+.profileImg1 {
+  transition: opacity 0.6s ease;
+}
+.profileImg2 {
+  transition: opacity 0.9s ease;
+}
+.profileImg3 {
+  transition: opacity 1.2s ease;
+}
 .ProfilePhotos {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
 }
 .ProfilePhotos > div {
   /* display: flex; */
@@ -737,7 +759,6 @@ $button-active-blue: #1669f2; */
 }
 
 .changedProfile {
-  position: absolute;
   box-sizing: border-box;
   text-align: center;
   width: 400px;
@@ -746,11 +767,14 @@ $button-active-blue: #1669f2; */
   border-radius: 15px;
   padding: 25px;
   background-color: #77acf1;
-  visibility: 1;
-  transition: opacity 1.5s ease;
+  transition: opacity 0.5s linear;
   font-size: 20px;
   color: white;
-  margin-top: 20px;
+  margin-left: 50px;
+  position: absolute;
+  top: 0;
+  left: 32rem;
+  margin-top: 30px;
 }
 
 .logo_signup {

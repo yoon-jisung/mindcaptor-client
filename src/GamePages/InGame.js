@@ -118,7 +118,10 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
 
   //! --------------------------method--------------------------
 
+  
+
   useEffect(() => {
+
     // * 문제가 선택되면 게임스타트와 문제를 서버에 보내줌
     SetAnswer(answer);
   }, [answer]);
@@ -147,6 +150,8 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
       setWinner([...winner, name]);
     });
 
+
+
     socket.on('renew userlist', (list) => {
       console.log('d우ㅠ저소ㅓ켓');
       setUserlist([...list]);
@@ -154,6 +159,7 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   }, []);
 
   useEffect(() => {
+
     socket.on('show chat', (name, message) => {
       if (chat.length > 10) {
         setChat([...chat.slice(1), { name, message }]);
@@ -169,7 +175,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     let parsedUrl = window.location.href.split('/');
     let roomNum = parsedUrl[parsedUrl.length - 1];
     socket.emit('send roomNum', roomNum);
-    console.log('userlist', userlist);
   }, []);
 
   return (

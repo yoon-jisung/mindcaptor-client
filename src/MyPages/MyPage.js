@@ -37,7 +37,6 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
     setPhotoNum(PhotoData.indexOf(nowPhoto))
     console.log(PhotoNum)
     if (photo !== nowPhoto) {
-      console.log('openModal');
       openModal();
     }
     //MyPageSaveData()
@@ -46,7 +45,7 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
     setIsOpen(true);
     setTimeout(() => {
       setIsOpen(false);
-    }, 2000);
+    }, 1000);
   };
 
   const handlePhotoBox = () => {
@@ -55,6 +54,7 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
     } else {
       setIsPhotoBoxOpen(true);
     }
+    console.log('photobox', isPhotoBoxOpen);
   };
 
 
@@ -110,14 +110,15 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
           </div>
           <SearchUser />
         </div>
-        {isPhotoBoxOpen ? (
+        {
           <section className="UserProFile">
             <div>
               <div className="ProfilePhotos">
-                {PhotoData.map((photo) => (
+                {PhotoData.map((photo, idx) => (
                   <div>
                     <img
-                      className="profileImg"
+                      style={{ opacity: isPhotoBoxOpen ? '1' : '0' }}
+                      className={`profileImg${idx}`}
                       src={photo}
                       alt="프로필사진"
                       onClick={() => ChangeInputPhoto(photo)}
@@ -127,7 +128,7 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
               </div>
             </div>
           </section>
-        ) : null}
+        }
       </content>
     </div>
   );

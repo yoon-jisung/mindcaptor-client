@@ -75,8 +75,6 @@ export default function App() {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.message);
-        console.log(res.data.data);
         const { nickname, email, profile_image, comment, id } = res.data.data;
         // !
         setUserInfo({
@@ -97,10 +95,12 @@ export default function App() {
       })
       .then((res) => {
 
+
         if (res.data.message !== 'ok') {}
         const { nickname, email, profile_image, id,comment } = res.data.data.userInfo;
         console.log(res.data.data.accessToken)
         setAccessToken({accessToken:res.data.data.accessToken})
+
         setUserInfo({
           id : id,
           nickname: nickname,
@@ -115,7 +115,6 @@ export default function App() {
     setAccessToken({ accessToken: token });
     accessTokenRequest(token);
     history.push('/Waiting');
-    console.log(token);
   };
   //구글 로그인----------------------------------------------------------------
 
@@ -130,15 +129,12 @@ export default function App() {
         withCredentials: true,
       }
     );
-    console.log(resp.data);
     issueAccessToken(resp.data.accessToken);
   };
   //구글 로그인 코드 받기--------------------------------
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
-    console.log('accessToken', accessToken);
-    console.log('userInfo:', userInfo);
     if (authorizationCode) {
       getAccessToken(authorizationCode);
     }

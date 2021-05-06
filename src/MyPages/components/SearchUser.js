@@ -10,30 +10,12 @@ export default function SearchUser() {
             <div className="following">
               <div>팔로잉</div>
               <input type="text" placeholder="유저 이메일"></input>
-              <ul className="followList">{<li>김재헌</li>}</ul>
+              <ul className="followList"></ul>
             </div>
             <div className="follower">
               <div>팔로워</div>
               <input type="text" placeholder="유저 닉네임"></input>
-              <ul className="followList">
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-                <li>김재헌</li>
-              </ul>
+              <ul className="followList"></ul>
             </div>
           </div>
         </div>

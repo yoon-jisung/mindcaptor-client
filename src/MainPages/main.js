@@ -28,7 +28,6 @@ export default function Main({ loginHandler, handleGuestLogin }) {
         withCredentials: true
       })
       .then((res) => {
-        console.log(res.data);
         loginHandler(res.data);
         history.push('/Waiting');
         handleGuestLogin();
