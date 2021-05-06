@@ -27,11 +27,13 @@ export default function App() {
 
   //로그인 상태 관리하기--------------------------------
   useEffect(() => {
-    // refreshTokenRequest();
-    if (accessToken.accessToken !== null) {
-      history.push('/Waiting');
-    }
-  }, []);
+
+    //refreshTokenRequest()
+    if(accessToken.accessToken!==null){
+      history.push('/Waiting')
+    }      
+  },[]);
+
   const loginHandler = (data) => {
     issueAccessToken(data.data.accessToken);
     history.push('/Waiting');
@@ -44,13 +46,11 @@ export default function App() {
   //로그 아웃--------------------------------------------------------
   const hendleLogout = () => {
     axios
-      .get('http://localhost:4000/user/logout', {
-        headers: {
-          'Content-Type': 'application/json',
-          'Clear-Site-Data': 'cookies',
-        },
-      })
-      .then((res) => {});
+
+        .get(
+          'http://localhost:4000/user/logout',
+          {withCredentials: true}
+        ).then((res) => {})
     setUserInfo({
       id: null,
       nickname: null,
@@ -96,14 +96,16 @@ export default function App() {
         withCredentials: true,
       })
       .then((res) => {
-        if (res.data.message !== 'ok') {
-        }
-        const { nickname, email, profile_image } = res.data.data.userInfo;
-        console.log(res.data.data.accessToken);
-        setAccessToken({ accessToken: res.data.data.accessToken });
+
+        if (res.data.message !== 'ok') {}
+        const { nickname, email, profile_image, id,comment } = res.data.data.userInfo;
+        console.log(res.data.data.accessToken)
+        setAccessToken({accessToken:res.data.data.accessToken})
         setUserInfo({
+          id : id,
           nickname: nickname,
           email: email,
+          comment:comment,
           profile_image: profile_image,
         });
       });
