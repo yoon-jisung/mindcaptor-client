@@ -9,8 +9,6 @@ export default function Chat({
   state,
   renderChat,
 }) {
-  console.log(chat);
-
   return (
     <div className="card">
       <div className="render-chat">
