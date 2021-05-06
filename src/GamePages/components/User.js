@@ -2,6 +2,7 @@ import React from 'react';
 import UserPic from '../../images/Character1.png';
 
 export default function User({ users, userInfo }) {
+  console.log('유저!!', users);
   return (
     <div className="UserTable">
       <ul className="users">
@@ -10,7 +11,7 @@ export default function User({ users, userInfo }) {
             <div className="inGameUserNickName">{el.nickname}</div>
           </li>;
         })}
-        <li className="inGameUserProfile">
+        {/* <li className="inGameUserProfile">
           <img className="inGameImg" src={UserPic} alt="user_profile" />
           <div>
             <div className="inGameUserNickName">
@@ -30,7 +31,7 @@ export default function User({ users, userInfo }) {
         <li className="inGameUserProfile">
           <img className="inGameImg" src={UserPic} alt="user_profile" />
           <div className="inGameUserNickName">닉네임 : {userInfo.nickname}</div>
-        </li>
+        </li> */}
       </ul>
     </div>
   );
