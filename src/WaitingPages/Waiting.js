@@ -17,6 +17,8 @@ export default function Waiting({
   userInfo,
 }) {
   const [createModal, setCreateModal] = useState(false);
+  const { token } = accessToken;
+  localStorage.setItem('accessToken', token);
 
   const closeModal = () => {
     setCreateModal(false);
@@ -47,6 +49,7 @@ export default function Waiting({
       }
     });
   }, [locationKeys]);
+
   useEffect(() => {
     loginCheck(isLogIn);
   });
