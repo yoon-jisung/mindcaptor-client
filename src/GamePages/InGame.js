@@ -179,6 +179,8 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
 
   return (
     <>
+      <BackBtn />
+
       <div className="justBox"></div>
       <div className="GameWindow">
         <div className="canvasBox">
@@ -219,7 +221,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
 
         <div className="startOrQuitBtns">
           <GameStartBtn isInGame={isInGame} handleGameStart={handleGameStart} />
-          <BackBtn />
         </div>
       </div>
     </>

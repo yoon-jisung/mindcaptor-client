@@ -18,7 +18,7 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
   const [PhotoNum, setPhotoNum] = useState(0);
   const [nowPhoto, setPhoto] = useState(PhotoData[profile_image]);
   const [text, setText] = useState(null);
-  
+
   // const emailInputValue = (e) => {
   //   setEmail(e.target.value);
   // };
@@ -30,12 +30,12 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
   // const nickNameInputValue = (e) => {
   //   setNickName(e.target.value);
   // };
-  
+
   const ChangeInputPhoto = function (photo) {
     // e.preventDefault();
     setPhoto(photo);
-    setPhotoNum(PhotoData.indexOf(nowPhoto))
-    console.log(PhotoNum)
+    setPhotoNum(PhotoData.indexOf(nowPhoto));
+    console.log(PhotoNum);
     if (photo !== nowPhoto) {
       openModal();
     }
@@ -57,35 +57,41 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
     console.log('photobox', isPhotoBoxOpen);
   };
 
-
-  const MyPageSaveData= async (PhotoNum) =>{
-
-    await refreshTokenRequest()
-    const SavePhoto = await axios.post(`http://localhost:4000/mypage/${id}/profile`,
-    {new_profile: PhotoNum},
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken.accessToken}`,
-        'Content-Type': 'application/json',
-      },
-      //withCredentials: true,
-    })
-    const SaveComment = await axios.post(`http://localhost:4000/mypage/${id}/comment`,
-    {Comment: '아니라어민어리ㅏㅁㄴ얼'},
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken.accessToken}`,
-        'Content-Type': 'application/json',
-      },
-      //withCredentials: true,
-    })
-  }
-
-
+  // const MyPageSaveData = async (PhotoNum) => {
+  //   await refreshTokenRequest();
+  //   const SavePhoto = await axios.post(
+  //     `http://localhost:4000/mypage/${id}/profile`,
+  //     { new_profile: PhotoNum },
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken.accessToken}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //       //withCredentials: true,
+  //     }
+  //   );
+  //   const SaveComment = await axios.post(
+  //     `http://localhost:4000/mypage/${id}/comment`,
+  //     { Comment: '아니라어민어리ㅏㅁㄴ얼' },
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken.accessToken}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //       //withCredentials: true,
+  //     }
+  //   );
+  // };
 
   return (
     <div>
-      <Header isOpen={isOpen} nowPhoto={nowPhoto} nickname={nickname} PhotoNum={PhotoNum}MyPageSaveData={MyPageSaveData}/>
+      <Header
+        isOpen={isOpen}
+        nowPhoto={nowPhoto}
+        nickname={nickname}
+        PhotoNum={PhotoNum}
+        // MyPageSaveData={MyPageSaveData}
+      />
       <content className="container">
         <div className="pro_search_box">
           <div className="introBox">
@@ -103,9 +109,7 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
             </div>
             <div className="intro">
               <h1>자기소개</h1>
-              <textarea
-                placeholder={`클릭하여 자신을 소개해 보세요!`}
-              />
+              <textarea placeholder={`클릭하여 자신을 소개해 보세요!`} />
             </div>
           </div>
           <SearchUser />
