@@ -27,7 +27,7 @@ export default function App() {
 
   //로그인 상태 관리하기--------------------------------
   useEffect(() => {
-    refreshTokenRequest();
+    // refreshTokenRequest();
     if (accessToken.accessToken !== null) {
       history.push('/Waiting');
     }

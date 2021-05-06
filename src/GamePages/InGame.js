@@ -50,11 +50,9 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   }, [locationKeys]);
 
   // ! Chat
-  const socketRef = useRef();
   const [state, setState] = useState({ message: '', name: userInfo.nickname });
-  // ! App.js 에서 유저이름 name에 넣으면 됨 !
-
   const [chat, setChat] = useState([]);
+  // ! App.js 에서 유저이름 name에 넣으면 됨 !
 
   // ! SelectWords
   const [Word1, SetWord1] = useState('');
@@ -94,16 +92,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     SetIsOpen(false);
   };
 
-  const renderChat = () => {
-    return chat.map(({ name, message }, index) => (
-      <div key={index}>
-        <h3>
-          {name}: <span>{message}</span>{' '}
-        </h3>
-      </div>
-    ));
-  };
-
   // const onMessageSubmit = (e) => {
   //   const { name, message } = state;
   //   socket.current.emit('message', { name, message });
@@ -115,6 +103,8 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     e.preventDefault();
     const { name, message } = state;
     socket.emit('send message', name, message);
+    // socket.emit('send message', name, message);
+
     setState({ message: '', name });
   };
 
@@ -145,10 +135,7 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
 
   // useEffect(() => {
   //   socket.on('message', ({ name, message }) => {
-  //     if (chat.length > 4) {
-  //       return setChat([]);
-  //     }
-  //     return setChat([...chat, { name, message }]);
+  //     setChat([...chat, { name, message }]);
   //   });
   //   console.log('채팅이야!!!!!', chat);
   // }, [chat]);
@@ -183,8 +170,8 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     });
 
     socket.on('show chat', (name, message) => {
-      console.log(message);
-      setChat([...chat, { name, message }]);
+      console.log('너니 ?????', message);
+      setChat(chat.concat([{ name, message }]));
     });
 
     socket.on('renew userlist', (list) => {
@@ -194,9 +181,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
 
   useEffect(() => {
     // * 사용자 정보 소켓으로 불러 오기
-    socket.on('my socket id', (data) => {
-      console.log('mySocketID : ', data);
-    });
 
     let parsedUrl = window.location.href.split('/');
     let roomNum = parsedUrl[parsedUrl.length - 1];
@@ -253,7 +237,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
             chat={chat}
             onTextChange={onTextChange}
             onMessageSubmit={onMessageSubmit}
-            renderChat={renderChat}
           />
         </div>
 
