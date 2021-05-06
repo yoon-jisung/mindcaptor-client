@@ -16,7 +16,7 @@ const socket = io.connect('http://localhost:4000', {
   path: '/socket.io',
 });
 
-export default function InGame({ accessToken, isLogIn, loginCheck }) {
+export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   const [resultPopup, setResultPopup] = useState(false);
   const [IsOpen, SetIsOpen] = useState(true);
   const [presenter, setPresenter] = useState({ nickname: '', id: '' });
@@ -27,7 +27,7 @@ export default function InGame({ accessToken, isLogIn, loginCheck }) {
 
   // ! Chat
   const socketRef = useRef();
-  const [state, setState] = useState({ message: '', name: '김코딩' });
+  const [state, setState] = useState({ message: '', name: userInfo.nickname });
   // ! App.js 에서 유저이름 name에 넣으면 됨 !
 
   const [chat, setChat] = useState([]);
@@ -95,16 +95,12 @@ export default function InGame({ accessToken, isLogIn, loginCheck }) {
   };
 
   const startRound = () => {
+    // setIsPresenter(false);
+    // setPresenter({ nickname: '', id: '' });
     setWinner([]);
     socket.emit('start round');
     SetIsOpen(true);
     RandomItem();
-    socket.on('set presenter', (presenter) => {
-      setPresenter(presenter);
-      if (presenter.nickname === state.name) {
-        setIsPresenter(true);
-      }
-    });
   };
 
   const SetAnswer = (answer) => {
@@ -117,33 +113,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck }) {
 
   //! --------------------------method--------------------------
 
-  useEffect(() => {}, [minutes, seconds, isTrueTimer]);
-  // useEffect(() => {
-  //   loginCheck(isLogIn);
-  // });
-
-  // useEffect(() => {
-  //   if (isTrueTimer) {
-  //     const countdown = setInterval(() => {
-  //       if (parseInt(seconds) > 0) {
-  //         setSeconds(parseInt(seconds) - 1);
-  //       }
-  //       if (parseInt(seconds) === 0) {
-  //         if (parseInt(minutes) === 0) {
-  //           clearInterval(countdown);
-  //           handleResult();
-  //         } else {
-  //           setMinutes(parseInt(minutes) - 1);
-  //           setSeconds(59);
-  //         }
-  //       }
-  //     }, 1000);
-  //     return () => {
-  //       clearInterval(countdown);
-  //     };
-  //   }
-  // }, [minutes, seconds, isTrueTimer]);
-
   useEffect(() => {
     // * 메세지
     renderChat();
@@ -155,6 +124,12 @@ export default function InGame({ accessToken, isLogIn, loginCheck }) {
   }, [answer]);
 
   useEffect(() => {
+    socket.on('set presenter', (presenter) => {
+      setPresenter(presenter);
+      if (presenter.id === userInfo.id) {
+        setIsPresenter(true);
+      }
+    });
     // answer를 전달받는다
     socket.on('get answer', (answer) => {
       setAnswer(answer);
@@ -197,7 +172,12 @@ export default function InGame({ accessToken, isLogIn, loginCheck }) {
     // * 결과창이 열리고 서버에 라운드가 종료메세지 보냄 , 일정 시간이 지나면 결과창 닫히고 다시 게임 시작
     const closeResult = setTimeout(() => setResultPopup(false), 3000);
     setChat([]);
-    if (presenter.nickname === state.name) {
+    console.log(presenter.nickname);
+    console.log(userInfo.name);
+
+    console.log(presenter);
+    console.log(userInfo);
+    if (presenter.id === userInfo.id) {
       startRound();
     }
   }, [resultPopup]);
