@@ -7,6 +7,7 @@ import Character1 from '../images/Character1.png';
 import Character2 from '../images/Character2.png';
 import Character3 from '../images/Character3.png';
 import Character4 from '../images/Character4.png';
+import axios from 'axios';
 
 function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
   const PhotoData = [Character1, Character2, Character3, Character4];
@@ -57,6 +58,11 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
     {
       headers: { 'Content-Type': 'application/json' },
       Credentials: 'include',
+    })
+    const SaveComment = await axios.post(`http://localhost:4000/mypage/${id}/comment`,
+    {
+      authorization: accessToken,
+      Comment: PhotoNum
     })
   }
 
