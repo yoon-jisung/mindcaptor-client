@@ -27,12 +27,11 @@ export default function App() {
 
   //로그인 상태 관리하기--------------------------------
   useEffect(() => {
-
     //refreshTokenRequest()
-    if(accessToken.accessToken!==null){
-      history.push('/Waiting')
-    }      
-  },[]);
+    if (accessToken.accessToken !== null) {
+      history.push('/Waiting');
+    }
+  }, []);
 
   const loginHandler = (data) => {
     issueAccessToken(data.data.accessToken);
@@ -47,10 +46,8 @@ export default function App() {
   const hendleLogout = () => {
     axios
 
-        .get(
-          'http://localhost:4000/user/logout',
-          {withCredentials: true}
-        ).then((res) => {})
+      .get('http://localhost:4000/user/logout', { withCredentials: true })
+      .then((res) => {});
     setUserInfo({
       id: null,
       nickname: null,
@@ -75,10 +72,12 @@ export default function App() {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.message);
-        console.log(res.data.data);
-        const { nickname, email, profile_image, comment, id } = res.data.data;
         // !
+        return res.data.data;
+      })
+      .then((data) => {
+        console.log('여기야야야야양', data);
+        const { nickname, email, profile_image, comment, id } = data;
         setUserInfo({
           id: id,
           nickname: nickname,
@@ -89,6 +88,12 @@ export default function App() {
       });
   };
 
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    };
+  }, [userInfo]);
+
   const refreshTokenRequest = () => {
     // ! 일정 주기로 함수 계속 보냄
     axios
@@ -96,16 +101,22 @@ export default function App() {
         withCredentials: true,
       })
       .then((res) => {
+        if (res.data.message !== 'ok') {
+        }
+        const {
+          nickname,
+          email,
+          profile_image,
+          id,
+          comment,
+        } = res.data.data.userInfo;
 
-        if (res.data.message !== 'ok') {}
-        const { nickname, email, profile_image, id,comment } = res.data.data.userInfo;
-        console.log(res.data.data.accessToken)
-        setAccessToken({accessToken:res.data.data.accessToken})
+        setAccessToken({ accessToken: res.data.data.accessToken });
         setUserInfo({
-          id : id,
+          id: id,
           nickname: nickname,
           email: email,
-          comment:comment,
+          comment: comment,
           profile_image: profile_image,
         });
       });
@@ -115,7 +126,6 @@ export default function App() {
     setAccessToken({ accessToken: token });
     accessTokenRequest(token);
     history.push('/Waiting');
-    console.log(token);
   };
   //구글 로그인----------------------------------------------------------------
 
@@ -130,14 +140,14 @@ export default function App() {
         withCredentials: true,
       }
     );
-    console.log(resp.data);
+
     issueAccessToken(resp.data.accessToken);
   };
   //구글 로그인 코드 받기--------------------------------
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
-    console.log('accessToken', accessToken);
+
     console.log('userInfo:', userInfo);
     if (authorizationCode) {
       getAccessToken(authorizationCode);
