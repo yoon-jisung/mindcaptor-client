@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import SearchUser from './components/SearchUser';
 import Header from './components/Header';
 import ChangePsw from './components/ChangePsw';
-import axios from 'axios';
 import Character1 from '../images/Character1.png';
 import Character2 from '../images/Character2.png';
 import Character3 from '../images/Character3.png';

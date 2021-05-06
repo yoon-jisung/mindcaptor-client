@@ -37,7 +37,7 @@ export default function App() {
     history.push('/Waiting')
   };
 
-  const handleGeuetLogin = () => {
+  const handleGuestLogin = () => {
     setUserInfo({ nickname: '게스트' });
     history.push('/Waiting')
   };
