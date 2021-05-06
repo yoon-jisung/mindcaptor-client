@@ -2,23 +2,23 @@ import React, { useRef, useEffect } from 'react';
 import io from 'socket.io-client';
 // import './styles/board.css';
 
-const Board = () => {
+export default function Canvas() {
   const canvasRef = useRef(null);
   const colorsRef = useRef(null);
   const socketRef = useRef();
+  // console.log(socketRef.current);
 
   useEffect(() => {
     // --------------- getContext() method returns a drawing context on the canvas-----
 
     const canvas = canvasRef.current;
-    const test = colorsRef.current;
     const context = canvas.getContext('2d');
 
     // ----------------------- Colors --------------------------------------------------
 
     const colors = document.getElementsByClassName('color');
-    console.log(colors, 'the colors');
-    console.log(test);
+    // console.log(colors, 'the colors');
+    // console.log(test);
     // set the current color
     const current = {
       color: 'black',
@@ -42,7 +42,7 @@ const Board = () => {
       context.moveTo(x0, y0);
       context.lineTo(x1, y1);
       context.strokeStyle = color;
-      context.lineWidth = 2;
+      context.lineWidth = 10;
       context.stroke();
       context.closePath();
 
@@ -64,6 +64,8 @@ const Board = () => {
     // ---------------- mouse movement --------------------------------------
 
     const onMouseDown = (e) => {
+      console.log(current);
+
       drawing = true;
       current.x = e.clientX || e.touches[0].clientX;
       current.y = e.clientY || e.touches[0].clientY;
@@ -73,6 +75,7 @@ const Board = () => {
       if (!drawing) {
         return;
       }
+      // console.log(current.x);
       drawLine(
         current.x,
         current.y,
@@ -90,6 +93,7 @@ const Board = () => {
         return;
       }
       drawing = false;
+
       drawLine(
         current.x,
         current.y,
@@ -118,14 +122,14 @@ const Board = () => {
 
     canvas.addEventListener('mousedown', onMouseDown, false);
     canvas.addEventListener('mouseup', onMouseUp, false);
-    canvas.addEventListener('mouseout', onMouseUp, false);
-    canvas.addEventListener('mousemove', throttle(onMouseMove, 10), false);
+    // canvas.addEventListener('mouseout', onMouseUp, false);
+    canvas.addEventListener('mousemove', throttle(onMouseMove, 5), false);
 
     // Touch support for mobile devices
-    canvas.addEventListener('touchstart', onMouseDown, false);
-    canvas.addEventListener('touchend', onMouseUp, false);
-    canvas.addEventListener('touchcancel', onMouseUp, false);
-    canvas.addEventListener('touchmove', throttle(onMouseMove, 10), false);
+    // canvas.addEventListener('touchstart', onMouseDown, false);
+    // canvas.addEventListener('touchend', onMouseUp, false);
+    // canvas.addEventListener('touchcancel', onMouseUp, false);
+    // canvas.addEventListener('touchmove', throttle(onMouseMove, 10), false);
 
     // -------------- make the canvas fill its parent component -----------------
 
@@ -133,15 +137,17 @@ const Board = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
-
+    console.log(canvas.width);
     window.addEventListener('resize', onResize, false);
     onResize();
 
     // ----------------------- socket.io connection ----------------------------
     const onDrawingEvent = (data) => {
-      console.log('onDrawingEvent');
+      // console.log(data);
+
       const w = canvas.width;
       const h = canvas.height;
+
       drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color);
     };
 
@@ -153,10 +159,25 @@ const Board = () => {
   }, []);
 
   // ------------- The Canvas and color elements --------------------------
+  const reset = () => {
+    if (canvasRef.current.getContext('2d')) {
+      canvasRef.current
+        .getContext('2d')
+        .clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+      // socket.emit('reset');
+    }
+  };
+  const eraserBtn = (e) => {
+    // setCursor({ cursor: `url(${Eraser}), pointer` });
+    canvasRef.current.getContext('2d').lineWidth = 20;
+    canvasRef.current.getContext('2d').strokeStyle = 'white';
+
+    // socket.emit('erase');
+  };
 
   return (
     <div>
-      <canvas ref={canvasRef} className="WhiteBoard" />
+      <canvas ref={canvasRef} className="whiteBoardInGame" />
 
       <div ref={colorsRef} className="colors">
         <div className="color black" />
@@ -165,8 +186,10 @@ const Board = () => {
         <div className="color blue" />
         <div className="color yellow" />
       </div>
+      <button onClick={reset}>초기화</button>
+      <button className="color white" onClick={eraserBtn}>
+        지우개
+      </button>
     </div>
   );
-};
-
-export default Board;
+}

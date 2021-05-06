@@ -27,32 +27,30 @@ export default function App() {
 
   //로그인 상태 관리하기--------------------------------
   useEffect(() => {
-    refreshTokenRequest()
-    if(accessToken.accessToken!==null){
-      history.push('/Waiting')
-    }      
-  },[]);
+    // refreshTokenRequest();
+    if (accessToken.accessToken !== null) {
+      history.push('/Waiting');
+    }
+  }, []);
   const loginHandler = (data) => {
     issueAccessToken(data.data.accessToken);
-    history.push('/Waiting')
+    history.push('/Waiting');
   };
 
-  const handleGeuetLogin = () => {
+  const handleGuestLogin = () => {
     setUserInfo({ nickname: '게스트' });
-    history.push('/Waiting')
+    history.push('/Waiting');
   };
-//로그 아웃--------------------------------------------------------
+  //로그 아웃--------------------------------------------------------
   const hendleLogout = () => {
     axios
-        .get(
-          'http://localhost:4000/user/logout',
-          {
-            headers:{
-              'Content-Type': 'application/json',
-              'Clear-Site-Data': "cookies"
-            },
-          }
-        ).then((res) => {})
+      .get('http://localhost:4000/user/logout', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Clear-Site-Data': 'cookies',
+        },
+      })
+      .then((res) => {});
     setUserInfo({
       id: null,
       nickname: null,
@@ -60,13 +58,12 @@ export default function App() {
       profile_image: Character1,
       comment: null,
       room_id: null,
-    })
+    });
     setAccessToken({ accessToken: null });
-    history.push('/')
+    history.push('/');
   };
 
-  
-//토큰 관리----------------------------------------------------------------------------------------------
+  //토큰 관리----------------------------------------------------------------------------------------------
   const accessTokenRequest = (accessToken) => {
     // ! 유저 정보를 알려달라는 코드
     axios
@@ -99,10 +96,11 @@ export default function App() {
         withCredentials: true,
       })
       .then((res) => {
-        if (res.data.message !== 'ok') {}
+        if (res.data.message !== 'ok') {
+        }
         const { nickname, email, profile_image } = res.data.data.userInfo;
-        console.log(res.data.data.accessToken)
-        setAccessToken({accessToken:res.data.data.accessToken})
+        console.log(res.data.data.accessToken);
+        setAccessToken({ accessToken: res.data.data.accessToken });
         setUserInfo({
           nickname: nickname,
           email: email,
@@ -114,23 +112,26 @@ export default function App() {
   const issueAccessToken = (token) => {
     setAccessToken({ accessToken: token });
     accessTokenRequest(token);
-    history.push('/Waiting')
+    history.push('/Waiting');
     console.log(token);
   };
-//구글 로그인----------------------------------------------------------------
+  //구글 로그인----------------------------------------------------------------
 
   const getAccessToken = async (authorizationCode) => {
     // ! 구글 로그인
-    let resp = await axios.post('http://localhost:4000/googlelogin',
-    {
-      authorizationCode: authorizationCode,
-    },{
-      withCredentials: true
-    });
-    console.log(resp.data)
-    issueAccessToken(resp.data.accessToken)
+    let resp = await axios.post(
+      'http://localhost:4000/googlelogin',
+      {
+        authorizationCode: authorizationCode,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    console.log(resp.data);
+    issueAccessToken(resp.data.accessToken);
   };
-//구글 로그인 코드 받기--------------------------------
+  //구글 로그인 코드 받기--------------------------------
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');

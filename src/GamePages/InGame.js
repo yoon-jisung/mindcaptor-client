@@ -9,9 +9,8 @@ import io from 'socket.io-client';
 import GameStartBtn from './components/GameStartBtn';
 import Words from '../Words';
 import { useHistory } from 'react-router-dom';
-import Board from './components/Canvas';
 import Logo from './components/Logo';
-
+import Canvas from './components/Canvas3';
 const socket = io.connect('http://localhost:4000', {
   transports: ['websocket'],
   path: '/socket.io',
@@ -200,7 +199,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
 
     let parsedUrl = window.location.href.split('/');
     let roomNum = parsedUrl[parsedUrl.length - 1];
-    console.log(roomNum);
     socket.emit('send roomNum', roomNum);
     console.log('userlist', userlist);
   }, []);
@@ -222,7 +220,7 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
       <div className="GameWindow">
         <div className="canvasBox">
           <div className="result_box">
-            <Board />
+            <Canvas />
             <Logo />
             {isPresenter ? (
               <SelectWords

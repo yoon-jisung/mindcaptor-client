@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import SearchUser from './components/SearchUser';
 import Header from './components/Header';
 import ChangePsw from './components/ChangePsw';
-import axios from 'axios';
 import Character1 from '../images/Character1.png';
 import Character2 from '../images/Character2.png';
 import Character3 from '../images/Character3.png';
@@ -41,25 +40,27 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
     }
   };
 
-
-  const MyPageSaveData= async () =>{
-    const PhotoNum = PhotoData.findIndex(nowPhoto)
-    const SavePhoto = await axios.post(`http://localhost:4000/mypage/${id}/profile`,
-    {
-      authorization: accessToken,
-      new_profile: PhotoNum
-    },
-    {
-      headers: { 'Content-Type': 'application/json' },
-      Credentials: 'include',
-    })
-    const SaveComment = await axios.post(`http://localhost:4000/mypage/${id}/comment`,
-    {
-      authorization: accessToken,
-      Comment: PhotoNum
-    })
-  }
-
+  const MyPageSaveData = async () => {
+    const PhotoNum = PhotoData.findIndex(nowPhoto);
+    const SavePhoto = await axios.post(
+      `http://localhost:4000/mypage/${id}/profile`,
+      {
+        authorization: accessToken,
+        new_profile: PhotoNum,
+      },
+      {
+        headers: { 'Content-Type': 'application/json' },
+        Credentials: 'include',
+      }
+    );
+    const SaveComment = await axios.post(
+      `http://localhost:4000/mypage/${id}/comment`,
+      {
+        authorization: accessToken,
+        Comment: PhotoNum,
+      }
+    );
+  };
 
   return (
     <div>

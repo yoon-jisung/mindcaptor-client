@@ -2,7 +2,6 @@ import React from 'react';
 import UserPic from '../../images/Character1.png';
 
 export default function User({ users, userInfo }) {
-  console.log(userInfo);
   return (
     <div className="UserTable">
       <ul className="users">
