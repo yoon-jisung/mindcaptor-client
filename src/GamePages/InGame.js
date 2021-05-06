@@ -10,13 +10,14 @@ import io from 'socket.io-client';
 import GameStartBtn from './components/GameStartBtn';
 import Words from '../Words';
 import GameOver from './components/IsInGameMsg';
+import { useHistory } from 'react-router-dom';
 
 const socket = io.connect('http://localhost:4000', {
   transports: ['websocket', 'polling'],
   path: '/socket.io',
 });
 
-export default function InGame({ accessToken, isLogIn, loginCheck }) {
+export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   const [resultPopup, setResultPopup] = useState(false);
   const [IsOpen, SetIsOpen] = useState(true);
   const [presenter, setPresenter] = useState({ nickname: '', id: '' });
@@ -25,9 +26,33 @@ export default function InGame({ accessToken, isLogIn, loginCheck }) {
   const [winner, setWinner] = useState([]);
   const [userlist, setUserlist] = useState([]);
 
+  //뒤로가기 버튼 방지
+
+  const [locationKeys, setLocationKeys] = useState([]);
+  const history = useHistory();
+
+  useEffect(() => {
+    return history.listen((location) => {
+      if (history.action === 'PUSH') {
+        setLocationKeys([location.key]);
+      }
+
+      if (history.action === 'POP') {
+        if (locationKeys[1] === location.key) {
+          setLocationKeys(([_, ...keys]) => keys);
+
+          // Handle forward event
+        } else {
+          setLocationKeys((keys) => [location.key, ...keys]);
+          history.push('/room');
+        }
+      }
+    });
+  }, [locationKeys]);
+
   // ! Chat
   const socketRef = useRef();
-  const [state, setState] = useState({ message: '', name: '김코딩' });
+  const [state, setState] = useState({ message: '', name: userInfo.nickname });
   // ! App.js 에서 유저이름 name에 넣으면 됨 !
 
   const [chat, setChat] = useState([]);
@@ -83,10 +108,9 @@ export default function InGame({ accessToken, isLogIn, loginCheck }) {
   };
 
   const onMessageSubmit = (e) => {
-    // * 메세지 보낼때
     e.preventDefault();
     const { name, message } = state;
-    socket.emit('send message', name, message);
+    socketRef.current.emit('message', { name, message });
     setState({ message: '', name });
   };
 
@@ -146,7 +170,11 @@ export default function InGame({ accessToken, isLogIn, loginCheck }) {
 
   useEffect(() => {
     // * 메세지
-    renderChat();
+    socketRef.current = socket;
+    socketRef.current.on('message', ({ name, message }) => {
+      setChat([...chat, { name, message }]);
+    });
+    // return () => socketRef.current.disconnect();
   }, [chat]);
 
   useEffect(() => {

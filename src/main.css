@@ -723,6 +723,38 @@ $button-active-blue: #1669f2; */
   width: 300px;
 }
 
+/* .pswBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+} */
+
+.changePsw {
+  font-size: 20px;
+  width: 140px;
+  height: 50px;
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 40px;
+}
+.changePswInput {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 4px;
+  padding: 3px;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+}
+.changePswBtn {
+  font-size: 15px;
+  width: 50px;
+  height: 35px;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  float: right;
+}
+
 /*GamePages********************************************************************/
 .Ready {
   display: flex;
