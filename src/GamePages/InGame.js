@@ -92,16 +92,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     SetIsOpen(false);
   };
 
-  const renderChat = () => {
-    return chat.map(({ name, message }, index) => (
-      <div key={index}>
-        <h3>
-          {name}: <span>{message}</span>{' '}
-        </h3>
-      </div>
-    ));
-  };
-
   // const onMessageSubmit = (e) => {
   //   const { name, message } = state;
   //   socket.current.emit('message', { name, message });
@@ -113,6 +103,8 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     e.preventDefault();
     const { name, message } = state;
     socket.emit('send message', name, message);
+    // socket.emit('send message', name, message);
+
     setState({ message: '', name });
   };
 
@@ -142,13 +134,10 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   //! --------------------------method--------------------------
 
   // useEffect(() => {
-  //   socket.on('show chat', ({ name, message }) => {
-  //     console.log(chat);
-  //     if (chat.length > 4) {
-  //       return setChat([]);
-  //     }
-  //     return setChat([...chat, { name, message }]);
+  //   socket.on('message', ({ name, message }) => {
+  //     setChat([...chat, { name, message }]);
   //   });
+  //   console.log('채팅이야!!!!!', chat);
   // }, [chat]);
 
   useEffect(() => {
@@ -181,18 +170,14 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     });
 
     socket.on('show chat', (name, message) => {
-      console.log(message);
-      setChat([...chat, { name, message }]);
+      console.log('너니 ?????', message);
+      setChat(chat.concat([{ name, message }]));
     });
 
     socket.on('renew userlist', (list) => {
       setUserlist([...list]);
     });
   }, []);
-
-  // useEffect(() => {
-  //   console.log(state);
-  // }, []);
 
   useEffect(() => {
     // * 사용자 정보 소켓으로 불러 오기
@@ -204,16 +189,16 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     console.log('userlist', userlist);
   }, []);
 
-  useEffect(() => {
-    // * 결과창이 열리고 서버에 라운드가 종료메세지 보냄 , 일정 시간이 지나면 결과창 닫히고 다시 게임 시작
-    const closeResult = setTimeout(() => {
-      setResultPopup(false);
-      setChat([]);
-      if (presenter.id === userInfo.id) {
-        startRound();
-      }
-    }, 3000);
-  }, [resultPopup]);
+  // useEffect(() => {
+  //   // * 결과창이 열리고 서버에 라운드가 종료메세지 보냄 , 일정 시간이 지나면 결과창 닫히고 다시 게임 시작
+  //   const closeResult = setTimeout(() => {
+  //     setResultPopup(false);
+  //     setChat([]);
+  //     if (presenter.id === userInfo.id) {
+  //       startRound();
+  //     }
+  //   }, 3000);
+  // }, [resultPopup]);
 
   return (
     <>
@@ -252,7 +237,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
             chat={chat}
             onTextChange={onTextChange}
             onMessageSubmit={onMessageSubmit}
-            renderChat={renderChat}
           />
         </div>
 
