@@ -11,7 +11,8 @@ import './main.css';
 const axios = require('axios');
 
 export default function App() {
-  const [isLogIn, setIsLogIn] = useState(false);
+  //const [isLogIn, setIsLogIn] = useState(false);
+  //localStorage.setItem('isLogIn',false)
   const [accessToken, setAccessToken] = useState({ accessToken: null });
   const [userInfo, setUserInfo] = useState({
     id: null,
@@ -23,29 +24,48 @@ export default function App() {
   });
   const history = useHistory();
 
-  const handleGeuetLogin = () => {
-    setUserInfo({ nickname: '게스트' });
-  };
-  const loginCheck = (isLogIn) => {
-    if (!isLogIn) {
-      history.push('/');
-    }else if(isLogIn){
-      history.push('/Waiting');
-    }
-  };
-  const hendleLogout = () => {
-    setIsLogIn(false);
-    setAccessToken({ accessToken: null });
-    axios
-        .get(
-          'http://localhost:4000/login',
-          {
-            headers: { 'Content-Type': 'application/json' },
-            withCredentials: true,
-          }
-        ).then((res) => {})
+  //로그인 상태 관리하기--------------------------------
+  useEffect(() => {
+    refreshTokenRequest()
+    if(accessToken.accessToken!==null){
+      history.push('/Waiting')
+    }      
+  },[]);
+  const loginHandler = (data) => {
+    issueAccessToken(data.data.accessToken);
+    history.push('/Waiting')
   };
 
+  const handleGeuetLogin = () => {
+    setUserInfo({ nickname: '게스트' });
+    history.push('/Waiting')
+  };
+//로그 아웃--------------------------------------------------------
+  const hendleLogout = () => {
+    axios
+        .get(
+          'http://localhost:4000/user/logout',
+          {
+            headers:{
+              'Content-Type': 'application/json',
+              'Clear-Site-Data': "cookies"
+            },
+          }
+        ).then((res) => {})
+    setUserInfo({
+      id: null,
+      nickname: null,
+      email: null,
+      profile_image: Character1,
+      comment: null,
+      room_id: null,
+    })
+    setAccessToken({ accessToken: null });
+    history.push('/')
+  };
+
+  
+//토큰 관리----------------------------------------------------------------------------------------------
   const accessTokenRequest = (accessToken) => {
     // ! 유저 정보를 알려달라는 코드
     axios
@@ -78,11 +98,7 @@ export default function App() {
         withCredentials: true,
       })
       .then((res) => {
-        if (res.data.message !== 'ok') {
-          const message =
-            'refresh token이 만료되어 불러올 수 없습니다. 다시 로그인 해주시기 바랍니다.';
-          //return this.setState({ email: message, createdAt: message });
-        }
+        if (res.data.message !== 'ok') {}
         const { nickname, email, profile_image } = res.data.data.userInfo;
         console.log(res.data.data.accessToken)
         setAccessToken({accessToken:res.data.data.accessToken})
@@ -94,44 +110,13 @@ export default function App() {
       });
   };
 
-  const loginHandler = (data) => {
-    // !
-    setIsLogIn(true);
-    issueAccessToken(data.data.accessToken);
-  };
-
   const issueAccessToken = (token) => {
     setAccessToken({ accessToken: token });
     accessTokenRequest(token);
+    history.push('/Waiting')
     console.log(token);
   };
-
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    const authorizationCode = url.searchParams.get('code');
-
-    console.log('accessToken', accessToken);
-    console.log('userInfo:', userInfo);
-    if (authorizationCode) {
-      getAccessToken(authorizationCode);
-    }
-  });
-
-  useEffect(() => {
-    console.log('엑세스 토큰', accessToken.accessToken);
-    // if (accessToken.accessToken !== null) {
-    //   setIsLogIn(true);
-    // }
-    // console.log('로그인상태', isLogIn);
-    //엑세스 토큰이 없을때
-    if(accessToken.accessToken===null){
-      setIsLogIn(true)
-      loginCheck(isLogIn)
-      refreshTokenRequest()
-      console.log('로그인상태',isLogIn)
-      }
-    console.log('로그인상태',isLogIn)
-  },);
+//구글 로그인----------------------------------------------------------------
 
   const getAccessToken = async (authorizationCode) => {
     // ! 구글 로그인
@@ -143,8 +128,18 @@ export default function App() {
     });
     console.log(resp.data)
     issueAccessToken(resp.data.accessToken)
-    history.push('/Waiting')
   };
+//구글 로그인 코드 받기--------------------------------
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const authorizationCode = url.searchParams.get('code');
+    console.log('accessToken', accessToken);
+    console.log('userInfo:', userInfo);
+    if (authorizationCode) {
+      getAccessToken(authorizationCode);
+    }
+  });
+
   return (
     <div>
       <button onClick={refreshTokenRequest}>리프레쉬 토큰</button>
@@ -153,8 +148,8 @@ export default function App() {
           path="/Waiting"
           render={() => (
             <Waiting
-              isLogIn={isLogIn}
-              loginCheck={loginCheck}
+              //isLogIn={isLogIn}
+              refreshTokenRequest={refreshTokenRequest}
               hendleLogout={hendleLogout}
               userInfo={userInfo}
               accessToken={accessToken}
@@ -165,8 +160,8 @@ export default function App() {
           path="/MyPage"
           render={() => (
             <MyPage
-              isLogIn={isLogIn}
-              loginCheck={loginCheck}
+              //isLogIn={isLogIn}
+              refreshTokenRequest={refreshTokenRequest}
               userInfo={userInfo}
               accessToken={accessToken}
             />
@@ -176,8 +171,8 @@ export default function App() {
           path="/room"
           render={() => (
             <InGame
-              isLogIn={isLogIn}
-              loginCheck={loginCheck}
+              //isLogIn={isLogIn}
+              refreshTokenRequest={refreshTokenRequest}
               userInfo={userInfo}
               accessToken={accessToken}
             />
@@ -196,19 +191,4 @@ export default function App() {
       </Switch>
     </div>
   );
-}
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-{
-  /* <Route
-  path="/"
-  render={() => {
-    if (isLogin) {
-      return <Redirect to="/mypage" />;
-    }
-    return <Redirect to="/login" />;
-  }}
-/>; */
 }

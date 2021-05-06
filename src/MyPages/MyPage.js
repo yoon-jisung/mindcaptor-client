@@ -40,11 +40,6 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
     }
   };
 
-  useEffect(() => {
-    return () => {
-      loginCheck(isLogIn);
-    };
-  });
 
 
 

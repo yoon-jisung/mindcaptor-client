@@ -11,10 +11,9 @@ import '../main.css';
 
 export default function Waiting({
   accessToken,
-  isLogIn,
-  loginCheck,
   hendleLogout,
   userInfo,
+  refreshTokenRequest
 }) {
   const [createModal, setCreateModal] = useState(false);
 
@@ -49,7 +48,10 @@ export default function Waiting({
     });
   }, [locationKeys]);
   useEffect(() => {
-    loginCheck(isLogIn);
+    refreshTokenRequest()
+    if(accessToken.accessToken===null){
+        history.push('/')
+      }      
   },[]);
 
   return (
@@ -70,7 +72,7 @@ export default function Waiting({
           <MyPageBtn />
         </div>
         <div className="waiting_signout_btn">
-          <Signout isLogIn={isLogIn} hendleLogout={hendleLogout} />
+          <Signout hendleLogout={hendleLogout} />
         </div>
       </div>
     </div>
