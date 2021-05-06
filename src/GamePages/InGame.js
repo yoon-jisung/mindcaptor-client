@@ -114,12 +114,12 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   const onMessageSubmit = (e) => {
     e.preventDefault();
     const { name, message } = state;
-    socket.emit('message', { name, message });
+    socket.emit('send message', name, message);
     setState({ message: '', name });
   };
 
   const onTextChange = (e) => {
-    setState({ ...state, [e.target.name]: e.target.value });
+    setState({ ...state, message: e.target.value });
   };
 
   const startRound = () => {
@@ -143,15 +143,15 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
 
   //! --------------------------method--------------------------
 
-  useEffect(() => {
-    socket.on('message', ({ name, message }) => {
-      if (chat.length > 4) {
-        return setChat([]);
-      }
-      return setChat([...chat, { name, message }]);
-    });
-    console.log('채팅이야!!!!!', chat);
-  }, [chat]);
+  // useEffect(() => {
+  //   socket.on('message', ({ name, message }) => {
+  //     if (chat.length > 4) {
+  //       return setChat([]);
+  //     }
+  //     return setChat([...chat, { name, message }]);
+  //   });
+  //   console.log('채팅이야!!!!!', chat);
+  // }, [chat]);
 
   useEffect(() => {
     // * 문제가 선택되면 게임스타트와 문제를 서버에 보내줌
@@ -190,7 +190,7 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     socket.on('renew userlist', (list) => {
       setUserlist([...list]);
     });
-  });
+  }, []);
 
   useEffect(() => {
     // * 사용자 정보 소켓으로 불러 오기
@@ -205,16 +205,16 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     console.log('userlist', userlist);
   }, []);
 
-  useEffect(() => {
-    // * 결과창이 열리고 서버에 라운드가 종료메세지 보냄 , 일정 시간이 지나면 결과창 닫히고 다시 게임 시작
-    const closeResult = setTimeout(() => {
-      setResultPopup(false);
-      setChat([]);
-      if (presenter.id === userInfo.id) {
-        startRound();
-      }
-    }, 3000);
-  }, [resultPopup]);
+  // useEffect(() => {
+  //   // * 결과창이 열리고 서버에 라운드가 종료메세지 보냄 , 일정 시간이 지나면 결과창 닫히고 다시 게임 시작
+  //   const closeResult = setTimeout(() => {
+  //     setResultPopup(false);
+  //     setChat([]);
+  //     if (presenter.id === userInfo.id) {
+  //       startRound();
+  //     }
+  //   }, 3000);
+  // }, [resultPopup]);
 
   return (
     <>
