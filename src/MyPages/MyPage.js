@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import SearchUser from './components/SearchUser';
 import Header from './components/Header';
+import axios from 'axios';
+
 import ChangePsw from './components/ChangePsw';
 import Character1 from '../images/Character1.png';
 import Character2 from '../images/Character2.png';
 import Character3 from '../images/Character3.png';
 import Character4 from '../images/Character4.png';
-import axios from 'axios';
 
 function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
   const PhotoData = [Character1, Character2, Character3, Character4];
