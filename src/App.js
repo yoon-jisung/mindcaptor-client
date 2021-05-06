@@ -72,6 +72,10 @@ export default function App() {
         withCredentials: true,
       })
       .then((res) => {
+<<<<<<< HEAD
+=======
+        const { nickname, email, profile_image, comment, id } = res.data.data;
+>>>>>>> a5771eaba281de9abd8e0bf97642c16df821de90
         // !
         return res.data.data;
       })
@@ -111,7 +115,16 @@ export default function App() {
           comment,
         } = res.data.data.userInfo;
 
+<<<<<<< HEAD
         setAccessToken({ accessToken: res.data.data.accessToken });
+=======
+
+        if (res.data.message !== 'ok') {}
+        const { nickname, email, profile_image, id,comment } = res.data.data.userInfo;
+        console.log(res.data.data.accessToken)
+        setAccessToken({accessToken:res.data.data.accessToken})
+
+>>>>>>> a5771eaba281de9abd8e0bf97642c16df821de90
         setUserInfo({
           id: id,
           nickname: nickname,
@@ -140,15 +153,21 @@ export default function App() {
         withCredentials: true,
       }
     );
+<<<<<<< HEAD
 
+=======
+>>>>>>> a5771eaba281de9abd8e0bf97642c16df821de90
     issueAccessToken(resp.data.accessToken);
   };
   //구글 로그인 코드 받기--------------------------------
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
+<<<<<<< HEAD
 
     console.log('userInfo:', userInfo);
+=======
+>>>>>>> a5771eaba281de9abd8e0bf97642c16df821de90
     if (authorizationCode) {
       getAccessToken(authorizationCode);
     }

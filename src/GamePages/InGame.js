@@ -138,7 +138,10 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     console.log('inputPresenter:내가발표자');
   }, [inputPresenter]);
 
+  
+
   useEffect(() => {
+
     // * 문제가 선택되면 게임스타트와 문제를 서버에 보내줌
     SetAnswer(answer);
   }, [answer]);
@@ -167,12 +170,15 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
       setWinner([...winner, name]);
     });
 
+
+
     socket.on('renew userlist', (list) => {
       setUserlist([...list]);
     });
   }, []);
 
   useEffect(() => {
+
     socket.on('show chat', (name, message) => {
       if (chat.length > 10) {
         setChat([...chat.slice(1), { name, message }]);
@@ -188,11 +194,12 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     let parsedUrl = window.location.href.split('/');
     let roomNum = parsedUrl[parsedUrl.length - 1];
     socket.emit('send roomNum', roomNum);
-    console.log('userlist', userlist);
   }, []);
 
   return (
     <>
+      <BackBtn />
+
       <div className="justBox"></div>
       <div className="GameWindow">
         <div className="canvasBox">
@@ -238,7 +245,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
 
         <div className="startOrQuitBtns">
           <GameStartBtn isInGame={isInGame} handleGameStart={handleGameStart} />
-          <BackBtn />
         </div>
       </div>
     </>

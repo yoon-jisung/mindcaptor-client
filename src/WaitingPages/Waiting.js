@@ -11,14 +11,13 @@ export default function Waiting({
   accessToken,
   hendleLogout,
   userInfo,
-  refreshTokenRequest
+  refreshTokenRequest,
 }) {
   const [createModal, setCreateModal] = useState(false);
   const { token } = accessToken;
   const { nickname } = userInfo;
   useEffect(() => {
     localStorage.setItem('accessToken', token);
-    console.log(localStorage);
   });
 
   const closeModal = () => {
@@ -53,11 +52,11 @@ export default function Waiting({
   }, [locationKeys]);
 
   useEffect(() => {
-    refreshTokenRequest()
-    if(accessToken.accessToken===null){
-        history.push('/')
-      }      
-  },[]);
+    refreshTokenRequest();
+    if (accessToken.accessToken === null) {
+      history.push('/');
+    }
+  }, []);
 
   return (
     <div>

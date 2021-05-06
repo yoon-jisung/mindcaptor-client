@@ -37,7 +37,6 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
     setPhotoNum(PhotoData.indexOf(nowPhoto));
     console.log(PhotoNum);
     if (photo !== nowPhoto) {
-      console.log('openModal');
       openModal();
     }
     //MyPageSaveData()
@@ -46,7 +45,7 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
     setIsOpen(true);
     setTimeout(() => {
       setIsOpen(false);
-    }, 2000);
+    }, 1000);
   };
 
   const handlePhotoBox = () => {
@@ -55,8 +54,10 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
     } else {
       setIsPhotoBoxOpen(true);
     }
+    console.log('photobox', isPhotoBoxOpen);
   };
 
+<<<<<<< HEAD
   const MyPageSaveData = async (PhotoNum) => {
     refreshTokenRequest();
     const SavePhoto = await axios.post(
@@ -82,6 +83,33 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
       }
     );
   };
+=======
+  // const MyPageSaveData = async (PhotoNum) => {
+  //   await refreshTokenRequest();
+  //   const SavePhoto = await axios.post(
+  //     `http://localhost:4000/mypage/${id}/profile`,
+  //     { new_profile: PhotoNum },
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken.accessToken}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //       //withCredentials: true,
+  //     }
+  //   );
+  //   const SaveComment = await axios.post(
+  //     `http://localhost:4000/mypage/${id}/comment`,
+  //     { Comment: '아니라어민어리ㅏㅁㄴ얼' },
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken.accessToken}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //       //withCredentials: true,
+  //     }
+  //   );
+  // };
+>>>>>>> a5771eaba281de9abd8e0bf97642c16df821de90
 
   return (
     <div>
@@ -90,7 +118,11 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
         nowPhoto={nowPhoto}
         nickname={nickname}
         PhotoNum={PhotoNum}
+<<<<<<< HEAD
         MyPageSaveData={MyPageSaveData}
+=======
+        // MyPageSaveData={MyPageSaveData}
+>>>>>>> a5771eaba281de9abd8e0bf97642c16df821de90
       />
       <content className="container">
         <div className="pro_search_box">
@@ -114,14 +146,15 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
           </div>
           <SearchUser />
         </div>
-        {isPhotoBoxOpen ? (
+        {
           <section className="UserProFile">
             <div>
               <div className="ProfilePhotos">
-                {PhotoData.map((photo) => (
+                {PhotoData.map((photo, idx) => (
                   <div>
                     <img
-                      className="profileImg"
+                      style={{ opacity: isPhotoBoxOpen ? '1' : '0' }}
+                      className={`profileImg${idx}`}
                       src={photo}
                       alt="프로필사진"
                       onClick={() => ChangeInputPhoto(photo)}
@@ -131,7 +164,7 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
               </div>
             </div>
           </section>
-        ) : null}
+        }
       </content>
     </div>
   );

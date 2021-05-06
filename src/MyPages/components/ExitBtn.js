@@ -7,7 +7,7 @@ export default function ExitBtn({ MyPageSaveData, PhotoNum }) {
     <span className="Exit">
       <button
         onClick={() => {
-          MyPageSaveData(PhotoNum);
+          // MyPageSaveData();
           history.push('/Waiting');
         }}
       >
