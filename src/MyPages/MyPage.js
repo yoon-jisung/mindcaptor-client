@@ -63,7 +63,7 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
 
   return (
     <div>
-      <Header isOpen={isOpen} nowPhoto={nowPhoto} />
+      <Header isOpen={isOpen} nowPhoto={nowPhoto} nickname={nickname} />
       <content className="container">
         <div className="pro_search_box">
           <div className="introBox">
@@ -82,7 +82,8 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
             <div className="intro">
               <h1>자기소개</h1>
               <textarea
-                placeholder={`안녕하세요, ${userInfo.nickname}입니다.`}
+                placeholder={`클릭하여 자신을 소개해
+보세요!`}
               />
             </div>
           </div>

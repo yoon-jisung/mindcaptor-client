@@ -11,6 +11,7 @@ import GameStartBtn from './components/GameStartBtn';
 import Words from '../Words';
 import GameOver from './components/IsInGameMsg';
 import { useHistory } from 'react-router-dom';
+import Logo from './components/Logo';
 
 const socket = io.connect('http://localhost:4000', {
   transports: ['websocket', 'polling'],
@@ -27,7 +28,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   const [userlist, setUserlist] = useState([]);
 
   //뒤로가기 버튼 방지
-
   const [locationKeys, setLocationKeys] = useState([]);
   const history = useHistory();
 
@@ -231,16 +231,12 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   }, [resultPopup]);
 
   return (
-    <div>
-      <>
-        <Timer
-          minutes={minutes}
-          seconds={seconds}
-          handleResult={handleResult}
-          handleAnswer={handleAnswer}
-        />
-        <div className="GameWindow">
+    <>
+      <div className="justBox"></div>
+      <div className="GameWindow">
+        <div className="canvasBox">
           <div className="result_box">
+            <Logo />
             <Canvas className="canvas" />
             {isPresenter ? (
               <SelectWords
@@ -257,7 +253,15 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
             )}
             {resultPopup ? <Result winner={winner} /> : null}
           </div>
-          <User users={userlist} />
+        </div>
+        <User users={userlist} />
+        <div className="chatBix">
+          <Timer
+            minutes={minutes}
+            seconds={seconds}
+            handleResult={handleResult}
+            handleAnswer={handleAnswer}
+          />
           <Chat
             state={state}
             chat={chat}
@@ -265,15 +269,13 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
             onMessageSubmit={onMessageSubmit}
             renderChat={renderChat}
           />
-          <div className="startOrQuitBtns">
-            <GameStartBtn
-              isInGame={isInGame}
-              handleGameStart={handleGameStart}
-            />
-            <BackBtn />
-          </div>
         </div>
-      </>
-    </div>
+
+        <div className="startOrQuitBtns">
+          <GameStartBtn isInGame={isInGame} handleGameStart={handleGameStart} />
+          <BackBtn />
+        </div>
+      </div>
+    </>
   );
 }

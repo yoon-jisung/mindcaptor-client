@@ -103,6 +103,9 @@ button:hover:after {
   cursor: pointer;
   margin-right: 60px;
 }
+.entry_btn:hover {
+  width: 350px;
+}
 
 .member_entry_btn {
   width: 300px;
@@ -111,7 +114,9 @@ button:hover:after {
   cursor: pointer;
   margin-left: 60px;
 }
-
+.member_entry_btn:hover {
+  width: 350px;
+}
 .main_btns {
   display: flex;
   flex-direction: column;
@@ -449,6 +454,7 @@ $button-active-blue: #1669f2; */
   position: absolute;
   margin-right: 20px;
   right: 0;
+  top: 0;
 }
 
 .signout_btn {
@@ -477,17 +483,42 @@ $button-active-blue: #1669f2; */
   font-size: 50px;
   height: 110px;
 }
+.entry_game_btn:hover {
+  width: 350px;
+}
 
 .create_game_btn {
   width: 300px;
   font-size: 50px;
   height: 110px;
 }
+.create_game_btn:hover {
+  width: 350px;
+}
 
 .mypage_btn {
-  width: 300px;
+  width: 350px;
   font-size: 50px;
   height: 110px;
+}
+
+.guestMyPageBtn {
+  width: 350px;
+  font-size: 50px;
+  height: 110px;
+  background-color: #4fb3db8c;
+  color: rgba(255, 255, 255, 0.589);
+}
+.guestMyPageBtn:hover {
+  width: 350px;
+}
+.guestMyPageBtn::before {
+  font-size: 50px;
+  content: '마이페이지';
+}
+.guestMyPageBtn:hover::before {
+  font-size: 45px;
+  content: '로그인 해주세요!';
 }
 
 .userInfo {
@@ -563,6 +594,7 @@ $button-active-blue: #1669f2; */
   display: flex;
   position: absolute;
   right: 0;
+  top: 0;
 }
 
 .Exit button {
@@ -657,6 +689,7 @@ $button-active-blue: #1669f2; */
   padding-left: 2px;
   padding-bottom: 40px;
   outline: none;
+  font-size: 15px;
 }
 
 .following {
@@ -756,6 +789,19 @@ $button-active-blue: #1669f2; */
 }
 
 /*GamePages********************************************************************/
+.inGameLogoBox {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.inGameLogo {
+  width: 500px;
+  align-items: center;
+  position: absolute;
+  border-radius: 20px;
+  bottom: 470px;
+  filter: drop-shadow(5px 5px 5px #000);
+}
 .Ready {
   display: flex;
   flex-direction: column;
@@ -767,6 +813,10 @@ $button-active-blue: #1669f2; */
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
+}
+/*캔버스를 밑으로 내리기 위한 div*/
+.justBox {
+  height: 60px;
 }
 
 .userProfile {
@@ -782,6 +832,11 @@ $button-active-blue: #1669f2; */
   cursor: url('./images/eraser.png'), pointer;
 }
 
+.canvasBox {
+  grid-row: 1;
+  grid-column: 2;
+  position: relative;
+}
 .WhiteBorad {
   grid-row: 1;
   grid-column: 2;
@@ -797,14 +852,16 @@ $button-active-blue: #1669f2; */
 canvas {
   border-bottom: dotted #0f4d86;
 }
-.Color {
+.Colors > div {
+  border: 2px solid #0f4d86;
 }
 
 .Paint {
   display: flex;
 }
 .Paint > button {
-  margin: 5px;
+  margin: 10px;
+  width: 100px;
 }
 
 .Answer {
@@ -837,16 +894,20 @@ canvas {
 }
 
 .card {
-  border: 2px solid red;
+  border: 2px solid #0f4d86;
   background-color: white;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  width: 600px;
+  height: 400px;
 }
 .card h1 {
   text-align: center;
 }
+
 /*Colors********************************************************************/
 
 .black {
@@ -901,18 +962,23 @@ canvas {
 
 /*Timer********************************************************************/
 
+.chatBox {
+  position: absolute;
+  top: 0;
+}
 .timer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  border: 2px solid tomato;
   font-size: 25px;
   color: rgb(78, 252, 171);
+  right: 0;
+  filter: drop-shadow(5px 5px 5px #000);
 }
 
 .timer_num {
   font-weight: bold;
+  text-align: center;
 }
 
 /*Result********************************************************************/
