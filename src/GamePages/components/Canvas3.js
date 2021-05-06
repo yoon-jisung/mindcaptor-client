@@ -42,10 +42,8 @@ export default function Canvas3() {
     const current = {
       color: 'black',
     };
-    console.log(current.colors);
 
     const onColorUpdate = (e) => {
-      console.log(e.target.className);
       current.color = e.target.className.split(' ')[1];
     };
 
@@ -55,13 +53,12 @@ export default function Canvas3() {
     }
 
     const drawLine = (x0, y0, x1, y1, color, emit) => {
-      // console.log(x0, y0, x1, y1, color, emit);
       context.beginPath();
       context.moveTo(x0, y0);
       context.lineTo(x1, y1);
       context.lineCap = 'round';
 
-      context.strokeStyle = color;
+      context.strokeStyle = current.color;
       context.lineWidth = 8;
       context.stroke();
       context.closePath();
@@ -182,19 +179,19 @@ export default function Canvas3() {
       <canvas ref={canvasRef} className="whiteBoardInGame" style={cursor} />
       <div className="pallette">
         <div className="colors" ref={colorsRef}>
-          <div className="black" onClick={handleColorClick}>
+          <div className="color black" onClick={handleColorClick}>
             black
           </div>
-          <div className="red" onClick={handleColorClick}>
+          <div className="color red" onClick={handleColorClick}>
             red
           </div>
-          <div className="blue" onClick={handleColorClick}>
+          <div className="color blue" onClick={handleColorClick}>
             blue
           </div>
-          <div className="green" onClick={handleColorClick}>
+          <div className="color green" onClick={handleColorClick}>
             green
           </div>
-          <div className="yellow" onClick={handleColorClick}>
+          <div className="color yellow" onClick={handleColorClick}>
             yellow
           </div>
         </div>

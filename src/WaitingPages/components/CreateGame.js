@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import React, { useEffect, useState } from 'react';
 
-export default function CreateGame({ createModal, closeModal,accessToken }) {
+export default function CreateGame({ createModal, closeModal, accessToken }) {
   const [roomName, setRoomName] = useState('');
   const [roomPassword, setRoomPassword] = useState('');
   const history = useHistory();
@@ -25,16 +25,16 @@ export default function CreateGame({ createModal, closeModal,accessToken }) {
         'http://localhost:4000/room/new',
         { room_name, room_pw },
         {
-          headers: { 
+          headers: {
             'Content-Type': 'application/json',
-            'authorization': accessToken
+            authorization: accessToken,
           },
           Credentials: 'include',
         }
       )
       .then((res) => {
         console.log(res.data);
-        history.push(`/room/${res.data.data}`)
+        history.push(`/room/${res.data.data}`);
       })
       .catch((err) => console.log(err));
   };
@@ -49,7 +49,7 @@ export default function CreateGame({ createModal, closeModal,accessToken }) {
             <span
               type="button"
               aria-label="Close"
-              className="signin_exit"
+              className="createRoom_exit"
               onClick={closeModal}
             >
               &times;

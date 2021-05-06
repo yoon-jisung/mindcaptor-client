@@ -25,7 +25,6 @@ export default function Main({ loginHandler, handleGuestLogin }) {
     axios
       .get('http://localhost:4000/guest')
       .then((res) => {
-        console.log(res.data);
         loginHandler(res.data);
         history.push('/Waiting');
         handleGuestLogin();
