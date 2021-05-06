@@ -16,7 +16,7 @@ function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
   const [isPhotoBoxOpen, setIsPhotoBoxOpen] = useState(false);
   const { nickname, email, profile_image, comment, id } = userInfo;
   const [PhotoNum, setPhotoNum] = useState(0);
-  const [nowPhoto, setPhoto] = useState(PhotoData[PhotoNum]);
+  const [nowPhoto, setPhoto] = useState(PhotoData[profile_image]);
   const [text, setText] = useState(null);
 
   // const emailInputValue = (e) => {

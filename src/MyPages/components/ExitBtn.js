@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-export default function ExitBtn({ MyPageSaveData }) {
+export default function ExitBtn({ MyPageSaveData, PhotoNum }) {
   const history = useHistory();
   return (
     <span className="Exit">

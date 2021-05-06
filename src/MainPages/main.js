@@ -23,7 +23,10 @@ export default function Main({ loginHandler, handleGuestLogin }) {
 
   const guestLogIn = () => {
     axios
-      .get('http://localhost:4000/guest')
+      .get('http://localhost:4000/guest',
+      {
+        withCredentials: true
+      })
       .then((res) => {
         loginHandler(res.data);
         history.push('/Waiting');
