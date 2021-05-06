@@ -8,8 +8,6 @@ import Character2 from '../images/Character2.png';
 import Character3 from '../images/Character3.png';
 import Character4 from '../images/Character4.png';
 
-const axios = require('axios');
-
 function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
   const PhotoData = [Character1, Character2, Character3, Character4];
  
@@ -18,7 +16,6 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
   const { nickname, email, profile_image, comment, id } = userInfo
   const defaultImageNum = profile_image === null ? 0 : profile_image
   const [nowPhoto, setPhoto] = useState(PhotoData[defaultImageNum]);
-
   const ChangeInputPhoto = function (photo) {
     // e.preventDefault();
     setPhoto(photo);
@@ -49,6 +46,7 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
   });
 
 
+
   const MyPageSaveData= async () =>{
     const PhotoNum = PhotoData.findIndex(nowPhoto)
     const SavePhoto = await axios.post(`http://localhost:4000/mypage/${id}/profile`,
@@ -64,10 +62,9 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
 
 
 
-
   return (
     <div>
-      <Header nickname={nickname}isOpen={isOpen} nowPhoto={nowPhoto} MyPageSaveData={MyPageSaveData}/>
+      <Header isOpen={isOpen} nowPhoto={nowPhoto} />
       <content className="container">
         <div className="pro_search_box">
           <div className="introBox">
@@ -76,11 +73,13 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
               <button className="changeProPhoto" onClick={handlePhotoBox}>
                 편집
               </button>
-              <div className="userNickName">닉네임 : {nickname} </div>
+              <div className="userNickName">닉네임 : {userInfo.nickname} </div>
             </div>
             <div className="intro">
               <h1>자기소개</h1>
-              <textarea placeholder={comment===null ? "클릭하여 자기소개를 적어주세요!" : comment} />
+              <textarea
+                placeholder={`안녕하세요, ${userInfo.nickname}입니다.`}
+              />
             </div>
           </div>
           <SearchUser />

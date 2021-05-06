@@ -5,7 +5,7 @@ export default function Complete({ isOpen }) {
   return (
     <span>
       {isOpen ? (
-        <div style={{ opacity: isOpen ? '1' : '0' }} className="changedPro">
+        <div style={{ opacity: isOpen ? '1' : '0' }} className="changedProfile">
           <h3>사진변경이 완료되었습니다.</h3>
         </div>
       ) : null}
