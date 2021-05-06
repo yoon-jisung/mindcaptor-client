@@ -864,7 +864,10 @@ $button-active-blue: #1669f2; */
   grid-column: 2;
   position: relative;
 }
-.WhiteBorad {
+.whiteBoardInGame {
+  margin-right: 200px;
+}
+canvas {
   grid-row: 1;
   grid-column: 2;
   display: flex;
@@ -875,20 +878,20 @@ $button-active-blue: #1669f2; */
   border: 5px solid #0f4d86;
   border-radius: 15px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
-}
-canvas {
-  border-bottom: dotted #0f4d86;
+  width: 600px;
+  height: 500px;
 }
 
 .pallette {
   display: flex;
 }
-.Colors {
+.colors {
   margin: 10px;
 }
-.Colors > div {
+.colors > div {
   border: 3px solid #302c3188;
   margin: 5px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
 }
 
 .Paint {
@@ -897,7 +900,7 @@ canvas {
 .Paint > button {
   margin: 10px;
   width: 100px;
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
 }
 
 .Answer {
@@ -924,7 +927,7 @@ canvas {
   width: 150px;
 }
 
-.Colors {
+.colors {
   user-select: auto;
   display: flex;
 }
@@ -1109,9 +1112,10 @@ canvas {
 .selectWord {
   height: 100%;
   width: 240px;
-  background-image: url('./images/mindcaptor_logo_word2.png');
+  background-image: url('./images/mindcaptor_logo_choice.png');
   background-repeat: no-repeat;
   background-position: center;
+  background-size: contain;
   background-color: rgb(100, 194, 194);
   /* -webkit-text-stroke: 1px white; */
 }

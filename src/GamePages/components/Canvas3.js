@@ -9,68 +9,131 @@ import Crayon_Green from '../../images/crayon_green.png';
 import Crayon_Yellow from '../../images/crayon_yellow.png';
 import io from 'socket.io-client';
 
-const socket = io.connect('http://localhost:4000', {
-  transports: ['websocket', 'polling'],
-  path: '/socket.io',
-});
-
 export default function Canvas3() {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
+  const colorsRef = useRef(null);
+
   const [canvas, setCanvas] = useState(undefined);
   const [ctx, setCtx] = useState(undefined);
-  const [isDrawing, setIsDrawing] = useState(false);
+  // const [isDrawing, setIsDrawing] = useState(false);
   const [color, setColor] = useState('black');
   const [cursor, setCursor] = useState({
     cursor: `url(${Crayon_Black}), pointer`,
   });
+
+  const socketRef = useRef();
 
   useEffect(() => {
     setCanvas(canvasRef.current);
     const canvas = canvasRef.current;
     canvas.width = '600';
     canvas.height = '500';
-
+    // let w = canvas.width;
+    // let h = canvas.height;
     setCtx(canvasRef.current.getContext('2d'));
     const context = canvas.getContext('2d');
-    context.lineCap = 'round';
-    context.strokeStyle = color;
-    context.lineWidth = 5;
+    // context.strokeStyle = color;
+    // context.lineWidth = 5;
     contextRef.current = context;
+
+    let drawing = false;
+    const colors = document.getElementsByClassName('color');
+    const current = {
+      color: 'black',
+    };
+    console.log(current.colors);
+
+    const onColorUpdate = (e) => {
+      console.log(e.target.className);
+      current.color = e.target.className.split(' ')[1];
+    };
+
+    // loop through the color elements and add the click event listeners
+    for (let i = 0; i < colors.length; i++) {
+      colors[i].addEventListener('click', onColorUpdate, false);
+    }
+
+    const drawLine = (x0, y0, x1, y1, color, emit) => {
+      // console.log(x0, y0, x1, y1, color, emit);
+      context.beginPath();
+      context.moveTo(x0, y0);
+      context.lineTo(x1, y1);
+      context.lineCap = 'round';
+
+      context.strokeStyle = color;
+      context.lineWidth = 8;
+      context.stroke();
+      context.closePath();
+
+      if (!emit) {
+        return;
+      }
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      socketRef.current.emit('drawing', {
+        x0: x0 / w,
+        y0: y0 / h,
+        x1: x1 / w,
+        y1: y1 / h,
+        color,
+      });
+    };
+    //!
+    const onMouseDown = (e) => {
+      drawing = true;
+      current.x = e.offsetX;
+      current.y = e.offsetY;
+    };
+
+    const onMouseMove = (e) => {
+      if (!drawing) return;
+      drawLine(current.x, current.y, e.offsetX, e.offsetY, color, true);
+      current.x = e.offsetX;
+      current.y = e.offsetY;
+    };
+
+    const onMouseUp = (e) => {
+      if (!drawing) return;
+      contextRef.current.closePath();
+      drawing = false;
+      drawLine(current.x, current.y, e.offsetX, e.offsetY, color, true);
+    };
+
+    const throttle = (callback, delay) => {
+      let previousCall = new Date().getTime();
+      return function () {
+        const time = new Date().getTime();
+
+        if (time - previousCall >= delay) {
+          previousCall = time;
+          callback.apply(null, arguments);
+        }
+      };
+    };
+
+    canvas.addEventListener('mouseup', onMouseUp, false);
+    canvas.addEventListener('mousedown', onMouseDown, false);
+    canvas.addEventListener('mousemove', throttle(onMouseMove, 10), false);
+
+    //!
+    const onDrawingEvent = (data) => {
+      const w = canvas.width;
+      const h = canvas.height;
+      drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color);
+    };
+
+    socketRef.current = io.connect('http://localhost:4000', {
+      transports: ['websocket', 'polling'],
+      path: '/socket.io',
+    });
+    socketRef.current.on('drawing', onDrawingEvent);
   }, []);
-
-  const startDrawing = ({ nativeEvent }) => {
-    console.log('start drawing');
-    const { offsetX, offsetY } = nativeEvent;
-    contextRef.current.beginPath();
-    contextRef.current.moveTo(offsetX, offsetY);
-    setIsDrawing(true);
-    socket.emit('start drawing', offsetX, offsetY);
-  };
-
-  const finishDrawing = () => {
-    console.log('finish drawing');
-    contextRef.current.closePath();
-    setIsDrawing(false);
-    // ctx.lineWidth = 5;
-    socket.emit('finish drawing');
-  };
-
-  const draw = ({ nativeEvent }) => {
-    console.log('draw');
-    if (!isDrawing) return;
-    const { offsetX, offsetY } = nativeEvent;
-    contextRef.current.lineTo(offsetX, offsetY);
-    // ! 소켓
-    contextRef.current.stroke();
-
-    socket.emit('draw', offsetX, offsetY);
-  };
 
   const reset = () => {
     if (ctx) {
       ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-      socket.emit('reset');
     }
   };
 
@@ -78,8 +141,6 @@ export default function Canvas3() {
     setCursor({ cursor: `url(${Eraser}), pointer` });
     ctx.lineWidth = 20;
     ctx.strokeStyle = 'white';
-
-    socket.emit('erase');
   };
 
   const handleColorClick = (e) => {
@@ -108,29 +169,34 @@ export default function Canvas3() {
         setCursor({ cursor: `url(${Crayon_Black}), pointer` });
         break;
     }
-
-    socket.on('color', e.target.textContent);
   };
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
-    context.strokeStyle = color;
-    console.log(context.strokeStyle);
-  }, [color]);
+  // useEffect(() => {
+  //   const canvas = canvasRef.current;
+  //   const context = canvas.getContext('2d');
+  //   context.strokeStyle = color;
+  // }, [color]);
 
   return (
-    <div className="WhiteBorad">
-      <canvas
-        style={cursor}
-        onMouseDown={startDrawing}
-        onMouseUp={finishDrawing}
-        onMouseMove={draw}
-        ref={canvasRef}
-      />
+    <>
+      <canvas ref={canvasRef} className="whiteBoardInGame" style={cursor} />
       <div className="pallette">
-        <div className="Color">
-          <Colors handleColorClick={handleColorClick} />
+        <div className="colors" ref={colorsRef}>
+          <div className="black" onClick={handleColorClick}>
+            black
+          </div>
+          <div className="red" onClick={handleColorClick}>
+            red
+          </div>
+          <div className="blue" onClick={handleColorClick}>
+            blue
+          </div>
+          <div className="green" onClick={handleColorClick}>
+            green
+          </div>
+          <div className="yellow" onClick={handleColorClick}>
+            yellow
+          </div>
         </div>
 
         <div>
@@ -141,6 +207,6 @@ export default function Canvas3() {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 }

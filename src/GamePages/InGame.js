@@ -9,9 +9,8 @@ import io from 'socket.io-client';
 import GameStartBtn from './components/GameStartBtn';
 import Words from '../Words';
 import { useHistory } from 'react-router-dom';
-import Board from './components/Canvas';
 import Logo from './components/Logo';
-
+import Canvas from './components/Canvas3';
 const socket = io.connect('http://localhost:4000', {
   transports: ['websocket'],
   path: '/socket.io',
@@ -50,11 +49,9 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   }, [locationKeys]);
 
   // ! Chat
-  const socketRef = useRef();
   const [state, setState] = useState({ message: '', name: userInfo.nickname });
-  // ! App.js 에서 유저이름 name에 넣으면 됨 !
-
   const [chat, setChat] = useState([]);
+  // ! App.js 에서 유저이름 name에 넣으면 됨 !
 
   // ! SelectWords
   const [Word1, SetWord1] = useState('');
@@ -94,16 +91,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     SetIsOpen(false);
   };
 
-  const renderChat = () => {
-    return chat.map(({ name, message }, index) => (
-      <div key={index}>
-        <h3>
-          {name}: <span>{message}</span>{' '}
-        </h3>
-      </div>
-    ));
-  };
-
   // const onMessageSubmit = (e) => {
   //   const { name, message } = state;
   //   socket.current.emit('message', { name, message });
@@ -114,12 +101,14 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   const onMessageSubmit = (e) => {
     e.preventDefault();
     const { name, message } = state;
-    socket.emit('message', { name, message });
+    socket.emit('send message', name, message);
+    // socket.emit('send message', name, message);
+
     setState({ message: '', name });
   };
 
   const onTextChange = (e) => {
-    setState({ ...state, [e.target.name]: e.target.value });
+    setState({ ...state, message: e.target.value });
   };
 
   const startRound = () => {
@@ -143,15 +132,12 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
 
   //! --------------------------method--------------------------
 
-  useEffect(() => {
-    socket.on('message', ({ name, message }) => {
-      if (chat.length > 4) {
-        return setChat([]);
-      }
-      return setChat([...chat, { name, message }]);
-    });
-    console.log('채팅이야!!!!!', chat);
-  }, [chat]);
+  // useEffect(() => {
+  //   socket.on('message', ({ name, message }) => {
+  //     setChat([...chat, { name, message }]);
+  //   });
+  //   console.log('채팅이야!!!!!', chat);
+  // }, [chat]);
 
   useEffect(() => {
     // * 문제가 선택되면 게임스타트와 문제를 서버에 보내줌
@@ -183,38 +169,34 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     });
 
     socket.on('show chat', (name, message) => {
-      console.log(message);
-      setChat([...chat, { name, message }]);
+      console.log('너니 ?????', message);
+      setChat(chat.concat([{ name, message }]));
     });
 
     socket.on('renew userlist', (list) => {
       setUserlist([...list]);
     });
-  });
+  }, []);
 
   useEffect(() => {
     // * 사용자 정보 소켓으로 불러 오기
-    socket.on('my socket id', (data) => {
-      console.log('mySocketID : ', data);
-    });
 
     let parsedUrl = window.location.href.split('/');
     let roomNum = parsedUrl[parsedUrl.length - 1];
-    console.log(roomNum);
     socket.emit('send roomNum', roomNum);
     console.log('userlist', userlist);
   }, []);
 
-  useEffect(() => {
-    // * 결과창이 열리고 서버에 라운드가 종료메세지 보냄 , 일정 시간이 지나면 결과창 닫히고 다시 게임 시작
-    const closeResult = setTimeout(() => {
-      setResultPopup(false);
-      setChat([]);
-      if (presenter.id === userInfo.id) {
-        startRound();
-      }
-    }, 3000);
-  }, [resultPopup]);
+  // useEffect(() => {
+  //   // * 결과창이 열리고 서버에 라운드가 종료메세지 보냄 , 일정 시간이 지나면 결과창 닫히고 다시 게임 시작
+  //   const closeResult = setTimeout(() => {
+  //     setResultPopup(false);
+  //     setChat([]);
+  //     if (presenter.id === userInfo.id) {
+  //       startRound();
+  //     }
+  //   }, 3000);
+  // }, [resultPopup]);
 
   return (
     <>
@@ -222,7 +204,7 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
       <div className="GameWindow">
         <div className="canvasBox">
           <div className="result_box">
-            <Board />
+            <Canvas />
             <Logo />
             {isPresenter ? (
               <SelectWords
@@ -253,7 +235,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
             chat={chat}
             onTextChange={onTextChange}
             onMessageSubmit={onMessageSubmit}
-            renderChat={renderChat}
           />
         </div>
 
