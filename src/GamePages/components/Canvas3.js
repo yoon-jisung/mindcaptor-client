@@ -196,12 +196,13 @@ export default function Canvas3() {
           </div>
         </div>
 
-        <div>
-          <Paint
-            handleColorClick={handleColorClick}
-            reset={reset}
-            eraserBtn={eraserBtn}
-          />
+        <div className="Paint">
+          <button className="reset" onClick={reset}>
+            초기화
+          </button>
+          <button className="color white" onClick={eraserBtn}>
+            지우개
+          </button>
         </div>
       </div>
     </>

@@ -2,27 +2,44 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import SearchUser from './components/SearchUser';
 import Header from './components/Header';
+import axios from 'axios';
+
 import ChangePsw from './components/ChangePsw';
 import Character1 from '../images/Character1.png';
 import Character2 from '../images/Character2.png';
 import Character3 from '../images/Character3.png';
 import Character4 from '../images/Character4.png';
-import axios from 'axios';
 
-function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
+function MyPage({ accessToken, refreshTokenRequest, userInfo }) {
   const PhotoData = [Character1, Character2, Character3, Character4];
-
   const [isOpen, setIsOpen] = useState(false);
   const [isPhotoBoxOpen, setIsPhotoBoxOpen] = useState(false);
   const { nickname, email, profile_image, comment, id } = userInfo;
-  const defaultImageNum = profile_image === null ? 0 : profile_image;
-  const [nowPhoto, setPhoto] = useState(PhotoData[defaultImageNum]);
+  const [PhotoNum, setPhotoNum] = useState(0);
+  const [nowPhoto, setPhoto] = useState(PhotoData[PhotoNum]);
+  const [text, setText] = useState(null);
+
+  // const emailInputValue = (e) => {
+  //   setEmail(e.target.value);
+  // };
+
+  // const passwordInputValue = (e) => {
+  //   setPassword(e.target.value);
+  // };
+
+  // const nickNameInputValue = (e) => {
+  //   setNickName(e.target.value);
+  // };
+
   const ChangeInputPhoto = function (photo) {
     // e.preventDefault();
     setPhoto(photo);
+    setPhotoNum(PhotoData.indexOf(nowPhoto));
+    console.log(PhotoNum);
     if (photo !== nowPhoto) {
       openModal();
     }
+    //MyPageSaveData()
   };
   const openModal = () => {
     setIsOpen(true);
@@ -40,31 +57,41 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
     console.log('photobox', isPhotoBoxOpen);
   };
 
-  const MyPageSaveData = async () => {
-    const PhotoNum = PhotoData.findIndex(nowPhoto);
-    const SavePhoto = await axios.post(
-      `http://localhost:4000/mypage/${id}/profile`,
-      {
-        authorization: accessToken,
-        new_profile: PhotoNum,
-      },
-      {
-        headers: { 'Content-Type': 'application/json' },
-        Credentials: 'include',
-      }
-    );
-    const SaveComment = await axios.post(
-      `http://localhost:4000/mypage/${id}/comment`,
-      {
-        authorization: accessToken,
-        Comment: PhotoNum,
-      }
-    );
-  };
+  // const MyPageSaveData = async (PhotoNum) => {
+  //   await refreshTokenRequest();
+  //   const SavePhoto = await axios.post(
+  //     `http://localhost:4000/mypage/${id}/profile`,
+  //     { new_profile: PhotoNum },
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken.accessToken}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //       //withCredentials: true,
+  //     }
+  //   );
+  //   const SaveComment = await axios.post(
+  //     `http://localhost:4000/mypage/${id}/comment`,
+  //     { Comment: '아니라어민어리ㅏㅁㄴ얼' },
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken.accessToken}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //       //withCredentials: true,
+  //     }
+  //   );
+  // };
 
   return (
     <div>
-      <Header isOpen={isOpen} nowPhoto={nowPhoto} nickname={nickname} />
+      <Header
+        isOpen={isOpen}
+        nowPhoto={nowPhoto}
+        nickname={nickname}
+        PhotoNum={PhotoNum}
+        // MyPageSaveData={MyPageSaveData}
+      />
       <content className="container">
         <div className="pro_search_box">
           <div className="introBox">
@@ -82,10 +109,7 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
             </div>
             <div className="intro">
               <h1>자기소개</h1>
-              <textarea
-                placeholder={`클릭하여 자신을 소개해
-보세요!`}
-              />
+              <textarea placeholder={`클릭하여 자신을 소개해 보세요!`} />
             </div>
           </div>
           <SearchUser />
