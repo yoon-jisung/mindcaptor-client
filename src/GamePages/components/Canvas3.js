@@ -14,7 +14,7 @@ const socket = io.connect('http://localhost:4000', {
   path: '/socket.io',
 });
 
-export default function Canvas3({ Round }) {
+export default function Canvas3() {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [canvas, setCanvas] = useState(undefined);
@@ -40,29 +40,37 @@ export default function Canvas3({ Round }) {
   }, []);
 
   const startDrawing = ({ nativeEvent }) => {
+    console.log('start drawing');
     const { offsetX, offsetY } = nativeEvent;
     contextRef.current.beginPath();
     contextRef.current.moveTo(offsetX, offsetY);
     setIsDrawing(true);
+    socket.emit('start drawing', offsetX, offsetY);
   };
 
   const finishDrawing = () => {
+    console.log('finish drawing');
     contextRef.current.closePath();
     setIsDrawing(false);
-    ctx.lineWidth = 5;
+    // ctx.lineWidth = 5;
+    socket.emit('finish drawing');
   };
 
   const draw = ({ nativeEvent }) => {
+    console.log('draw');
     if (!isDrawing) return;
     const { offsetX, offsetY } = nativeEvent;
     contextRef.current.lineTo(offsetX, offsetY);
     // ! 소켓
     contextRef.current.stroke();
+
+    socket.emit('draw', offsetX, offsetY);
   };
 
   const reset = () => {
     if (ctx) {
       ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+      socket.emit('reset');
     }
   };
 
@@ -70,6 +78,8 @@ export default function Canvas3({ Round }) {
     setCursor({ cursor: `url(${Eraser}), pointer` });
     ctx.lineWidth = 20;
     ctx.strokeStyle = 'white';
+
+    socket.emit('erase');
   };
 
   const handleColorClick = (e) => {
@@ -98,6 +108,8 @@ export default function Canvas3({ Round }) {
         setCursor({ cursor: `url(${Crayon_Black}), pointer` });
         break;
     }
+
+    socket.on('color', e.target.textContent);
   };
 
   useEffect(() => {
@@ -116,17 +128,18 @@ export default function Canvas3({ Round }) {
         onMouseMove={draw}
         ref={canvasRef}
       />
+      <div className="pallette">
+        <div className="Color">
+          <Colors handleColorClick={handleColorClick} />
+        </div>
 
-      <div className="Color">
-        <Colors handleColorClick={handleColorClick} />
-      </div>
-
-      <div>
-        <Paint
-          handleColorClick={handleColorClick}
-          reset={reset}
-          eraserBtn={eraserBtn}
-        />
+        <div>
+          <Paint
+            handleColorClick={handleColorClick}
+            reset={reset}
+            eraserBtn={eraserBtn}
+          />
+        </div>
       </div>
     </div>
   );

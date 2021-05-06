@@ -7,6 +7,7 @@ import InGame from './GamePages/InGame';
 import Character1 from './images/Character1.png';
 import { useHistory } from 'react-router-dom';
 import './main.css';
+import Bgm from './Bgm';
 
 const axios = require('axios');
 
@@ -79,14 +80,14 @@ export default function App() {
       .then((res) => {
         console.log(res.message);
         console.log(res.data.data);
-        const { nickname, email, profile_image, comment,id } = res.data.data;
+        const { nickname, email, profile_image, comment, id } = res.data.data;
         // !
         setUserInfo({
           id: id,
           nickname: nickname,
           email: email,
           profile_image: profile_image,
-          comment: comment
+          comment: comment,
         });
       });
   };
@@ -142,7 +143,7 @@ export default function App() {
 
   return (
     <div>
-      <button onClick={refreshTokenRequest}>리프레쉬 토큰</button>
+      <Bgm />
       <Switch>
         <Route
           path="/Waiting"
@@ -184,7 +185,7 @@ export default function App() {
           render={() => (
             <Main
               loginHandler={loginHandler}
-              handleGeuetLogin={handleGeuetLogin}
+              handleGuestLogin={handleGuestLogin}
             />
           )}
         />

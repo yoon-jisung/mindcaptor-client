@@ -1,35 +1,36 @@
 import React from 'react';
 import UserPic from '../../images/Character1.png';
 
-export default function User({ users }) {
+export default function User({ users, userInfo }) {
+  console.log(userInfo);
   return (
     <div className="UserTable">
       <ul className="users">
         {users.map((el) => {
-          <li className="userProfile">
-            <div className="userNickname">{el.nickname}</div>
-            <div className="correctAns"></div>
+          <li className="inGameUserProfile">
+            <div className="inGameUserNickName">{el.nickname}</div>
           </li>;
         })}
-        <li className="userProfile">
-          {/* <img src={UserPic} className="userPic"></img> */}
-          <div className="userNickName">닉네임</div>
-          <div className="correctAns">정답: ?</div>
+        <li className="inGameUserProfile">
+          <img className="inGameImg" src={UserPic} alt="user_profile" />
+          <div>
+            <div className="inGameUserNickName">
+              닉네임 : {userInfo.nickname}
+            </div>
+            <div className="comment">자기소개</div>
+          </div>
         </li>
-        <li className="userProfile">
-          {/* <img src={UserPic} className="userPic"></img> */}
-          <div className="userNickName">닉네임</div>
-          <div className="correctAns">정답: ?</div>
+        <li className="inGameUserProfile">
+          <img className="inGameImg" src={UserPic} alt="user_profile" />
+          <div className="inGameUserNickName">닉네임 : {userInfo.nickname}</div>
         </li>
-        <li className="userProfile">
-          {/* <img src={UserPic} className="userPic"></img> */}
-          <div className="userNickName">닉네임</div>
-          <div className="correctAns">정답: ?</div>
+        <li className="inGameUserProfile">
+          <img className="inGameImg" src={UserPic} alt="user_profile" />
+          <div className="inGameUserNickName">닉네임 : {userInfo.nickname}</div>
         </li>
-        <li className="userProfile">
-          {/* <img src={UserPic} className="userPic"></img> */}
-          <div className="userNickName">닉네임</div>
-          <div className="correctAns">정답: ?</div>
+        <li className="inGameUserProfile">
+          <img className="inGameImg" src={UserPic} alt="user_profile" />
+          <div className="inGameUserNickName">닉네임 : {userInfo.nickname}</div>
         </li>
       </ul>
     </div>

@@ -7,8 +7,6 @@ import MyPageBtn from './components/MyPageBtn';
 import Signout from './components/Signout';
 import { useHistory } from 'react-router-dom';
 
-import '../main.css';
-
 export default function Waiting({
   accessToken,
   hendleLogout,
@@ -16,6 +14,12 @@ export default function Waiting({
   refreshTokenRequest
 }) {
   const [createModal, setCreateModal] = useState(false);
+  const { token } = accessToken;
+  const { nickname } = userInfo;
+  useEffect(() => {
+    localStorage.setItem('accessToken', token);
+    console.log(localStorage);
+  });
 
   const closeModal = () => {
     setCreateModal(false);
@@ -47,6 +51,7 @@ export default function Waiting({
       }
     });
   }, [locationKeys]);
+
   useEffect(() => {
     refreshTokenRequest()
     if(accessToken.accessToken===null){
@@ -69,7 +74,7 @@ export default function Waiting({
             closeModal={closeModal}
             accessToken={accessToken}
           />
-          <MyPageBtn />
+          <MyPageBtn nickname={nickname} />
         </div>
         <div className="waiting_signout_btn">
           <Signout hendleLogout={hendleLogout} />
