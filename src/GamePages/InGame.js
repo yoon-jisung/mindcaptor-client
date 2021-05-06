@@ -49,11 +49,9 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   }, [locationKeys]);
 
   // ! Chat
-  const socketRef = useRef();
   const [state, setState] = useState({ message: '', name: userInfo.nickname });
-  // ! App.js 에서 유저이름 name에 넣으면 됨 !
-
   const [chat, setChat] = useState([]);
+  // ! App.js 에서 유저이름 name에 넣으면 됨 !
 
   // ! SelectWords
   const [Word1, SetWord1] = useState('');
@@ -93,37 +91,19 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     SetIsOpen(false);
   };
 
-  const renderChat = () => {
-    return chat.map(({ name, message }, index) => (
-      <div key={index}>
-        <h3>
-          {name}: <span>{message}</span>{' '}
-        </h3>
-      </div>
-    ));
-  };
-
-  // const onMessageSubmit = (e) => {
-  //   const { name, message } = state;
-  //   socket.current.emit('message', { name, message });
-  //   e.preventDefault();
-  //   setState({ message: '', name });
-  // };
-
   const onMessageSubmit = (e) => {
     e.preventDefault();
     const { name, message } = state;
-    socket.emit('message', { name, message });
+    socket.emit('send message', name, message);
+
     setState({ message: '', name });
   };
 
   const onTextChange = (e) => {
-    setState({ ...state, [e.target.name]: e.target.value });
+    setState({ ...state, message: e.target.value });
   };
 
   const startRound = () => {
-    // setIsPresenter(false);
-    // setPresenter({ nickname: '', id: '' });
     setWinner([]);
     setAnswer('');
     setIsPresenter(false);
@@ -136,22 +116,12 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     socket.emit('set answer', { answer });
   };
 
-  // const endRound = () => {
-  //   socket.emit('end round');
-  // };
-
   //! --------------------------method--------------------------
 
-  useEffect(() => {
-    socket.on('message', ({ name, message }) => {
-      if (chat.length > 4) {
-        return setChat([]);
-      }
-      return setChat([...chat, { name, message }]);
-    });
-  }, [chat]);
+  
 
   useEffect(() => {
+
     // * 문제가 선택되면 게임스타트와 문제를 서버에 보내줌
     SetAnswer(answer);
   }, [answer]);
@@ -180,34 +150,32 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
       setWinner([...winner, name]);
     });
 
-    socket.on('show chat', (name, message) => {
-      setChat([...chat, { name, message }]);
-    });
+
 
     socket.on('renew userlist', (list) => {
+      console.log('d우ㅠ저소ㅓ켓');
       setUserlist([...list]);
     });
-  });
+  }, []);
+
+  useEffect(() => {
+
+    socket.on('show chat', (name, message) => {
+      if (chat.length > 10) {
+        setChat([...chat.slice(1), { name, message }]);
+      } else {
+        setChat([...chat, { name, message }]);
+      }
+    });
+  }, [state]);
 
   useEffect(() => {
     // * 사용자 정보 소켓으로 불러 오기
-    socket.on('my socket id', (data) => {});
 
     let parsedUrl = window.location.href.split('/');
     let roomNum = parsedUrl[parsedUrl.length - 1];
     socket.emit('send roomNum', roomNum);
   }, []);
-
-  useEffect(() => {
-    // * 결과창이 열리고 서버에 라운드가 종료메세지 보냄 , 일정 시간이 지나면 결과창 닫히고 다시 게임 시작
-    const closeResult = setTimeout(() => {
-      setResultPopup(false);
-      setChat([]);
-      if (presenter.id === userInfo.id) {
-        startRound();
-      }
-    }, 3000);
-  }, [resultPopup]);
 
   return (
     <>
@@ -246,7 +214,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
             chat={chat}
             onTextChange={onTextChange}
             onMessageSubmit={onMessageSubmit}
-            renderChat={renderChat}
           />
         </div>
 
