@@ -30,11 +30,21 @@ export default function App() {
   const loginCheck = (isLogIn) => {
     if (!isLogIn) {
       history.push('/');
+    }else if(isLogIn){
+      history.push('/Waiting');
     }
   };
   const hendleLogout = () => {
     setIsLogIn(false);
     setAccessToken({ accessToken: null });
+    axios
+        .get(
+          'http://localhost:4000/login',
+          {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+          }
+        ).then((res) => {})
   };
 
   const accessTokenRequest = (accessToken) => {
@@ -75,6 +85,8 @@ export default function App() {
           //return this.setState({ email: message, createdAt: message });
         }
         const { nickname, email, profile_image } = res.data.data.userInfo;
+        console.log(res.data.data.accessToken)
+        setAccessToken({accessToken:res.data.data.accessToken})
         setUserInfo({
           nickname: nickname,
           email: email,
@@ -108,16 +120,27 @@ export default function App() {
 
   useEffect(() => {
     console.log('엑세스 토큰', accessToken.accessToken);
-    if (accessToken.accessToken !== null) {
-      setIsLogIn(true);
-    }
-    console.log('로그인상태', isLogIn);
-  }, [accessToken]);
+    // if (accessToken.accessToken !== null) {
+    //   setIsLogIn(true);
+    // }
+    // console.log('로그인상태', isLogIn);
+    //엑세스 토큰이 없을때
+    if(accessToken.accessToken===null){
+      setIsLogIn(true)
+      loginCheck(isLogIn)
+      refreshTokenRequest()
+      console.log('로그인상태',isLogIn)
+      }
+    console.log('로그인상태',isLogIn)
+  },);
 
   const getAccessToken = async (authorizationCode) => {
     // ! 구글 로그인
-    let resp = await axios.post('http://localhost:4000/googlelogin', {
+    let resp = await axios.post('http://localhost:4000/googlelogin',
+    {
       authorizationCode: authorizationCode,
+    },{
+      withCredentials: true
     });
     console.log(resp.data);
     issueAccessToken(resp.data.accessToken);
