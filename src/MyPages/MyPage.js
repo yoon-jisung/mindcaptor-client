@@ -12,10 +12,12 @@ const axios = require('axios');
 
 function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
   const PhotoData = [Character1, Character2, Character3, Character4];
-  const [nowPhoto, setPhoto] = useState(Character1);
+ 
   const [isOpen, setIsOpen] = useState(false);
   const [isPhotoBoxOpen, setIsPhotoBoxOpen] = useState(false);
   const { nickname, email, profile_image, comment, id } = userInfo
+  const defaultImageNum = profile_image === null ? 0 : profile_image
+  const [nowPhoto, setPhoto] = useState(PhotoData[defaultImageNum]);
 
   const ChangeInputPhoto = function (photo) {
     // e.preventDefault();
@@ -48,17 +50,16 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
 
 
   const MyPageSaveData= async () =>{
+    const PhotoNum = PhotoData.findIndex(nowPhoto)
     const SavePhoto = await axios.post(`http://localhost:4000/mypage/${id}/profile`,
     {
       authorization: accessToken,
-      //new_profile: number
+      new_profile: PhotoNum
     },
     {
       headers: { 'Content-Type': 'application/json' },
       Credentials: 'include',
-    }
-      
-    )
+    })
   }
 
 

@@ -42,7 +42,7 @@ export default function Waiting({
           // Handle forward event
         } else {
           setLocationKeys((keys) => [location.key, ...keys]);
-
+          //console.log('laskdfj;alskdjfl;askdfjl;askdjflsk')
           history.push('/Waiting');
         }
       }
