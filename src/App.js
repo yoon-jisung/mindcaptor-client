@@ -7,6 +7,7 @@ import InGame from './GamePages/InGame';
 import Character1 from './images/Character1.png';
 import { useHistory } from 'react-router-dom';
 import './main.css';
+import Bgm from './Bgm';
 
 const axios = require('axios');
 
@@ -23,17 +24,27 @@ export default function App() {
   });
   const history = useHistory();
 
-  const handleGeuetLogin = () => {
+  const handleGuestLogin = () => {
     setUserInfo({ nickname: '게스트' });
   };
   const loginCheck = (isLogIn) => {
     if (!isLogIn) {
       history.push('/');
+    }else if(isLogIn){
+      history.push('/Waiting');
     }
   };
   const hendleLogout = () => {
     setIsLogIn(false);
     setAccessToken({ accessToken: null });
+    axios
+        .get(
+          'http://localhost:4000/login',
+          {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+          }
+        ).then((res) => {})
   };
 
   const accessTokenRequest = (accessToken) => {
@@ -49,14 +60,14 @@ export default function App() {
       .then((res) => {
         console.log(res.message);
         console.log(res.data.data);
-        const { nickname, email, profile_image, comment,id } = res.data.data;
+        const { nickname, email, profile_image, comment, id } = res.data.data;
         // !
         setUserInfo({
           id: id,
           nickname: nickname,
           email: email,
           profile_image: profile_image,
-          comment: comment
+          comment: comment,
         });
       });
   };
@@ -74,6 +85,8 @@ export default function App() {
           //return this.setState({ email: message, createdAt: message });
         }
         const { nickname, email, profile_image } = res.data.data.userInfo;
+        console.log(res.data.data.accessToken)
+        setAccessToken({accessToken:res.data.data.accessToken})
         setUserInfo({
           nickname: nickname,
           email: email,
@@ -107,23 +120,35 @@ export default function App() {
 
   useEffect(() => {
     console.log('엑세스 토큰', accessToken.accessToken);
-    if (accessToken.accessToken !== null) {
-      setIsLogIn(true);
-    }
-    console.log('로그인상태', isLogIn);
-  }, [accessToken]);
+    // if (accessToken.accessToken !== null) {
+    //   setIsLogIn(true);
+    // }
+    // console.log('로그인상태', isLogIn);
+    //엑세스 토큰이 없을때
+    if(accessToken.accessToken===null){
+      setIsLogIn(true)
+      loginCheck(isLogIn)
+      refreshTokenRequest()
+      console.log('로그인상태',isLogIn)
+      }
+    console.log('로그인상태',isLogIn)
+  },);
 
   const getAccessToken = async (authorizationCode) => {
     // ! 구글 로그인
-    let resp = await axios.post('http://localhost:4000/googlelogin', {
+    let resp = await axios.post('http://localhost:4000/googlelogin',
+    {
       authorizationCode: authorizationCode,
+    },{
+      withCredentials: true
     });
-    console.log(resp.data)
-    issueAccessToken(resp.data.accessToken)
-    history.push('/Waiting')
+    console.log(resp.data);
+    issueAccessToken(resp.data.accessToken);
+    history.push('/Waiting');
   };
   return (
     <div>
+      <Bgm />
       <Switch>
         <Route
           path="/Waiting"
@@ -165,7 +190,7 @@ export default function App() {
           render={() => (
             <Main
               loginHandler={loginHandler}
-              handleGeuetLogin={handleGeuetLogin}
+              handleGuestLogin={handleGuestLogin}
             />
           )}
         />
