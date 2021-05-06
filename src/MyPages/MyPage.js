@@ -8,6 +8,7 @@ import Character1 from '../images/Character1.png';
 import Character2 from '../images/Character2.png';
 import Character3 from '../images/Character3.png';
 import Character4 from '../images/Character4.png';
+import axios from 'axios';
 
 function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
   const PhotoData = [Character1, Character2, Character3, Character4];
@@ -46,24 +47,28 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
     };
   });
 
-  const MyPageSaveData = async () => {
-    const PhotoNum = PhotoData.findIndex(nowPhoto);
-    const SavePhoto = await axios.post(
-      `http://localhost:4000/mypage/${id}/profile`,
-      {
-        authorization: accessToken,
-        new_profile: PhotoNum,
-      },
-      {
-        headers: { 'Content-Type': 'application/json' },
-        Credentials: 'include',
-      }
-    );
-  };
+  const MyPageSaveData= async () =>{
+    const PhotoNum = PhotoData.findIndex(nowPhoto)
+    const SavePhoto = await axios.post(`http://localhost:4000/mypage/${id}/profile`,
+    {
+      authorization: accessToken,
+      new_profile: PhotoNum
+    },
+    {
+      headers: { 'Content-Type': 'application/json' },
+      Credentials: 'include',
+    })
+    const SaveComment = await axios.post(`http://localhost:4000/mypage/${id}/comment`,
+    {
+      authorization: accessToken,
+      Comment: PhotoNum
+    })
+  }
+
 
   return (
     <div>
-      <Header isOpen={isOpen} nowPhoto={nowPhoto} />
+      <Header isOpen={isOpen} nowPhoto={nowPhoto} nickname={nickname} />
       <content className="container">
         <div className="pro_search_box">
           <div className="introBox">
@@ -82,7 +87,8 @@ function MyPage({ accessToken, isLogIn, loginCheck, userInfo }) {
             <div className="intro">
               <h1>자기소개</h1>
               <textarea
-                placeholder={`안녕하세요, ${userInfo.nickname}입니다.`}
+                placeholder={`클릭하여 자신을 소개해
+보세요!`}
               />
             </div>
           </div>

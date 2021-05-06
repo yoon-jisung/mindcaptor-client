@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import BGM from '../bgms/bgm1.mp3';
-import useSound from 'use-sound';
-
 import logo from '../images/mindcaptor_logo_game.png';
 import SigninBtn from './components/SigninBtn';
 import SignupBtn from './components/SignupBtn';
@@ -12,9 +9,7 @@ import 'reactjs-popup/dist/index.css';
 
 const axios = require('axios');
 
-export default function Main({ loginHandler, handleGeuetLogin }) {
-  const [play, { stop }] = useSound(BGM);
-  const [bgmOff, setBgmOff] = useState(false);
+export default function Main({ loginHandler, handleGuestLogin }) {
   const [isNone, setIsNone] = useState(true);
 
   // useEffect(() => {
@@ -33,50 +28,27 @@ export default function Main({ loginHandler, handleGeuetLogin }) {
         console.log(res.data);
         loginHandler(res.data);
         history.push('/Waiting');
-        handleGeuetLogin();
+        handleGuestLogin();
       })
       .catch((err) => console.log(err));
   };
 
-  const handelOnBGM = () => {
-    setBgmOff(true);
-    play();
-  };
-
-  const idCreatedOk = () =>{
-    setIsNone(false)
+  const idCreatedOk = () => {
+    setIsNone(false);
     setTimeout(() => {
       setIsNone(true);
     }, 2000);
-  }
-  
-
-  const handleOffBGM = () => {
-    setBgmOff(false);
-    stop();
   };
 
   return (
     <div>
-      {bgmOff ? (
-        <button className="bgm" onClick={handleOffBGM}>
-          On
-        </button>
-      ) : (
-        <button className="bgm" onClick={handelOnBGM}>
-          Off
-        </button>
-      )}
       <div className="mainTotal">
         <div className="main">
           <div className="logo_div">
             <img src={logo} className="logo" alt="logo" />
           </div>
-          <div
-                className="idCreatedOk"
-                style={{ opacity: isNone ? '0' : '1' }}
-              >
-                회원가입 완료!
+          <div className="idCreatedOk" style={{ opacity: isNone ? '0' : '1' }}>
+            회원가입 완료!
           </div>
 
           <div className="main_btns">
