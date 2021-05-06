@@ -50,7 +50,7 @@ export default function Waiting({
   }, [locationKeys]);
   useEffect(() => {
     loginCheck(isLogIn);
-  });
+  },[]);
 
   return (
     <div>
