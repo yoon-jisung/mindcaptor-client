@@ -11,9 +11,10 @@ import GameStartBtn from './components/GameStartBtn';
 import Words from '../Words';
 import GameOver from './components/IsInGameMsg';
 import { useHistory } from 'react-router-dom';
+import moment from 'moment';
 
 const socket = io.connect('http://localhost:4000', {
-  transports: ['websocket', 'polling'],
+  transports: ['websocket'],
   path: '/socket.io',
 });
 
@@ -101,16 +102,23 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     return chat.map(({ name, message }, index) => (
       <div key={index}>
         <h3>
-          {name}: <span>{message}</span>
+          {name}: <span>{message}</span>{' '}
         </h3>
       </div>
     ));
   };
 
+  // const onMessageSubmit = (e) => {
+  //   const { name, message } = state;
+  //   socket.current.emit('message', { name, message });
+  //   e.preventDefault();
+  //   setState({ message: '', name });
+  // };
+
   const onMessageSubmit = (e) => {
     e.preventDefault();
     const { name, message } = state;
-    socketRef.current.emit('message', { name, message });
+    socket.emit('message', { name, message });
     setState({ message: '', name });
   };
 
@@ -143,13 +151,21 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
 
   useEffect(() => {}, [minutes, seconds, isTrueTimer]);
 
+  // useEffect(() => {
+  //   // * 메세지
+  //   socketRef.current = io.connect('http://localhost:4000');
+  //   socketRef.current.on('message', ({ name, message }) => {
+  //     setChat([...chat, { name, message }]);
+  //   });
+  // }, [chat]);
   useEffect(() => {
-    // * 메세지
-    socketRef.current = socket;
-    socketRef.current.on('message', ({ name, message }) => {
-      setChat([...chat, { name, message }]);
+    socket.on('message', ({ name, message }) => {
+      if (chat.length > 4) {
+        return setChat([]);
+      }
+      return setChat([...chat, { name, message }]);
     });
-    // return () => socketRef.current.disconnect();
+    console.log('채팅이야!!!!!', chat);
   }, [chat]);
 
   useEffect(() => {
@@ -181,7 +197,7 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
     });
 
     socket.on('renew userlist', (list) => {
-      setUserlist(list);
+      setUserlist([...list]);
     });
   });
 
@@ -193,7 +209,9 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
 
     let parsedUrl = window.location.href.split('/');
     let roomNum = parsedUrl[parsedUrl.length - 1];
+    console.log(roomNum);
     socket.emit('send roomNum', roomNum);
+    console.log('userlist', userlist);
   }, []);
 
   useEffect(() => {
