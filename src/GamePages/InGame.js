@@ -254,7 +254,7 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
             {resultPopup ? <Result winner={winner} /> : null}
           </div>
         </div>
-        <User users={userlist} />
+        <User users={userlist} userInfo={userInfo} />
         <div className="chatBix">
           <Timer
             minutes={minutes}

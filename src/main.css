@@ -553,6 +553,7 @@ $button-active-blue: #1669f2; */
   display: flex;
   justify-content: center;
   margin-top: 70px;
+  flex-direction: column;
 }
 
 .UserProFile img {
@@ -816,16 +817,42 @@ $button-active-blue: #1669f2; */
 }
 /*캔버스를 밑으로 내리기 위한 div*/
 .justBox {
-  height: 60px;
-}
-
-.userProfile {
-  border: 2px solid tomato;
-  list-style: none;
-  width: 300px;
+  height: 80px;
 }
 
 .UserTable {
+  display: flex;
+  justify-content: center;
+}
+
+.inGameUserProfile {
+  display: flex;
+  border: 3px solid #0f4d86;
+  border-radius: 15px;
+  list-style: none;
+  width: 300px;
+  margin-bottom: 10px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+}
+.inGameImg {
+  width: 150px;
+  border-radius: 12px;
+}
+
+.inGameUserNickName {
+  font-size: 15px;
+  padding: 5px;
+  margin-left: 5px;
+}
+.comment {
+  font-size: 15px;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+.users {
+  height: 100px;
+  align-content: space-around;
 }
 
 .eraser {
@@ -852,8 +879,16 @@ $button-active-blue: #1669f2; */
 canvas {
   border-bottom: dotted #0f4d86;
 }
+
+.pallette {
+  display: flex;
+}
+.Colors {
+  margin: 10px;
+}
 .Colors > div {
-  border: 2px solid #0f4d86;
+  border: 3px solid #302c3188;
+  margin: 5px;
 }
 
 .Paint {
@@ -862,6 +897,7 @@ canvas {
 .Paint > button {
   margin: 10px;
   width: 100px;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
 }
 
 .Answer {
@@ -885,7 +921,7 @@ canvas {
   justify-content: space-around;
 }
 .startOrQuitBtns button {
-  width: 100px;
+  width: 150px;
 }
 
 .Colors {
