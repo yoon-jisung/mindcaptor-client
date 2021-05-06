@@ -42,6 +42,7 @@ export default function Waiting({
           // Handle forward event
         } else {
           setLocationKeys((keys) => [location.key, ...keys]);
+
           history.push('/Waiting');
         }
       }
