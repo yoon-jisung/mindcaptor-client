@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Canvas from './components/Canvas3';
 import Timer from './components/Timer';
 import User from './components/User';
 import BackBtn from './components/BackBtn';
@@ -9,9 +8,9 @@ import Chat from './components/Chat';
 import io from 'socket.io-client';
 import GameStartBtn from './components/GameStartBtn';
 import Words from '../Words';
-import GameOver from './components/IsInGameMsg';
 import { useHistory } from 'react-router-dom';
-import moment from 'moment';
+import Board from './components/Canvas';
+import Logo from './components/Logo';
 
 const socket = io.connect('http://localhost:4000', {
   transports: ['websocket'],
@@ -28,7 +27,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   const [userlist, setUserlist] = useState([]);
 
   //뒤로가기 버튼 방지
-
   const [locationKeys, setLocationKeys] = useState([]);
   const history = useHistory();
 
@@ -83,14 +81,12 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   };
 
   const handleGameStart = () => {
-    if (minutes === 0 && seconds === 0) {
-      startRound();
-      // setMinutes(1); // 시간 다시 설정
-      // setIsTrueTimer(true); // Timer 다시 돌아감
-      SetIsOpen(true);
-      // RandomItem();
-      // setIsInGame(false);
-    }
+    startRound();
+    // setMinutes(1); // 시간 다시 설정
+    // setIsTrueTimer(true); // Timer 다시 돌아감
+    SetIsOpen(true);
+    // RandomItem();
+    // setIsInGame(false);
   };
 
   const handleAnswer = (word) => {
@@ -127,16 +123,14 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   };
 
   const startRound = () => {
+    // setIsPresenter(false);
+    // setPresenter({ nickname: '', id: '' });
     setWinner([]);
+    setAnswer('');
+    setIsPresenter(false);
     socket.emit('start round');
     SetIsOpen(true);
     RandomItem();
-    socket.on('set presenter', (presenter) => {
-      setPresenter(presenter);
-      if (presenter.nickname === state.name) {
-        setIsPresenter(true);
-      }
-    });
   };
 
   const SetAnswer = (answer) => {
@@ -149,15 +143,6 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
 
   //! --------------------------method--------------------------
 
-  useEffect(() => {}, [minutes, seconds, isTrueTimer]);
-
-  // useEffect(() => {
-  //   // * 메세지
-  //   socketRef.current = io.connect('http://localhost:4000');
-  //   socketRef.current.on('message', ({ name, message }) => {
-  //     setChat([...chat, { name, message }]);
-  //   });
-  // }, [chat]);
   useEffect(() => {
     socket.on('message', ({ name, message }) => {
       if (chat.length > 4) {
@@ -174,6 +159,12 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
   }, [answer]);
 
   useEffect(() => {
+    socket.on('set presenter', (presenter) => {
+      setPresenter(presenter);
+      if (presenter.id === userInfo.id) {
+        setIsPresenter(true);
+      }
+    });
     // answer를 전달받는다
     socket.on('get answer', (answer) => {
       setAnswer(answer);
@@ -216,25 +207,23 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
 
   useEffect(() => {
     // * 결과창이 열리고 서버에 라운드가 종료메세지 보냄 , 일정 시간이 지나면 결과창 닫히고 다시 게임 시작
-    const closeResult = setTimeout(() => setResultPopup(false), 3000);
-    setChat([]);
-    if (presenter.nickname === state.name) {
-      startRound();
-    }
+    const closeResult = setTimeout(() => {
+      setResultPopup(false);
+      setChat([]);
+      if (presenter.id === userInfo.id) {
+        startRound();
+      }
+    }, 3000);
   }, [resultPopup]);
 
   return (
-    <div>
-      <>
-        <Timer
-          minutes={minutes}
-          seconds={seconds}
-          handleResult={handleResult}
-          handleAnswer={handleAnswer}
-        />
-        <div className="GameWindow">
+    <>
+      <div className="justBox"></div>
+      <div className="GameWindow">
+        <div className="canvasBox">
           <div className="result_box">
-            <Canvas className="canvas" />
+            <Board />
+            <Logo />
             {isPresenter ? (
               <SelectWords
                 Word1={Word1}
@@ -250,7 +239,15 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
             )}
             {resultPopup ? <Result winner={winner} /> : null}
           </div>
-          <User users={userlist} />
+        </div>
+        <User users={userlist} userInfo={userInfo} />
+        <div className="chatBix">
+          <Timer
+            minutes={minutes}
+            seconds={seconds}
+            handleResult={handleResult}
+            handleAnswer={handleAnswer}
+          />
           <Chat
             state={state}
             chat={chat}
@@ -258,15 +255,13 @@ export default function InGame({ accessToken, isLogIn, loginCheck, userInfo }) {
             onMessageSubmit={onMessageSubmit}
             renderChat={renderChat}
           />
-          <div className="startOrQuitBtns">
-            <GameStartBtn
-              isInGame={isInGame}
-              handleGameStart={handleGameStart}
-            />
-            <BackBtn />
-          </div>
         </div>
-      </>
-    </div>
+
+        <div className="startOrQuitBtns">
+          <GameStartBtn isInGame={isInGame} handleGameStart={handleGameStart} />
+          <BackBtn />
+        </div>
+      </div>
+    </>
   );
 }

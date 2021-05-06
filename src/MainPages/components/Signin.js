@@ -9,7 +9,6 @@ const axios = require('axios');
 export default function Signin({ isOpen, close, loginHandler }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isSigin, setIsSignin] = useState(true);
   const [isNone, setIsNone] = useState(true);
   const history = useHistory();
 
@@ -21,10 +20,6 @@ export default function Signin({ isOpen, close, loginHandler }) {
     setPassword(e.target.value);
   };
 
-  // const handleSignin = () => {
-  //   history.push('/Waiting');
-  // };
-
   const loginRequestHandler = (e) => {
     if (e.key === 'Enter' || e.type === 'click') {
       axios
@@ -33,13 +28,11 @@ export default function Signin({ isOpen, close, loginHandler }) {
           { email, password },
           {
             headers: { 'Content-Type': 'application/json' },
-            Credentials: 'include',
+            withCredentials: true,
           }
         )
         .then((res) => {
-          console.dir(loginHandler);
           loginHandler(res.data);
-          history.push('/Waiting');
         })
         .catch((err) => {
           if (err) {
