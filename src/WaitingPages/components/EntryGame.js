@@ -2,13 +2,22 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-function EntryGame() {
+function EntryGame({ accessToken }) {
   const history = useHistory();
 
   const handleUrl = async () => {
-    console.log('test');
-    const result = await axios.post('http://localhost:4000/room/join', {});
-    history.push(`/room/${result.data}`);
+    const result = await axios.post(
+      'http://localhost:4000/room/join',
+      {},
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: accessToken.accessToken,
+        },
+        Credentials: 'include',
+      }
+    );
+    history.push(`/room/${result.data.data}`);
   };
 
   return (
